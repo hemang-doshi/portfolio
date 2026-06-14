@@ -1,14 +1,49 @@
 import type { Metadata, Viewport } from "next";
+import {
+  Boldonse,
+  Inter,
+  JetBrains_Mono,
+  Permanent_Marker,
+} from "next/font/google";
+
 import "./globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter-var",
+});
+
+const boldonse = Boldonse({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-kaio",
+  adjustFontFallback: false,
+  fallback: ["Arial Narrow", "Arial", "sans-serif"],
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains-mono",
+});
+
+const permanentMarker = Permanent_Marker({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-permanent-marker",
+});
+
 export const metadata: Metadata = {
-  title: "Hemang Doshi — Proof of Work",
+  title: "Hemang Doshi — AI-Native Engineer & Systems Builder",
   description:
-    "AI-native full-stack engineer building agent-first tools, cloud-ready systems, and proof-of-work products.",
+    "Portfolio of Hemang Doshi: agent infrastructure, cloud-ready systems, local AI workflows, and focused products people can actually use.",
   openGraph: {
-    title: "Hemang Doshi — Proof of Work",
+    title: "Hemang Doshi — AI-Native Engineer & Systems Builder",
     description:
-      "AI-native full-stack engineer building agent-first tools, cloud-ready systems, and proof-of-work products.",
+      "Work, thinking, and product craft across agent infrastructure, cloud systems, local AI, and creator workflows.",
     type: "website",
   },
 };
@@ -16,7 +51,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#171721",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -25,10 +60,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full bg-deep-space antialiased">
-      <body className="min-h-full bg-deep-space font-[family:var(--font-arcadia)] text-starlight">
-        {children}
-      </body>
+    <html
+      lang="en"
+      className={`${inter.variable} ${boldonse.variable} ${jetBrainsMono.variable} ${permanentMarker.variable}`}
+    >
+      <body>{children}</body>
     </html>
   );
 }

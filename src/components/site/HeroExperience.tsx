@@ -1,155 +1,102 @@
-"use client";
-
-import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
-
 import { Button } from "@/components/ui/Button";
-import { ShellCard } from "@/components/ui/ShellCard";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { HandDrawnAnnotation } from "@/components/ui/HandDrawnAnnotation";
+import { ProjectPreview } from "@/components/ui/ProjectPreview";
+import { workItems } from "@/data/work";
+import { buildMailtoHref } from "@/lib/site-config";
+
+const showcaseItems = workItems.slice(0, 3);
 
 export function HeroExperience() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-
-  const imageScale = useTransform(
-    scrollYProgress,
-    [0, 1],
-    reduceMotion ? [1, 1.04] : [1, 1.88],
-  );
-  const imageY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    reduceMotion ? ["0%", "-2%"] : ["0%", "-14%"],
-  );
-  const heroOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.45],
-    reduceMotion ? [1, 1, 0.92] : [1, 1, 0],
-  );
-  const heroY = useTransform(
-    scrollYProgress,
-    [0, 0.45],
-    reduceMotion ? ["0%", "-2%"] : ["0%", "-12%"],
-  );
-  const panelOpacity = useTransform(
-    scrollYProgress,
-    [0.35, 0.6],
-    reduceMotion ? [1, 1] : [0, 1],
-  );
-  const panelY = useTransform(
-    scrollYProgress,
-    [0.35, 0.7],
-    reduceMotion ? ["0%", "0%"] : ["10%", "0%"],
-  );
-
   return (
-    <section
-      ref={sectionRef}
-      id="top"
-      className="relative h-[220vh] bg-deep-space"
-      aria-label="Proof-of-work hero"
-    >
-      <div className="sticky top-0 h-screen overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ scale: imageScale, y: imageY }}>
-          <Image
-            src="/images/hero-mountain-desk.svg"
-            alt="Twilight mountain desk scene with a laptop in the foreground"
-            fill
-            priority
-            className="object-cover"
-          />
-        </motion.div>
-
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(23,23,33,0.12),rgba(23,23,33,0.38)_55%,rgba(23,23,33,0.88)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(237,237,243,0.08),transparent_40%)]" />
-
-        <div className="relative z-10 flex h-full items-center justify-center px-4 pt-20 sm:px-6">
-          <div className="mx-auto flex w-full max-w-[var(--page-max-width)] items-center justify-center">
-            <motion.div
-              className="max-w-4xl text-center"
-              style={{ opacity: heroOpacity, y: heroY }}
+    <section id="top" className="hero-gradient relative overflow-hidden">
+      <div className="section-shell relative pt-16 pb-16 sm:pt-20 sm:pb-20 lg:pt-20 lg:pb-24">
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
+          <Eyebrow className="mb-5">AI-NATIVE ENGINEER • SYSTEMS BUILDER</Eyebrow>
+          <h1 className="display-heading text-[length:clamp(2.8rem,8vw,var(--text-display))] leading-[var(--leading-display)] tracking-[var(--tracking-display)] text-aubergine">
+            Building systems people can actually use.
+          </h1>
+          <p className="mx-auto mt-5 max-w-3xl text-[length:clamp(1rem,2vw,var(--text-subheading))] leading-[1.55] tracking-[var(--tracking-subheading)] text-aubergine">
+            I’m Hemang Doshi, a developer who likes turning vague ideas, messy
+            workflows, and technical complexity into clean products people can
+            actually use. This site is where I document the work, thinking, and
+            taste behind that.
+          </p>
+          <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+            <Button
+              href={buildMailtoHref("Start a conversation")}
+              withArrow
+              className="w-full sm:w-auto"
             >
-              <p className="mb-6 text-[length:var(--text-caption)] uppercase tracking-[0.34em] text-silver">
-                Proof-of-work system
-              </p>
-              <h1 className="mx-auto max-w-5xl font-[family:var(--font-arcadiadisplay)] text-[length:clamp(3rem,8vw,var(--text-display))] font-[360] leading-[1.05] tracking-[0.02em] text-starlight">
-                Building agent-first tools, cloud-ready systems, and products with
-                taste.
-              </h1>
-              <p className="mx-auto mt-7 max-w-3xl text-[length:clamp(1rem,2vw,var(--text-subheading))] leading-[1.6] text-silver">
-                I&apos;m Hemang Doshi — a developer turning projects, experiments, and
-                engineering thinking into systems people can actually use.
-              </p>
-              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Button href="#work" variant="primary">
-                  Explore work
-                </Button>
-                <Button href="#case-studies" variant="secondary">
-                  Read case studies
-                </Button>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="absolute inset-x-4 bottom-[14vh] mx-auto max-w-3xl sm:inset-x-6"
-              style={{ opacity: panelOpacity, y: panelY }}
+              Start a conversation
+            </Button>
+            <Button
+              href="#work"
+              variant="secondary"
+              className="w-full sm:w-auto"
             >
-              <ShellCard className="overflow-hidden border-lead/20 bg-midnight-slate/78">
-                <div className="border-b border-lead/15 px-5 py-3 sm:px-6">
-                  <div className="flex items-center gap-3 text-[length:var(--text-caption)] uppercase tracking-[0.2em] text-silver">
-                    <span>[HD]</span>
-                    <span className="flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-mercury-blue" aria-hidden="true" />
-                      System online
-                    </span>
-                  </div>
-                </div>
-
-                <div className="grid gap-6 px-5 py-6 sm:grid-cols-[1.4fr_0.9fr] sm:px-6 sm:py-8">
-                  <div className="space-y-5">
-                    <div className="space-y-3">
-                      <h2 className="font-[family:var(--font-arcadiadisplay)] text-[length:clamp(2rem,4vw,var(--text-heading-lg))] font-[360] leading-[1.05] tracking-[0.02em] text-starlight">
-                        Hemang Doshi
-                      </h2>
-                      <p className="text-[length:var(--text-body-sm)] uppercase tracking-[0.24em] text-silver">
-                        Developer • Systems Builder • Proof-of-work
-                      </p>
-                    </div>
-                    <p className="max-w-2xl text-[length:var(--text-subheading)] leading-[1.55] text-silver">
-                      Building agent-first tools, cloud-ready systems, and
-                      products with taste.
-                    </p>
-                  </div>
-
-                  <div className="grid gap-3">
-                    <div className="rounded-[var(--radius-md)] border border-lead/10 bg-black/10 px-4 py-4">
-                      <p className="text-[length:var(--text-caption)] uppercase tracking-[0.18em] text-silver">
-                        Base
-                      </p>
-                      <p className="mt-2 text-[length:var(--text-body)] font-[420] text-starlight">
-                        India
-                      </p>
-                    </div>
-                    <div className="rounded-[var(--radius-md)] border border-lead/10 bg-black/10 px-4 py-4">
-                      <p className="text-[length:var(--text-caption)] uppercase tracking-[0.18em] text-silver">
-                        Availability
-                      </p>
-                      <p className="mt-2 text-[length:var(--text-body)] font-[420] text-starlight">
-                        Select projects
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </ShellCard>
-            </motion.div>
+              Explore selected work
+            </Button>
           </div>
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-[linear-gradient(180deg,transparent,rgba(23,23,33,0.92)_70%,rgba(23,23,33,1))]" />
+        <div className="mt-12 flex items-center justify-center gap-2 font-[family:var(--font-permanent-marker)] text-[length:var(--text-body)] text-aubergine lg:hidden">
+          <span>proof over promises</span>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 42 20"
+            className="h-5 w-11"
+            fill="none"
+          >
+            <path
+              d="M3 4C14 4 23 8 34 15M29 15l7 1-2-7"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+
+        <div className="relative z-10 mt-6 lg:mt-20">
+          <div className="grid gap-4 md:grid-cols-3">
+            {showcaseItems.map((item) => (
+              <article
+                key={item.title}
+                className="overflow-hidden rounded-[var(--radius-xl)] bg-canvas shadow-subtle-5"
+              >
+                <ProjectPreview
+                  variant={item.preview}
+                  className="rounded-none shadow-none"
+                />
+                <div className="flex items-center justify-between gap-3 border-t border-plum-tinted px-5 py-4">
+                  <div>
+                    <p className="font-[family:var(--font-jetbrains-mono)] text-[10px] tracking-[0.08em] text-heather uppercase">
+                      {item.label}
+                    </p>
+                    <h2 className="mt-1 text-[length:var(--text-body)] font-semibold text-aubergine">
+                      {item.title}
+                    </h2>
+                  </div>
+                  <span
+                    className="size-2 rounded-full bg-aubergine"
+                    aria-hidden="true"
+                  />
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <HandDrawnAnnotation className="-top-[72px] left-3">
+            agent-first by design
+          </HandDrawnAnnotation>
+          <HandDrawnAnnotation className="-top-[72px] right-3" flip>
+            built close to the problem
+          </HandDrawnAnnotation>
+          <HandDrawnAnnotation className="-bottom-20 left-[44%]">
+            proof over promises
+          </HandDrawnAnnotation>
+        </div>
       </div>
     </section>
   );

@@ -1,32 +1,41 @@
-export type CaseStudy = {
+export type EvidenceItem = {
   title: string;
-  description: string;
-  href: string;
+  problem: string;
+  approach: string;
+  relatedProject: string;
 };
 
-export const caseStudies: CaseStudy[] = [
+export const evidenceItems: EvidenceItem[] = [
   {
     title: "Agent-first infrastructure",
-    description:
-      "Designing tools that keep orchestration tight, observable, and economical under real developer workloads.",
-    href: "#contact",
+    problem:
+      "Agent workflows become expensive and opaque when orchestration, diagnostics, and local context are treated as separate concerns.",
+    approach:
+      "Design the developer loop as one observable system with compact context, explicit state, and small operational surfaces.",
+    relatedProject: "DevDeck",
   },
   {
     title: "Cloud-ready systems",
-    description:
-      "Shipping pragmatic platform layers that stay simple locally and hold up when the scale curve arrives.",
-    href: "#contact",
+    problem:
+      "Early products need to move quickly without locking themselves into infrastructure that becomes fragile at the first scale change.",
+    approach:
+      "Keep the local path simple, define boundaries early, and introduce platform complexity only where usage proves it is needed.",
+    relatedProject: "DevDeck",
   },
   {
     title: "Local AI workflows",
-    description:
-      "Building assistants that respect privacy, run close to the source, and still feel operationally sharp.",
-    href: "#contact",
+    problem:
+      "Sensitive data and slow feedback loops make generic hosted assistants a poor fit for high-context analytical work.",
+    approach:
+      "Run inference and retrieval close to the source, expose the reasoning path, and keep the human in control of consequential output.",
+    relatedProject: "AI Financial Analyst",
   },
   {
     title: "Creator workflow systems",
-    description:
-      "Turning fragmented planning and asset loops into deliberate operating systems for creative output.",
-    href: "#contact",
+    problem:
+      "Creative work fragments across planning documents, asset folders, scripts, and publishing tools before production even begins.",
+    approach:
+      "Organize the workflow around the artifact being shipped, with one deliberate path from idea to reusable production context.",
+    relatedProject: "SceneBook",
   },
 ];

@@ -1,5 +1,9 @@
-import { ArrowRight } from "lucide-react";
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  ReactNode,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -25,23 +29,30 @@ type NativeButtonProps = SharedProps &
 type ButtonProps = AnchorProps | NativeButtonProps;
 
 const baseClassName =
-  "inline-flex items-center justify-center gap-2 rounded-[var(--radius-3xl)] px-5 py-3 text-[length:var(--text-body)] font-[480] tracking-[0.01em] transition-colors duration-200";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-[var(--radius-md)] px-6 py-3 text-[length:var(--text-body)] font-semibold tracking-[var(--tracking-body)] transition-[background-color,color,transform,box-shadow] duration-200 hover:-translate-y-0.5";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-mercury-blue text-pure-white hover:bg-[color-mix(in_srgb,var(--color-mercury-blue)_88%,var(--color-pure-white)_12%)]",
+    "bg-fuchsia-signal text-canvas shadow-subtle-2 hover:bg-[color-mix(in_srgb,var(--color-fuchsia-signal)_90%,var(--color-aubergine)_10%)]",
   secondary:
-    "border border-lead/30 bg-graphite/35 text-starlight hover:bg-graphite/55",
-  ghost: "bg-transparent text-silver hover:text-starlight",
+    "border border-heather bg-transparent text-aubergine hover:bg-aubergine/[0.05]",
+  ghost: "bg-transparent px-2 text-heather hover:text-aubergine",
 };
 
 export function Button(props: ButtonProps) {
-  const { children, className, variant = "primary", withArrow = false } = props;
+  const {
+    children,
+    className,
+    variant = "primary",
+    withArrow = false,
+  } = props;
 
   const content = (
     <>
       <span>{children}</span>
-      {withArrow ? <ArrowRight className="h-4 w-4" aria-hidden="true" /> : null}
+      {withArrow ? (
+        <ArrowRightIcon size={17} weight="bold" aria-hidden="true" />
+      ) : null}
     </>
   );
 
@@ -68,7 +79,11 @@ export function Button(props: ButtonProps) {
   delete buttonProps.withArrow;
 
   return (
-    <button {...buttonProps} className={mergedClassName} type={buttonProps.type ?? "button"}>
+    <button
+      {...buttonProps}
+      className={mergedClassName}
+      type={buttonProps.type ?? "button"}
+    >
       {content}
     </button>
   );

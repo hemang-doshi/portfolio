@@ -1,82 +1,187 @@
 @import "tailwindcss";
 
 @theme {
-  --color-mercury-blue: #5266eb;
-  --color-ghost-blue: #cdddff;
-  --color-deep-space: #171721;
-  --color-midnight-slate: #1e1e2a;
-  --color-graphite: #272735;
-  --color-lead: #70707d;
-  --color-starlight: #ededf3;
-  --color-silver: #c3c3cc;
-  --color-pure-white: #ffffff;
+  /* Colors */
+  --color-aubergine: #240029;
+  --color-fuchsia-signal: #df37a7;
+  --color-heather: #6d526d;
+  --color-glowstick: #ffcc11;
+  --color-plum-tinted: #d4ccd4;
+  --color-ink: #222222;
+  --color-smoke: #bbadbb;
+  --color-charcoal: #333333;
+  --color-frost: #767676;
+  --color-forest: #15803d;
+  --color-mint: #bbf7d0;
+  --color-honeydew: #dcfce7;
+  --color-strawberry: #ef4444;
+  --color-mango: #22c55e;
+  --color-canvas: #ffffff;
+  --color-hero-glow: #ffbdd3;
 
-  --font-arcadiadisplay:
-    "arcadiaDisplay", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  /* Typography */
+  --font-inter-var:
+    "Inter Var", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, sans-serif;
-  --font-arcadia:
-    "arcadia", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  --font-kaio:
+    "Kaio", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, sans-serif;
+  --font-jetbrains-mono:
+    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+  --font-permanent-marker:
+    "Permanent Marker", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-phosphor:
+    "Phosphor", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  --font-font-awesome-6-brands:
+    "Font Awesome 6 Brands", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-phosphor-bold:
+    "Phosphor-Bold", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-phosphor-fill:
+    "Phosphor-Fill", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-apple-system:
+    "-apple-system", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family:
+    "Family", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  --font-fraunces:
+    "Fraunces", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  --font-chakra-petch:
+    "Chakra Petch", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
+  /* Typography — Scale */
+  --text-micro: 10px;
+  --leading-micro: 1.4;
+  --tracking-micro: -0.2px;
   --text-caption: 12px;
   --leading-caption: 1.5;
-  --tracking-caption: 0.24px;
+  --tracking-caption: -0.16px;
   --text-body-sm: 14px;
   --leading-body-sm: 1.5;
-  --tracking-body-sm: 0.28px;
+  --tracking-body-sm: -0.14px;
   --text-body: 16px;
   --leading-body: 1.5;
-  --tracking-body: 0.16px;
-  --text-subheading: 18px;
+  --tracking-body: -0.16px;
+  --text-subheading: 20px;
   --leading-subheading: 1.4;
-  --text-heading-sm: 21px;
-  --leading-heading-sm: 1.35;
-  --text-heading: 32px;
+  --tracking-subheading: -0.16px;
+  --text-heading-sm: 24px;
+  --leading-heading-sm: 1.2;
+  --tracking-heading-sm: -0.1px;
+  --text-heading: 36px;
   --leading-heading: 1.2;
-  --text-heading-lg: 49px;
-  --leading-heading-lg: 1.15;
-  --text-display: 65px;
-  --leading-display: 1.1;
-  --tracking-display: 0.65px;
+  --tracking-heading: -0.14px;
+  --text-heading-lg: 56px;
+  --leading-heading-lg: 1.1;
+  --tracking-heading-lg: -1.12px;
+  --text-display: 80px;
+  --leading-display: 1;
+  --tracking-display: -1.6px;
 
+  /* Spacing */
   --spacing-4: 4px;
   --spacing-8: 8px;
   --spacing-12: 12px;
   --spacing-16: 16px;
-  --spacing-20: 20px;
   --spacing-24: 24px;
   --spacing-32: 32px;
-  --spacing-40: 40px;
-  --spacing-56: 56px;
-  --spacing-72: 72px;
-  --spacing-80: 80px;
-  --spacing-112: 112px;
-  --spacing-128: 128px;
+  --spacing-48: 48px;
+  --spacing-96: 96px;
 
-  --radius-md: 4px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
+  /* Border Radius */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
+  --radius-2xl-2: 22px;
   --radius-3xl: 32px;
-  --radius-3xl-2: 40px;
+  --radius-3xl-2: 46px;
+  --radius-full: 64px;
+  --radius-full-2: 999px;
+
+  /* Shadows */
+  --shadow-subtle:
+    rgba(41, 0, 41, 0.11) 0px 0px 0px 1px,
+    rgba(32, 0, 36, 0.05) 0px 2px 2px 0px;
+  --shadow-subtle-2:
+    rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset,
+    rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  --shadow-subtle-3: rgba(255, 255, 255, 0.05) 0px 0px 0px 1px;
+  --shadow-subtle-4: rgba(41, 0, 41, 0.2) 0px 0px 0px 1px inset;
+  --shadow-subtle-5:
+    rgba(32, 0, 36, 0.11) 0px 0px 0px 1px,
+    rgba(32, 0, 36, 0.01) 0px 1px 1.5px 0px,
+    rgba(32, 0, 36, 0.02) 0px 2px 3px 0px,
+    rgba(32, 0, 36, 0.03) 0px 4px 6px 0px,
+    rgba(32, 0, 36, 0.04) 0px 8px 12px 0px,
+    rgba(32, 0, 36, 0.05) 0px 16px 24px 0px,
+    rgba(32, 0, 36, 0.06) 0px 24px 36px 0px,
+    rgba(32, 0, 36, 0.07) 0px 36px 54px 0px,
+    rgba(32, 0, 36, 0.08) 0px 54px 81px 0px;
+  --shadow-subtle-6:
+    rgba(32, 0, 36, 0.01) 0px 1px 1.5px 0px,
+    rgba(32, 0, 36, 0.02) 0px 2px 3px 0px,
+    rgba(32, 0, 36, 0.03) 0px 4px 6px 0px,
+    rgba(32, 0, 36, 0.04) 0px 8px 12px 0px,
+    rgba(32, 0, 36, 0.05) 0px 16px 24px 0px;
+  --shadow-subtle-7:
+    rgba(32, 0, 36, 0.11) 0px 0px 0px 1px,
+    rgba(32, 0, 36, 0.05) 0px 2px 2px 0px;
+  --shadow-subtle-8: rgba(32, 0, 36, 0.11) 0px 0px 0px 1px;
+  --shadow-subtle-9: rgba(41, 0, 41, 0.11) 0px 0px 0px 1px;
+  --shadow-subtle-10: rgba(255, 255, 255, 0.11) 0px 0px 0px 1px;
+  --shadow-subtle-11: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  --shadow-subtle-12:
+    rgba(32, 0, 36, 0.05) 0px 1px 2px 0px,
+    rgba(255, 255, 255, 0.4) 0px 10px 24px -10px inset;
 }
 
 :root {
-  --surface-abyss: #171721;
-  --surface-surface: #1e1e2a;
-  --surface-interactive: #272735;
+  --gradient-hero-glow: linear-gradient(
+    145deg,
+    #ffbdd3,
+    #fff1bd 40%,
+    #fff1bd 60%,
+    #ffcb0f
+  );
   --page-max-width: 1200px;
+  --section-gap: 80px;
+  --card-padding: 24px;
+  --element-gap: 16px;
+  --surface-canvas: #ffffff;
+  --surface-warm-wash: #fff1bd;
+  --surface-dark-plum: #240029;
+  --surface-success-wash: #dcfce7;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 88px;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--color-deep-space);
-  color: var(--color-starlight);
-  font-family: var(--font-arcadia);
+  overflow-x: hidden;
+  background: var(--color-canvas);
+  color: var(--color-aubergine);
+  font-family: var(--font-inter-var);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -93,13 +198,55 @@ a {
 }
 
 ::selection {
-  background: var(--color-mercury-blue);
-  color: var(--color-pure-white);
+  background: var(--color-aubergine);
+  color: var(--color-canvas);
 }
 
 :focus-visible {
-  outline: 1px solid color-mix(in srgb, var(--color-mercury-blue) 55%, var(--color-lead) 45%);
+  outline: 2px solid var(--color-aubergine);
   outline-offset: 3px;
+}
+
+.hero-gradient {
+  background: var(--gradient-hero-glow);
+}
+
+.display-heading {
+  font-family: var(--font-kaio);
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+.section-shell {
+  margin-inline: auto;
+  width: min(calc(100% - 32px), var(--page-max-width));
+}
+
+.section-anchor {
+  scroll-margin-top: 96px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: 12px;
+  z-index: 100;
+  transform: translateY(-160%);
+  border-radius: var(--radius-md);
+  background: var(--color-aubergine);
+  color: var(--color-canvas);
+  padding: 10px 14px;
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (min-width: 640px) {
+  .section-shell {
+    width: min(calc(100% - 48px), var(--page-max-width));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -112,6 +259,7 @@ a {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
 }

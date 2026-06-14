@@ -1,39 +1,61 @@
+export type ProjectPreviewVariant =
+  | "devdeck"
+  | "scenebook"
+  | "financial-analyst"
+  | "setuai";
+
+export type WorkStatus = {
+  label: string;
+  tone: "success";
+};
+
 export type WorkItem = {
   title: string;
-  badge?: string;
+  label: string;
   description: string;
   tags: string[];
-  href: string;
+  preview: ProjectPreviewVariant;
+  emailSubject: string;
+  status?: WorkStatus;
 };
 
 export const workItems: WorkItem[] = [
   {
     title: "DevDeck",
-    badge: "Featured",
+    label: "Agent infrastructure",
     description:
-      "Agent-first engineering workspace for orchestrating local development stacks with compact diagnostics and lower token overhead.",
+      "An agent-first engineering workspace for orchestrating local development stacks with compact diagnostics and lower token overhead.",
     tags: ["TypeScript", "CLI", "Agent Infra"],
-    href: "#contact",
+    preview: "devdeck",
+    emailSubject: "Discuss DevDeck",
+    status: { label: "Active build", tone: "success" },
   },
   {
     title: "SceneBook",
+    label: "Creator systems",
     description:
-      "Creator operating system for short-form builders, combining planning, assets, scripts, and agentic workflows.",
+      "A creator operating system that brings planning, assets, scripts, and agentic workflows into one focused production loop.",
     tags: ["Next.js", "AI Tools", "Creator OS"],
-    href: "#contact",
+    preview: "scenebook",
+    emailSubject: "Discuss SceneBook",
+    status: { label: "Active build", tone: "success" },
   },
   {
     title: "AI Financial Analyst",
+    label: "Local AI",
     description:
-      "Local-first financial analysis assistant using NL2SQL, forecasting, and LLM workflows for leadership queries.",
+      "A local-first analysis assistant using NL2SQL, forecasting, and LLM workflows to answer leadership questions from structured data.",
     tags: ["Python", "FastAPI", "LLMs"],
-    href: "#contact",
+    preview: "financial-analyst",
+    emailSubject: "Discuss the AI Financial Analyst",
   },
   {
     title: "SetuAI",
+    label: "Responsible supply chains",
     description:
-      "Supply-chain ethics and compliance prototype for multilingual vendor onboarding and risk scoring.",
+      "A multilingual supply-chain ethics and compliance prototype for vendor onboarding, document extraction, and explainable risk scoring.",
     tags: ["OCR", "SAP", "Hackathon"],
-    href: "#contact",
+    preview: "setuai",
+    emailSubject: "Discuss SetuAI",
   },
 ];

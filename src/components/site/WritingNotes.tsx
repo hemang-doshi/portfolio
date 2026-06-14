@@ -1,43 +1,47 @@
+import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
+
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ShellCard } from "@/components/ui/ShellCard";
 import { notes } from "@/data/notes";
+import { buildMailtoHref } from "@/lib/site-config";
 
 export function WritingNotes() {
   return (
-    <section id="writing" className="space-y-8">
-      <SectionHeader
-        number="03"
-        title="Writing / Notes"
-        actionHref="#contact"
-        actionLabel="Ask for the longer version"
-      />
-      <div className="grid gap-4">
-        {notes.map((note) => (
-          <ShellCard
-            key={note.title}
-            className="p-5 transition-colors duration-200 hover:border-lead/30 hover:bg-graphite/25"
-          >
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div className="max-w-2xl space-y-2">
-                <p className="text-[length:var(--text-caption)] uppercase tracking-[0.16em] text-silver">
-                  {note.date}
-                </p>
-                <h3 className="font-[family:var(--font-arcadiadisplay)] text-[length:var(--text-heading-sm)] font-[360] tracking-[0.01em] text-starlight">
+    <section id="writing" className="section-anchor py-20 sm:py-24">
+      <div className="section-shell">
+        <SectionHeader
+          eyebrow="WRITING & NOTES"
+          title="Ideas I’m working through."
+          description="Short notes on agents, local AI, product clarity, and the craft of making technical work legible."
+          align="left"
+        />
+
+        <div className="mt-10 border-t border-plum-tinted">
+          {notes.map((note) => (
+            <article
+              key={note.title}
+              className="grid gap-4 border-b border-plum-tinted py-7 sm:grid-cols-[110px_1fr_auto] sm:items-center"
+            >
+              <p className="font-[family:var(--font-jetbrains-mono)] text-[length:var(--text-caption)] tracking-[0.08em] text-heather uppercase">
+                {note.date}
+              </p>
+              <div className="max-w-2xl">
+                <h3 className="text-[length:var(--text-heading-sm)] leading-[var(--leading-heading-sm)] font-semibold tracking-[var(--tracking-heading-sm)] text-aubergine">
                   {note.title}
                 </h3>
-                <p className="text-[length:var(--text-body)] leading-[var(--leading-body)] text-silver">
+                <p className="mt-2 text-[length:var(--text-body-sm)] leading-[var(--leading-body-sm)] text-heather">
                   {note.description}
                 </p>
               </div>
               <a
-                href={note.href}
-                className="text-[length:var(--text-body-sm)] tracking-[0.04em] text-silver transition-colors hover:text-starlight"
+                href={buildMailtoHref(note.emailSubject)}
+                className="inline-flex min-h-11 items-center gap-2 self-start text-[length:var(--text-body-sm)] font-semibold text-aubergine transition-colors hover:text-heather sm:self-center"
               >
-                Read note →
+                Request note
+                <ArrowUpRightIcon size={16} weight="bold" aria-hidden="true" />
               </a>
-            </div>
-          </ShellCard>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

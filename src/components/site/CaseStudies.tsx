@@ -1,40 +1,67 @@
+import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
+
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ShellCard } from "@/components/ui/ShellCard";
-import { caseStudies } from "@/data/case-studies";
+import { evidenceItems } from "@/data/case-studies";
+import { buildMailtoHref } from "@/lib/site-config";
 
 export function CaseStudies() {
   return (
-    <section id="case-studies" className="space-y-8">
-      <SectionHeader
-        number="02"
-        title="Case Studies"
-        actionHref="#contact"
-        actionLabel="Request the full walkthrough"
-      />
-      <div className="grid gap-4">
-        {caseStudies.map((study) => (
-          <ShellCard
-            key={study.title}
-            className="p-5 transition-colors duration-200 hover:border-lead/30 hover:bg-graphite/25"
-          >
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div className="max-w-2xl space-y-2">
-                <h3 className="font-[family:var(--font-arcadiadisplay)] text-[length:var(--text-heading-sm)] font-[360] tracking-[0.01em] text-starlight">
-                  {study.title}
-                </h3>
-                <p className="text-[length:var(--text-body)] leading-[var(--leading-body)] text-silver">
-                  {study.description}
-                </p>
+    <section
+      id="case-studies"
+      className="section-anchor border-y border-plum-tinted bg-aubergine/[0.025] py-20 sm:py-24"
+    >
+      <div className="section-shell">
+        <SectionHeader
+          eyebrow="ENGINEERING EVIDENCE"
+          title="The thinking behind the work."
+          description="A few recurring system problems, and the practical approaches I use to make them clearer, smaller, and easier to operate."
+        />
+
+        <div className="mt-12 grid gap-4 md:grid-cols-2">
+          {evidenceItems.map((item, index) => (
+            <article
+              key={item.title}
+              className="rounded-[var(--radius-xl)] bg-canvas p-6 shadow-subtle sm:p-8"
+            >
+              <div className="mb-8 flex items-center justify-between">
+                <span className="grid size-8 place-items-center rounded-full bg-aubergine text-[length:var(--text-caption)] font-semibold text-canvas">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="font-[family:var(--font-jetbrains-mono)] text-[10px] tracking-[0.08em] text-heather uppercase">
+                  {item.relatedProject}
+                </span>
+              </div>
+              <h3 className="text-[length:var(--text-heading-sm)] leading-[var(--leading-heading-sm)] font-semibold tracking-[var(--tracking-heading-sm)] text-aubergine">
+                {item.title}
+              </h3>
+              <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                <div>
+                  <p className="mb-2 font-[family:var(--font-jetbrains-mono)] text-[10px] tracking-[0.08em] text-heather uppercase">
+                    Problem
+                  </p>
+                  <p className="text-[length:var(--text-body-sm)] leading-[var(--leading-body-sm)] text-aubergine">
+                    {item.problem}
+                  </p>
+                </div>
+                <div>
+                  <p className="mb-2 font-[family:var(--font-jetbrains-mono)] text-[10px] tracking-[0.08em] text-heather uppercase">
+                    Approach
+                  </p>
+                  <p className="text-[length:var(--text-body-sm)] leading-[var(--leading-body-sm)] text-aubergine">
+                    {item.approach}
+                  </p>
+                </div>
               </div>
               <a
-                href={study.href}
-                className="text-[length:var(--text-body-sm)] tracking-[0.04em] text-silver transition-colors hover:text-starlight"
+                href={buildMailtoHref(`Discuss ${item.title}`)}
+                className="mt-7 inline-flex min-h-11 items-center gap-2 text-[length:var(--text-body-sm)] font-semibold text-aubergine transition-colors hover:text-heather"
               >
-                Read case study →
+                Talk through the approach
+                <ArrowUpRightIcon size={16} weight="bold" aria-hidden="true" />
               </a>
-            </div>
-          </ShellCard>
-        ))}
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

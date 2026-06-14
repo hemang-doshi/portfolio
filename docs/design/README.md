@@ -1,25 +1,21 @@
 # Design Documentation
 
-This folder is the source of truth for the portfolio website design system and experience direction.
+This folder documents the portfolio’s sunset-marketplace design system.
 
-The site should not feel like a portfolio template. It should feel like a cohesive proof-of-work system: a cinematic world that zooms into a desk, reveals a workstation interface, and turns into a structured archive of selected work, case studies, and writing.
+## Source Precedence
 
-## Documents
-
-| Document | Purpose |
-|---|---|
-| [`mercury-style-reference.md`](./mercury-style-reference.md) | Visual style, rules, components, imagery direction, do/don't guidance. |
-| [`tokens.json`](./tokens.json) | Structured design-token reference for colors, typography, spacing, radii, and surfaces. |
-| [`tailwind-v4-theme.css`](./tailwind-v4-theme.css) | Tailwind v4 `@theme` setup and CSS custom properties. |
-| [`experience-brief.md`](./experience-brief.md) | Scroll narrative, page structure, and content strategy. |
-| [`implementation-plan.md`](./implementation-plan.md) | First shippable implementation plan. |
+1. `src/app/globals.css` contains the authoritative runtime `@theme`.
+2. `tokens.json` is the structured reference for the same values.
+3. `outseta-style-reference.md` defines how those values may be used.
+4. `experience-brief.md` defines the page structure, copy rules, and interaction model.
 
 ## Non-Negotiables
 
-- Use the exact color tokens.
-- Mercury Blue is only for primary CTAs and tiny active indicators.
-- Keep typography light and refined; avoid heavy font weights.
-- Do not add extra saturated colors.
-- Avoid heavy shadows.
-- Use spacious layouts and disciplined dividers.
-- The homepage must behave like a product experience, not a resume page.
+- Canvas is the page background and Aubergine is the structural ink.
+- Fuchsia Signal is reserved for primary conversion buttons.
+- The sunset gradient appears only in the full-width hero.
+- Permanent Marker annotations appear only inside the hero.
+- Cards use 14px radii, buttons 6px, inputs 3px, and pills 999px.
+- UI previews must depict deliberate product interfaces, never generic abstract art.
+- No fabricated testimonials, clients, metrics, links, or operational status.
+- Motion must remain optional and never carry meaning.

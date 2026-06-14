@@ -1,43 +1,42 @@
+import { Eyebrow } from "@/components/ui/Eyebrow";
 import { cn } from "@/lib/utils";
 
 type SectionHeaderProps = {
-  number: string;
+  eyebrow: string;
   title: string;
-  actionHref?: string;
-  actionLabel?: string;
+  description?: string;
+  align?: "left" | "center";
   className?: string;
 };
 
 export function SectionHeader({
-  number,
+  eyebrow,
   title,
-  actionHref,
-  actionLabel,
+  description,
+  align = "center",
   className,
 }: SectionHeaderProps) {
   return (
     <div
       className={cn(
-        "flex flex-col gap-4 border-b border-lead/15 pb-6 sm:flex-row sm:items-end sm:justify-between",
+        "space-y-4",
+        align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl",
         className,
       )}
     >
-      <div className="space-y-3">
-        <div className="flex items-center gap-3 text-[length:var(--text-caption)] uppercase tracking-[0.22em] text-silver">
-          <span>{number}</span>
-          <span className="h-1.5 w-1.5 rounded-full bg-mercury-blue" aria-hidden="true" />
-        </div>
-        <h2 className="font-[family:var(--font-arcadiadisplay)] text-[length:clamp(1.75rem,3vw,var(--text-heading))] font-[360] leading-[var(--leading-heading)] tracking-[0.01em] text-starlight">
-          {title}
-        </h2>
-      </div>
-      {actionHref && actionLabel ? (
-        <a
-          href={actionHref}
-          className="text-[length:var(--text-body-sm)] tracking-[0.02em] text-silver transition-colors hover:text-starlight"
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h2 className="display-heading text-[length:clamp(2.25rem,6vw,var(--text-heading-lg))] leading-[var(--leading-heading-lg)] tracking-[var(--tracking-heading-lg)] text-aubergine">
+        {title}
+      </h2>
+      {description ? (
+        <p
+          className={cn(
+            "text-[length:var(--text-subheading)] leading-[var(--leading-subheading)] tracking-[var(--tracking-subheading)] text-heather",
+            align === "center" && "mx-auto max-w-2xl",
+          )}
         >
-          {actionLabel}
-        </a>
+          {description}
+        </p>
       ) : null}
     </div>
   );

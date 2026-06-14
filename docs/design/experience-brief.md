@@ -2,53 +2,46 @@
 
 ## Intent
 
-Build a personal proof-of-work website that feels like a cohesive operating system for Hemang Doshi's work, not a conventional portfolio template.
+Present Hemang Doshi’s work as an evidence-first product marketplace for both
+hiring teams and potential collaborators. The page should communicate technical
+credibility, product judgment, and a clear path to start a conversation.
 
-## Core Scroll Narrative
+## Page Narrative
 
 ```txt
-world → workstation → system → evidence
+positioning → product evidence → engineering thinking → writing → working model → contact
 ```
 
-1. **World** — full-bleed twilight mountain desk hero.
-2. **Workstation** — scroll zoom moves the camera toward the desk/laptop.
-3. **System** — laptop reveals Hemang Doshi and the proof-of-work interface.
-4. **Evidence** — selected work, case studies, writing notes, and current focus unfold below.
+1. **Sticky navigation** — identity, section anchors, GitHub, and email.
+2. **Sunset hero** — approved positioning, dual actions, and three project previews.
+3. **Selected work** — DevDeck, SceneBook, AI Financial Analyst, and SetuAI.
+4. **Engineering evidence** — factual problem/approach cards without invented outcomes.
+5. **Writing and notes** — four dated ideas with honest email-request actions.
+6. **How I work** — frame the system, build the smallest useful loop, ship and learn.
+7. **Dark CTA** — direct email conversion with GitHub as the secondary route.
+8. **Footer** — identity, India, IST, availability, email, and GitHub.
 
-## Primary Sections
+## Approved Hero Copy
 
-- Hero world
-- Desk/laptop reveal
-- Selected Work
-- Case Studies
-- Writing / Notes
-- Current Focus / System Status
-- Contact / Build Together
+**Eyebrow:** AI-NATIVE ENGINEER • SYSTEMS BUILDER
 
-## Content Tone
+**Headline:** Building systems people can actually use.
 
-Confident, calm, technical, and premium. Avoid resume-speak. The copy should sound like a builder explaining systems, constraints, and proof.
+**Supporting copy:** I’m Hemang Doshi, a developer who likes turning vague
+ideas, messy workflows, and technical complexity into clean products people can
+actually use. This site is where I document the work, thinking, and taste behind
+that.
 
-## Selected Work
+## Content Rules
 
-Initial work cards:
+- Preserve factual project claims while editing for clarity.
+- Use pre-addressed email links when a verified public project or article URL is unavailable.
+- Do not invent customer quotes, performance numbers, active-user counts, or credentials.
+- Keep project content in typed data modules and site identity in one shared config.
 
-- DevDeck — agent-first engineering workspace / local development orchestration
-- SceneBook — creator operating system for short-form builders
-- AI Financial Analyst — local-first financial analysis assistant
-- SetuAI — supply-chain ethics and compliance prototype
+## Interaction Rules
 
-## Case Study Buckets
-
-- Agent-first infrastructure
-- Cloud-ready systems
-- Local AI workflows
-- Creator tooling and workflow systems
-
-## Interaction Principles
-
-- One cinematic scroll reveal is the hero interaction.
-- Everything else should be restrained.
-- Avoid random hover fireworks.
-- Use opacity, borders, motion, and surface shifts.
-- Respect reduced-motion preferences.
+- No long scroll choreography or sticky cinematic reveal.
+- Use anchor navigation, visible focus states, and restrained hover transitions.
+- All content must remain understandable with motion disabled.
+- Project previews are decorative and hidden from assistive technology.

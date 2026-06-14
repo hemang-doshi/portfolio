@@ -2,42 +2,36 @@
 
 Personal proof-of-work website for Hemang Doshi.
 
-This repository is being built as a cinematic developer portfolio: a scroll-driven proof-of-work system rather than a conventional resume-style website. The intended experience starts with a full-bleed twilight desk hero, zooms into the workstation on scroll, reveals Hemang Doshi on the laptop interface, and then transitions into selected work, case studies, writing notes, and current-focus/status surfaces.
+The portfolio is an evidence-first marketplace for selected engineering work,
+case-study thinking, and writing. Its visual language follows the supplied
+Outseta sunset-marketplace reference: a warm gradient hero, Aubergine structural
+ink, one Fuchsia conversion color, UI-led project previews, and restrained
+editorial motion.
 
-## Design Direction
+## Stack
 
-The visual source of truth is the **Mercury / Mountain Top Command Center** style reference.
+- Next.js App Router
+- React and TypeScript
+- Tailwind CSS v4
+- Phosphor Icons
+- Vitest
 
-Core principles:
+## Commands
 
-- dark, immersive command-center atmosphere
-- full-bleed atmospheric hero imagery
-- deep neutral surfaces with one disciplined blue accent
-- elegant light-weight typography
-- generous vertical spacing
-- pill-shaped primary actions
-- no heavy shadows; use borders, opacity, and surface shifts instead
-- content should feel like a cohesive proof-of-work operating system, not a pasted portfolio template
-
-## Documentation
-
-- [`docs/design/README.md`](docs/design/README.md) — design-doc index
-- [`docs/design/mercury-style-reference.md`](docs/design/mercury-style-reference.md) — style reference and usage rules
-- [`docs/design/tokens.json`](docs/design/tokens.json) — structured design tokens
-- [`docs/design/tailwind-v4-theme.css`](docs/design/tailwind-v4-theme.css) — Tailwind v4 theme variables and CSS custom properties
-- [`docs/design/experience-brief.md`](docs/design/experience-brief.md) — portfolio experience model and page structure
-- [`docs/design/implementation-plan.md`](docs/design/implementation-plan.md) — first implementation plan
-
-## Product Mental Model
-
-Do not build this as:
-
-```txt
-hero + projects + about + footer
+```bash
+pnpm dev
+pnpm test
+pnpm lint
+pnpm exec tsc --noEmit
+pnpm build
 ```
 
-Build it as:
+## Design Source Of Truth
 
-```txt
-world → workstation → system → evidence
-```
+- [`src/app/globals.css`](src/app/globals.css) — canonical runtime tokens
+- [`docs/design/tokens.json`](docs/design/tokens.json) — structured token reference
+- [`docs/design/outseta-style-reference.md`](docs/design/outseta-style-reference.md) — usage rules
+- [`docs/design/experience-brief.md`](docs/design/experience-brief.md) — page narrative and content rules
+
+The previous Mercury command-center design, cinematic mountain hero, fake
+operational metrics, and placeholder links are intentionally retired.

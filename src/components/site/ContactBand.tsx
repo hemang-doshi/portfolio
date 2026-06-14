@@ -1,51 +1,44 @@
-import { GitBranch, Link2, Mail } from "lucide-react";
-
 import { Button } from "@/components/ui/Button";
-import { ShellCard } from "@/components/ui/ShellCard";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { ProjectPreview } from "@/components/ui/ProjectPreview";
+import { buildMailtoHref, siteConfig } from "@/lib/site-config";
 
 export function ContactBand() {
   return (
-    <section id="contact" className="px-4 pb-24 sm:px-6 sm:pb-32">
-      <div className="mx-auto max-w-[var(--page-max-width)]">
-        <ShellCard className="overflow-hidden px-5 py-10 sm:px-8 sm:py-12">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl space-y-4">
-              <p className="text-[length:var(--text-caption)] uppercase tracking-[0.24em] text-silver">
-                Contact
-              </p>
-              <h2 className="font-[family:var(--font-arcadiadisplay)] text-[length:clamp(2rem,5vw,var(--text-heading-lg))] font-[360] leading-[1.08] tracking-[0.02em] text-starlight">
-                Have something worth building?
-              </h2>
-              <p className="text-[length:var(--text-subheading)] leading-[1.6] text-silver">
-                Send me a note if you&apos;re working on developer tools, AI-native
-                systems, cloud platforms, or creator workflows.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button href="mailto:hello@TODO" variant="primary" className="justify-center">
-                <Mail className="h-4 w-4" aria-hidden="true" />
-                Email me
-              </Button>
-              <Button
-                href="https://github.com/hemang-doshi"
-                variant="secondary"
-                className="justify-center"
-              >
-                <GitBranch className="h-4 w-4" aria-hidden="true" />
-                GitHub
-              </Button>
-              <Button
-                href="https://www.linkedin.com/in/TODO"
-                variant="secondary"
-                className="justify-center"
-              >
-                <Link2 className="h-4 w-4" aria-hidden="true" />
-                LinkedIn
-              </Button>
-            </div>
+    <section id="contact" className="overflow-hidden bg-aubergine py-20 text-canvas sm:py-24">
+      <div className="section-shell grid items-center gap-12 lg:grid-cols-[1fr_0.9fr]">
+        <div>
+          <Eyebrow className="text-plum-tinted">LET’S BUILD SOMETHING USEFUL</Eyebrow>
+          <h2 className="display-heading mt-4 max-w-3xl text-[length:clamp(2.4rem,6vw,var(--text-heading-lg))] leading-[var(--leading-heading-lg)] tracking-[var(--tracking-heading-lg)] text-canvas">
+            Have a hard problem worth making clear?
+          </h2>
+          <p className="mt-6 max-w-2xl text-[length:var(--text-body)] leading-[1.6] text-plum-tinted">
+            I’m interested in thoughtful teams working on developer tools, AI-native
+            products, cloud platforms, and creator workflows. Based in{" "}
+            {siteConfig.location}, working in {siteConfig.timezone}.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button href={buildMailtoHref("Start a conversation")} withArrow>
+              Start a conversation
+            </Button>
+            <Button
+              href={siteConfig.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              variant="secondary"
+              className="border-plum-tinted text-canvas hover:bg-canvas/10"
+            >
+              View GitHub
+            </Button>
           </div>
-        </ShellCard>
+        </div>
+
+        <div className="relative lg:translate-x-12">
+          <ProjectPreview
+            variant="devdeck"
+            className="shadow-subtle-5 lg:scale-110"
+          />
+        </div>
       </div>
     </section>
   );
