@@ -257,21 +257,21 @@ export function SpinningRope() {
     // Render loop using requestAnimationFrame
     let frameId: number;
     let isRunning = true;
+    let idlePhase = 0;
 
     const renderLoop = () => {
       if (!isRunning) return;
 
-      // Spin proportional to scroll progress plus a continuous very slow, calm idle spin
-      state.targetPhase = state.targetProgress * Math.PI * 16 + (performance.now() / 1000) * 0.05;
+      // Increment idle phase smoothly
+      idlePhase += 0.0015;
 
-      // Lerp values for butter-smooth drawing and spin
+      // Lerp values for butter-smooth drawing
       state.currentProgress += (state.targetProgress - state.currentProgress) * 0.08;
       
-      // Lerp phase
-      let diff = state.targetPhase - state.currentPhase;
-      state.currentPhase += diff * 0.08;
+      // Calculate phase directly from lerped progress and idle phase
+      const phase = state.currentProgress * Math.PI * 16 + idlePhase;
 
-      drawHelix(state.currentProgress, state.currentPhase);
+      drawHelix(state.currentProgress, phase);
 
       frameId = requestAnimationFrame(renderLoop);
     };

@@ -2,7 +2,12 @@
 
 import { useRef, useState } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { buildMailtoHref, siteConfig } from "@/lib/site-config";
@@ -49,120 +54,153 @@ function GmailMockup() {
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto bg-canvas rounded-xl border border-plum-tinted/50 shadow-subtle-5 overflow-hidden flex flex-col font-sans text-xs text-aubergine min-h-[350px]">
+    <div className="relative w-full max-w-md mx-auto bg-white dark:bg-[#131926] rounded-2xl border border-[#cbd5e1]/80 dark:border-[#334155] shadow-lg overflow-hidden flex flex-col font-sans text-xs text-[#1f1f1f] dark:text-[#f1f5f9] min-h-[360px]">
       
       {/* Gmail Window Header */}
-      <div className="bg-aubergine text-canvas px-4 py-3 flex items-center justify-between select-none">
-        <span className="font-semibold tracking-wide">New Message</span>
-        <div className="flex items-center gap-2.5 opacity-80 text-sm">
-          <span className="cursor-pointer hover:opacity-100">─</span>
-          <span className="cursor-pointer hover:opacity-100">⤢</span>
-          <span className="cursor-pointer hover:opacity-100">✕</span>
+      <div className="bg-[#f2f6fc] dark:bg-[#202124] text-[#1f1f1f] dark:text-[#e3e3e3] px-4 py-2.5 flex items-center justify-between select-none rounded-t-2xl border-b border-[#e0e0e0]/40 dark:border-[#303134]">
+        <span className="font-semibold text-xs text-[#1f1f1f] dark:text-[#e3e3e3]">New Message</span>
+        <div className="flex items-center gap-3 text-[#444746] dark:text-[#c4c7c5]">
+          <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-0.5 rounded cursor-pointer" aria-label="Minimize">
+            <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12" /></svg>
+          </button>
+          <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-0.5 rounded cursor-pointer" aria-label="Expand">
+            <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 3 21 3 21 9" /><polyline points="9 21 3 21 3 15" /><line x1="21" y1="3" x2="14" y2="10" /><line x1="3" y1="21" x2="10" y2="14" /></svg>
+          </button>
+          <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-0.5 rounded cursor-pointer" aria-label="Close">
+            <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+          </button>
         </div>
       </div>
 
       {sendState === "sent" ? (
         /* Success Screen */
-        <div className="flex-1 flex flex-col items-center justify-center p-8 text-center gap-4 bg-canvas">
-          <div className="size-14 rounded-full bg-honeydew border border-mint flex items-center justify-center text-forest text-2xl animate-bounce">
+        <div className="flex-1 flex flex-col items-center justify-center p-8 text-center gap-4 bg-white dark:bg-[#131926] rounded-b-2xl">
+          <div className="size-12 rounded-full bg-honeydew border border-mint flex items-center justify-center text-forest text-xl animate-bounce">
             ✓
           </div>
           <div>
-            <h4 className="font-bold text-sm text-aubergine">Message Sent!</h4>
-            <p className="mt-2 text-heather text-[11px] leading-relaxed">
+            <h4 className="font-semibold text-sm text-[#1f1f1f] dark:text-[#f1f5f9]">Message Sent!</h4>
+            <p className="mt-2 text-[#767676] dark:text-[#9e9e9e] text-[11px] leading-relaxed">
               Thanks for reaching out. Hemang's inbox has received your details (simulated) and he will get back to you shortly.
             </p>
           </div>
           <button 
             onClick={() => setSendState("idle")}
-            className="mt-2 px-4 py-2 border border-heather rounded-lg font-bold text-aubergine hover:bg-aubergine/[0.03] transition-colors"
+            className="mt-2 px-4 py-2 border border-[#cbd5e1] dark:border-[#334155] rounded-full font-medium text-xs text-[#0b57d0] dark:text-[#38bdf8] hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
           >
             Compose Another
           </button>
         </div>
       ) : (
         /* Mail Form */
-        <form onSubmit={handleSend} className="flex-1 flex flex-col p-4 gap-3.5 bg-canvas">
+        <form onSubmit={handleSend} className="flex-1 flex flex-col p-4 gap-3 bg-white dark:bg-[#131926] rounded-b-2xl">
           
           {/* Recipient Field */}
-          <div className="flex items-center gap-2 border-b border-plum-tinted/30 pb-2.5">
-            <span className="text-heather font-medium w-10">To:</span>
+          <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] pb-2 text-[11px]">
+            <span className="text-[#767676] dark:text-[#9e9e9e] w-12 text-left">To</span>
             <div 
               onClick={() => setIsRevealed(true)}
               onMouseEnter={() => setIsRevealed(true)}
-              className="flex-1 cursor-pointer font-mono font-semibold text-aubergine text-[11px]"
+              className="flex-1 cursor-pointer font-mono font-medium text-[#1f1f1f] dark:text-[#f1f5f9]"
               title="Click/Hover to reveal email address"
             >
               {isRevealed ? (
-                <span className="text-fuchsia-signal select-all">{siteConfig.email}</span>
+                <span className="text-[#0b57d0] dark:text-[#38bdf8] select-all">{siteConfig.email}</span>
               ) : (
-                <span className="text-heather opacity-75">hemangd... @ gmail.com <span className="text-[9px] font-sans font-normal italic ml-2">(hover to reveal)</span></span>
+                <span className="text-[#767676]/80 dark:text-[#9e9e9e]/80">hemangd... @ gmail.com <span className="text-[9px] font-sans font-normal italic ml-2">(hover to reveal)</span></span>
               )}
             </div>
           </div>
 
           {/* Sender Email Input */}
-          <div className="flex items-center gap-2 border-b border-plum-tinted/30 pb-2.5">
-            <span className="text-heather font-medium w-10">From:</span>
+          <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] pb-2 text-[11px]">
+            <span className="text-[#767676] dark:text-[#9e9e9e] w-12 text-left">From</span>
             <input
               type="email"
               required
               placeholder="your.email@domain.com"
               value={sender}
               onChange={(e) => setSender(e.target.value)}
-              className="flex-1 bg-transparent border-none outline-none font-medium placeholder-heather/50 text-aubergine"
+              className="flex-1 bg-transparent border-none outline-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9]"
             />
           </div>
 
           {/* Subject Input */}
-          <div className="flex items-center gap-2 border-b border-plum-tinted/30 pb-2.5">
-            <span className="text-heather font-medium w-10">Subject:</span>
+          <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] pb-2 text-[11px]">
+            <span className="text-[#767676] dark:text-[#9e9e9e] w-12 text-left">Subject</span>
             <input
               type="text"
-              placeholder="Let's build a product / job inquiry"
+              placeholder="Subject"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="flex-1 bg-transparent border-none outline-none font-medium placeholder-heather/50 text-aubergine"
+              className="flex-1 bg-transparent border-none outline-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9]"
             />
           </div>
 
           {/* Message Area */}
-          <div className="flex-1 min-h-[120px] flex">
+          <div className="flex-1 min-h-[140px] flex">
             <textarea
               required
-              placeholder="Hi Hemang, I saw your portfolio work and wanted to reach out regarding..."
+              placeholder="Say hello..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full bg-transparent border-none outline-none resize-none font-medium placeholder-heather/50 text-aubergine leading-relaxed"
+              className="w-full bg-transparent border-none outline-none resize-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9] leading-relaxed text-xs pt-1"
             />
           </div>
 
           {/* Form Actions Footer */}
-          <div className="border-t border-plum-tinted/20 pt-3 flex items-center justify-between select-none">
-            <div className="flex items-center gap-3">
+          <div className="border-t border-[#f1f3f4] dark:border-[#303134] pt-3 flex items-center justify-between select-none">
+            <div className="flex items-center gap-2.5">
               <button
                 type="submit"
                 disabled={sendState === "sending"}
-                className="px-5 py-2.5 bg-fuchsia-signal text-canvas font-bold rounded-lg shadow-sm hover:opacity-95 disabled:opacity-50 transition-opacity flex items-center gap-2"
+                className="px-5 py-2 bg-[#0b57d0] hover:bg-[#0842a0] disabled:bg-[#0b57d0]/50 text-white font-semibold rounded-full shadow-sm transition-colors flex items-center gap-1.5 cursor-pointer text-xs"
               >
                 {sendState === "sending" ? "Sending..." : "Send"}
               </button>
-              {/* Fake Rich Formatting icons */}
-              <div className="hidden sm:flex items-center gap-2 text-heather/60 text-sm">
-                <span className="cursor-not-allowed">A</span>
-                <span className="cursor-not-allowed">📎</span>
-                <span className="cursor-not-allowed">🔗</span>
-                <span className="cursor-not-allowed">📷</span>
+              
+              {/* Authentic Gmail Toolbar Emojis/Icons */}
+              <div className="hidden sm:flex items-center gap-1 text-[#444746] dark:text-[#c4c7c5]">
+                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Formatting options">
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20h16" /><path d="M12 4v12" /><path d="M8 10h8" /></svg>
+                </button>
+                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Attach files">
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
+                </button>
+                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Insert link">
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+                </button>
+                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Insert emoji">
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><line x1="9" y1="9" x2="9.01" y2="9" /><line x1="15" y1="9" x2="15.01" y2="9" /></svg>
+                </button>
+                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Insert files using Drive">
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 22 22 22" /></svg>
+                </button>
+                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Insert photo">
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
+                </button>
+                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Toggle confidential mode">
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+                </button>
+                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Insert signature">
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
+                </button>
               </div>
             </div>
-            {/* Trash can */}
-            <span 
-              onClick={() => { setSender(""); setSubject(""); setMessage(""); }}
-              className="cursor-pointer text-heather/60 hover:text-aubergine text-sm"
-              title="Discard draft"
-            >
-              🗑️
-            </span>
+            
+            <div className="flex items-center gap-1 text-[#444746] dark:text-[#c4c7c5]">
+              <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="More options">
+                <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg>
+              </button>
+              <button 
+                type="button"
+                onClick={() => { setSender(""); setSubject(""); setMessage(""); }}
+                className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded text-[#444746] hover:text-strawberry dark:text-[#c4c7c5] dark:hover:text-red-400 cursor-pointer"
+                title="Discard draft"
+              >
+                <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
+              </button>
+            </div>
           </div>
         </form>
       )}
@@ -186,21 +224,25 @@ export function ContactBand() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // Header & Content reveal on scroll
-    gsap.fromTo(".cb-text-anim, .cb-preview-anim", 
+    // Contact section pin & reveal on scroll
+    const contactTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current || "#contact",
+        start: "top center",
+        end: "+=400",
+        pin: true,
+        scrub: 1.5,
+        anticipatePin: 1,
+      }
+    });
+
+    contactTl.fromTo(".cb-text-anim, .cb-preview-anim",
       { y: 50, opacity: 0 },
       {
         y: 0,
         opacity: 1,
         stagger: 0.1,
-        duration: 0.8,
         ease: "power2.out",
-        scrollTrigger: {
-          trigger: containerRef.current || "#contact",
-          start: "top 85%",
-          end: "top 55%",
-          scrub: 1,
-        }
       }
     );
 
@@ -210,7 +252,7 @@ export function ContactBand() {
     <section 
       id="contact" 
       ref={containerRef}
-      className="overflow-hidden bg-transparent py-32 text-aubergine sm:py-44"
+      className="overflow-hidden bg-transparent py-12 text-aubergine sm:py-16 lg:py-20"
     >
       <div className="section-shell grid items-center gap-12 lg:grid-cols-[1fr_0.9fr]">
         <div className="flex flex-col items-start lg:pr-16">

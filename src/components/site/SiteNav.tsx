@@ -19,6 +19,14 @@ export function SiteNav() {
     } else {
       document.documentElement.classList.remove("dark");
     }
+
+    // Force scroll to top on initial page mount
+    if (typeof window !== "undefined") {
+      window.scrollTo(0, 0);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 50);
+    }
   }, []);
 
   const toggleTheme = () => {

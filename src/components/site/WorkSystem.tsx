@@ -2,8 +2,13 @@
 
 import { useRef, useState } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { WritingNotes } from "@/components/site/WritingNotes";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { WorkCard } from "@/components/ui/WorkCard";
 import { workItems } from "@/data/work";
@@ -75,7 +80,7 @@ const consoleDetails: Record<
 
 export function WorkSystem() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const terminalScrollRef = useRef<HTMLDivElement>(null);
   const [history, setHistory] = useState<Array<{ command?: string; output: React.ReactNode }>>([
     {
       output: (
@@ -91,46 +96,85 @@ export function WorkSystem() {
     const workEl = containerRef.current?.querySelector("#work");
     const tpEl = containerRef.current?.querySelector("#system-console");
 
-    // Selected work reveal on scroll
-    gsap.fromTo(".work-header-anim, .work-card-anim",
+    // Selected work header reveal on scroll
+    gsap.fromTo(".work-header-anim",
       { y: 50, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        stagger: 0.1,
-        duration: 0.8,
         ease: "power2.out",
         scrollTrigger: {
           trigger: workEl || "#work",
-          start: "top 85%",
-          end: "top 50%",
-          scrub: 1,
+          start: "top 90%",
+          end: "top 10%",
+          scrub: 1.5,
         }
       }
     );
 
-    // Thought process/system console reveal on scroll
-    gsap.fromTo(".tp-header-anim, .tp-grid-trigger",
+    // Cards coming in sequentially (top 2 first, bottom 2 after)
+    const workTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".work-grid-trigger",
+        start: "top 90%",
+        end: "bottom 30%",
+        scrub: 1.5,
+      }
+    });
+
+    workTl.fromTo([".work-card-top-left", ".work-card-top-right"],
+      { 
+        x: (index) => index === 0 ? -120 : 120, 
+        opacity: 0 
+      },
+      {
+        x: 0,
+        opacity: 1,
+        ease: "power2.out",
+        duration: 1,
+      }
+    );
+
+    workTl.fromTo([".work-card-bottom-left", ".work-card-bottom-right"],
+      { 
+        x: (index) => index === 0 ? -120 : 120, 
+        opacity: 0 
+      },
+      {
+        x: 0,
+        opacity: 1,
+        ease: "power2.out",
+        duration: 1,
+      },
+      "+=0.2"
+    );
+
+    // Thought process/system console pin & reveal on scroll
+    const tpTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: tpEl || "#system-console",
+        start: "top center",
+        end: "+=400",
+        pin: true,
+        scrub: 1.5,
+        anticipatePin: 1,
+      }
+    });
+
+    tpTl.fromTo(".tp-header-anim, .tp-grid-trigger",
       { y: 50, opacity: 0 },
       {
         y: 0,
         opacity: 1,
         stagger: 0.1,
-        duration: 0.8,
         ease: "power2.out",
-        scrollTrigger: {
-          trigger: tpEl || "#system-console",
-          start: "top 85%",
-          end: "top 55%",
-          scrub: 1,
-        }
       }
     );
   }, { scope: containerRef });
 
   const scrollToBottom = () => {
-    if (terminalEndRef.current) {
-      terminalEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (terminalScrollRef.current) {
+      terminalScrollRef.current.scrollTop = terminalScrollRef.current.scrollHeight;
     }
   };
 
@@ -269,7 +313,7 @@ export function WorkSystem() {
 
   return (
     <div ref={containerRef}>
-      <section id="work" className="section-anchor bg-transparent py-32 sm:py-44">
+      <section id="work" className="section-anchor bg-transparent py-12 sm:py-16 lg:py-20">
         <div className="section-shell">
           <div className="work-header-anim">
             <SectionHeader
@@ -279,18 +323,29 @@ export function WorkSystem() {
             />
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 work-grid-trigger">
-            {workItems.map((item) => (
-              <div key={item.title} className="work-card-anim">
-                <WorkCard item={item} />
-              </div>
-            ))}
+            {workItems.map((item, index) => {
+              let cardClass = "";
+              if (index === 0) cardClass = "work-card-top-left";
+              else if (index === 1) cardClass = "work-card-top-right";
+              else if (index === 2) cardClass = "work-card-bottom-left";
+              else if (index === 3) cardClass = "work-card-bottom-right";
+
+              return (
+                <div
+                  key={item.title}
+                  className={`work-card-anim ${cardClass}`}
+                >
+                  <WorkCard item={item} />
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       <WritingNotes />
 
-      <section id="system-console" className="section-anchor bg-transparent py-32 sm:py-44">
+      <section id="system-console" className="section-anchor bg-transparent pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-16 lg:pb-20">
         <div className="section-shell relative">
           <div className="tp-header-anim max-w-xl mx-auto text-center mb-8">
             <p className="font-[family:var(--font-jetbrains-mono)] text-[10px] font-bold text-fuchsia-signal uppercase tracking-wider mb-1.5">System Operations Console</p>
@@ -312,7 +367,7 @@ export function WorkSystem() {
               </div>
               
               {/* Terminal Logs/Scroll area */}
-              <div className="flex-1 overflow-y-auto flex flex-col gap-2.5 pr-1 custom-scrollbar">
+              <div ref={terminalScrollRef} className="flex-1 overflow-y-auto flex flex-col gap-2.5 pr-1 custom-scrollbar">
                 {history.map((entry, idx) => (
                   <div key={idx} className="flex flex-col gap-1">
                     {entry.command && (
@@ -324,7 +379,6 @@ export function WorkSystem() {
                     <div>{entry.output}</div>
                   </div>
                 ))}
-                <div ref={terminalEndRef} />
               </div>
 
               {/* Terminal Input Bar */}

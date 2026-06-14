@@ -7,7 +7,7 @@ import { SpinningRope } from "@/components/ui/SpinningRope";
 
 export default function Home() {
   return (
-    <>
+    <div id="top">
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>
@@ -19,6 +19,6 @@ export default function Home() {
         <ContactBand />
       </main>
       <FooterTerminal />
-    </>
+    </div>
   );
 }

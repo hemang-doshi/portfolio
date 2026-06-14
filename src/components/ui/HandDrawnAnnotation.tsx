@@ -14,35 +14,65 @@ export function HandDrawnAnnotation({
   return (
     <div
       className={cn(
-        "pointer-events-none absolute z-20 hidden items-center gap-2 -rotate-3 font-[family:var(--font-permanent-marker)] text-[length:var(--text-body)] text-aubergine lg:flex",
-        flip ? "flex-row-reverse" : "flex-row",
+        "pointer-events-none absolute z-20 hidden items-start gap-2 -rotate-3 font-[family:var(--font-permanent-marker)] text-[length:var(--text-body)] text-aubergine lg:flex",
         className,
       )}
       aria-hidden="true"
     >
-      <span className="whitespace-nowrap">{children}</span>
-      <svg
-        viewBox="0 0 96 44"
-        className={cn(
-          "h-8 w-18 overflow-visible flex-shrink-0",
-          flip && "-scale-x-100",
-        )}
-        fill="none"
-      >
-        <path
-          d="M4 15C30 10 50 15 78 28"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-        <path
-          d="M66 22C71 25 76 27 80 29C77 23 75 19 72 13"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      {flip ? (
+        <>
+          {/* Flipped: SVG on the left pointing left, text on the right */}
+          <svg
+            viewBox="0 0 96 44"
+            width="96"
+            height="44"
+            className="overflow-visible flex-shrink-0"
+            style={{ transform: "scaleX(-1)" }}
+            fill="none"
+          >
+            <path
+              d="M4 7C25 6 55 13 78 34"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M67 32C72 34 77 36 82 37C80 31 78 27 75 23"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className="whitespace-nowrap select-none -mt-1">{children}</span>
+        </>
+      ) : (
+        <>
+          {/* Normal: text on the left, SVG on the right pointing right */}
+          <span className="whitespace-nowrap select-none -mt-1">{children}</span>
+          <svg
+            viewBox="0 0 96 44"
+            width="96"
+            height="44"
+            className="overflow-visible flex-shrink-0"
+            fill="none"
+          >
+            <path
+              d="M4 7C25 6 55 13 78 34"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M67 32C72 34 77 36 82 37C80 31 78 27 75 23"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </>
+      )}
     </div>
   );
 }

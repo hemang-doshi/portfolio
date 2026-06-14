@@ -14,6 +14,22 @@ export function HemangLogo({
       xmlns="http://www.w3.org/2000/svg"
       className={cn("size-9", className)}
     >
+      <style dangerouslySetInnerHTML={{__html: `
+        :root {
+          --logo-stop-1: #df37a7;
+          --logo-stop-2: #ffcc11;
+        }
+        .dark {
+          --logo-stop-1: #df37a7;
+          --logo-stop-2: #00f0ff;
+        }
+      `}} />
+      <defs>
+        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="var(--logo-stop-1)" />
+          <stop offset="100%" stopColor="var(--logo-stop-2)" />
+        </linearGradient>
+      </defs>
       {/* Outer Circle */}
       <circle
         cx="16"
@@ -22,33 +38,31 @@ export function HemangLogo({
         className={cn(
           forceLight 
             ? "stroke-white/20" 
-            : "stroke-aubergine/30 dark:stroke-white/20"
+            : "stroke-aubergine/20 dark:stroke-white/20"
         )}
         strokeWidth="1.5"
       />
-      {/* Monogram H */}
-      <path
-        d="M10 11V21M15.5 11V21M10 16H15.5"
-        className={cn(
-          forceLight 
-            ? "stroke-white" 
-            : "stroke-aubergine dark:stroke-white"
-        )}
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      {/* Monogram D */}
-      <path
-        d="M19 11H21.5C23.5 11 25 12.5 25 16C25 19.5 23.5 21 21.5 21H19V11Z"
-        className={cn(
-          forceLight 
-            ? "stroke-fuchsia-signal" 
-            : "stroke-fuchsia-signal dark:stroke-cyan-400"
-        )}
-        strokeWidth="2"
-        strokeLinecap="round"
+      {/* Joined HD Monogram */}
+      <g 
+        strokeWidth="2.5" 
+        strokeLinecap="round" 
         strokeLinejoin="round"
-      />
+      >
+        {/* H Part (Left stem, crossbar, and middle vertical stem) */}
+        <path
+          d="M8 8V24 M8 16H16 M16 8V24"
+          className={cn(
+            forceLight 
+              ? "stroke-white" 
+              : "stroke-aubergine dark:stroke-white"
+          )}
+        />
+        {/* D Part (Loop extending from middle stem) */}
+        <path
+          d="M16 8H21C25.4 8 28 11.6 28 16C28 20.4 24.4 24 21 24H16"
+          stroke="url(#logoGrad)"
+        />
+      </g>
     </svg>
   );
 }

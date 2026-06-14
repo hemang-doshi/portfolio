@@ -50,9 +50,9 @@ export function HeroExperience() {
 
   return (
     <section 
-      id="top" 
+      id="hero" 
       ref={containerRef}
-      className="bg-transparent relative overflow-hidden py-24 sm:py-32 lg:py-36"
+      className="bg-transparent relative overflow-hidden min-h-[calc(100vh-72px)] flex items-center py-12 sm:py-16 lg:py-20"
     >
       <div className="section-shell relative">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -89,15 +89,18 @@ export function HeroExperience() {
 
           {/* Right Column: Miniature Instagram Phone Mockup */}
           <div className="relative flex justify-center items-center z-10">
-            {/* Single annotation pointing to the interactive posts */}
-            <div className="absolute -right-16 top-[45%] hidden xl:block z-20 hero-annotation-anim">
-              <HandDrawnAnnotation className="relative" flip>
+            {/* Phone Wrapper to anchor the annotation relative to the phone */}
+            <div className="relative">
+              {/* Single annotation pointing to the interactive posts */}
+              <HandDrawnAnnotation 
+                className="left-[calc(100%+12px)] top-[45%] lg:hidden xl:flex hero-annotation-anim" 
+                flip
+              >
                 click me
               </HandDrawnAnnotation>
-            </div>
 
-            {/* Phone Container */}
-            <div className="instagram-phone-anim relative w-[300px] h-[590px] rounded-[42px] border-[8px] border-aubergine bg-canvas shadow-subtle-5 overflow-hidden flex flex-col">
+              {/* Phone Container */}
+              <div className="instagram-phone-anim relative w-[300px] h-[590px] rounded-[42px] border-[8px] border-aubergine bg-canvas shadow-subtle-5 overflow-hidden flex flex-col">
               {/* Phone Speaker & Camera Notch */}
               <div className="absolute top-2 left-1/2 -translate-x-1/2 w-32 h-5 bg-aubergine rounded-full flex items-center justify-between px-4 z-30">
                 <span className="w-12 h-1 bg-white/20 rounded-full" />
@@ -223,6 +226,7 @@ export function HeroExperience() {
                   ))}
                 </div>
               </div>
+            </div>
             </div>
 
           </div>

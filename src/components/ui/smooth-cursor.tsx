@@ -214,6 +214,7 @@ export function SmoothCursor({
     }
 
     document.body.style.cursor = "none"
+    document.body.classList.add("custom-cursor-active")
     window.addEventListener("pointermove", throttledPointerMove, {
       passive: true,
     })
@@ -221,6 +222,7 @@ export function SmoothCursor({
     return () => {
       window.removeEventListener("pointermove", throttledPointerMove)
       document.body.style.cursor = "auto"
+      document.body.classList.remove("custom-cursor-active")
       if (rafId) cancelAnimationFrame(rafId)
       if (timeout !== null) {
         clearTimeout(timeout)
@@ -233,27 +235,35 @@ export function SmoothCursor({
   }
 
   return (
-    <motion.div
-      style={{
-        position: "fixed",
-        left: cursorX,
-        top: cursorY,
-        translateX: "-50%",
-        translateY: "-50%",
-        rotate: rotation,
-        scale: scale,
-        zIndex: 100,
-        pointerEvents: "none",
-        willChange: "transform",
-        opacity: isVisible ? 1 : 0,
-      }}
-      initial={false}
-      animate={{ opacity: isVisible ? 1 : 0 }}
-      transition={{
-        duration: 0.15,
-      }}
-    >
-      {cursor}
-    </motion.div>
+    <>
+      <style dangerouslySetInnerHTML={{__html: `
+        .custom-cursor-active,
+        .custom-cursor-active * {
+          cursor: none !important;
+        }
+      `}} />
+      <motion.div
+        style={{
+          position: "fixed",
+          left: cursorX,
+          top: cursorY,
+          translateX: "-50%",
+          translateY: "-50%",
+          rotate: rotation,
+          scale: scale,
+          zIndex: 100,
+          pointerEvents: "none",
+          willChange: "transform",
+          opacity: isVisible ? 1 : 0,
+        }}
+        initial={false}
+        animate={{ opacity: isVisible ? 1 : 0 }}
+        transition={{
+          duration: 0.15,
+        }}
+      >
+        {cursor}
+      </motion.div>
+    </>
   )
 }

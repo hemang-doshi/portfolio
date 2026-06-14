@@ -2,7 +2,12 @@
 
 import { useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import dynamic from "next/dynamic";
 
@@ -22,13 +27,12 @@ export function WritingNotes() {
         y: 0,
         opacity: 1,
         stagger: 0.1,
-        duration: 0.8,
         ease: "power2.out",
         scrollTrigger: {
           trigger: containerRef.current || "#skills",
-          start: "top 85%",
-          end: "top 55%",
-          scrub: 1,
+          start: "top 90%",
+          end: "top 10%",
+          scrub: 1.5,
         }
       }
     );
@@ -39,7 +43,7 @@ export function WritingNotes() {
     <section
       id="skills"
       ref={containerRef}
-      className="section-anchor bg-transparent py-32 sm:py-44"
+      className="section-anchor bg-transparent pt-12 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 lg:pb-10"
     >
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center wn-list-trigger">
