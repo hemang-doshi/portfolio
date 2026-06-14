@@ -57,17 +57,17 @@ function GmailMockup() {
     <div className="relative w-full max-w-md mx-auto bg-white dark:bg-[#131926] rounded-2xl border border-[#cbd5e1]/80 dark:border-[#334155] shadow-lg overflow-hidden flex flex-col font-sans text-xs text-[#1f1f1f] dark:text-[#f1f5f9] min-h-[360px]">
       
       {/* Gmail Window Header */}
-      <div className="bg-[#f2f6fc] dark:bg-[#202124] text-[#1f1f1f] dark:text-[#e3e3e3] px-4 py-2.5 flex items-center justify-between select-none rounded-t-2xl border-b border-[#e0e0e0]/40 dark:border-[#303134]">
+      <div className="bg-[#f2f6fc] dark:bg-[#202124] text-[#1f1f1f] dark:text-[#e3e3e3] px-5 py-3 flex items-center justify-between select-none rounded-t-2xl border-b border-[#e0e0e0]/40 dark:border-[#303134]">
         <span className="font-semibold text-xs text-[#1f1f1f] dark:text-[#e3e3e3]">New Message</span>
         <div className="flex items-center gap-3 text-[#444746] dark:text-[#c4c7c5]">
-          <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-0.5 rounded cursor-pointer" aria-label="Minimize">
-            <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12" /></svg>
+          <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1 rounded cursor-pointer animate-none" aria-label="Minimize">
+            <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12" /></svg>
           </button>
-          <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-0.5 rounded cursor-pointer" aria-label="Expand">
-            <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 3 21 3 21 9" /><polyline points="9 21 3 21 3 15" /><line x1="21" y1="3" x2="14" y2="10" /><line x1="3" y1="21" x2="10" y2="14" /></svg>
+          <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1 rounded cursor-pointer animate-none" aria-label="Expand">
+            <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 3 21 3 21 9" /><polyline points="9 21 3 21 3 15" /><line x1="21" y1="3" x2="14" y2="10" /><line x1="3" y1="21" x2="10" y2="14" /></svg>
           </button>
-          <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-0.5 rounded cursor-pointer" aria-label="Close">
-            <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+          <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1 rounded cursor-pointer animate-none" aria-label="Close">
+            <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
           </button>
         </div>
       </div>
@@ -97,11 +97,11 @@ function GmailMockup() {
           
           {/* Recipient Field */}
           <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] pb-2 text-[11px]">
-            <span className="text-[#767676] dark:text-[#9e9e9e] w-12 text-left">To</span>
+            <span className="text-[#767676] dark:text-[#9e9e9e] shrink-0 w-14 text-left">To</span>
             <div 
               onClick={() => setIsRevealed(true)}
               onMouseEnter={() => setIsRevealed(true)}
-              className="flex-1 cursor-pointer font-mono font-medium text-[#1f1f1f] dark:text-[#f1f5f9]"
+              className="flex-1 min-w-0 cursor-pointer font-mono font-medium text-[#1f1f1f] dark:text-[#f1f5f9] truncate"
               title="Click/Hover to reveal email address"
             >
               {isRevealed ? (
@@ -114,26 +114,26 @@ function GmailMockup() {
 
           {/* Sender Email Input */}
           <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] pb-2 text-[11px]">
-            <span className="text-[#767676] dark:text-[#9e9e9e] w-12 text-left">From</span>
+            <span className="text-[#767676] dark:text-[#9e9e9e] shrink-0 w-14 text-left">From</span>
             <input
               type="email"
               required
               placeholder="your.email@domain.com"
               value={sender}
               onChange={(e) => setSender(e.target.value)}
-              className="flex-1 bg-transparent border-none outline-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9]"
+              className="flex-1 min-w-0 w-full bg-transparent border-none outline-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9]"
             />
           </div>
 
           {/* Subject Input */}
           <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] pb-2 text-[11px]">
-            <span className="text-[#767676] dark:text-[#9e9e9e] w-12 text-left">Subject</span>
+            <span className="text-[#767676] dark:text-[#9e9e9e] shrink-0 w-14 text-left">Subject</span>
             <input
               type="text"
               placeholder="Subject"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="flex-1 bg-transparent border-none outline-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9]"
+              className="flex-1 min-w-0 w-full bg-transparent border-none outline-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9]"
             />
           </div>
 
@@ -159,46 +159,31 @@ function GmailMockup() {
                 {sendState === "sending" ? "Sending..." : "Send"}
               </button>
               
-              {/* Authentic Gmail Toolbar Emojis/Icons */}
-              <div className="hidden sm:flex items-center gap-1 text-[#444746] dark:text-[#c4c7c5]">
+              {/* Authentic Gmail Toolbar Emojis/Icons in proper size */}
+              <div className="hidden sm:flex items-center gap-1.5 text-[#444746] dark:text-[#c4c7c5]">
                 <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Formatting options">
-                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20h16" /><path d="M12 4v12" /><path d="M8 10h8" /></svg>
+                  <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20h16" /><path d="M12 4v12" /><path d="M8 10h8" /></svg>
                 </button>
                 <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Attach files">
-                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
+                  <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
                 </button>
                 <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Insert link">
-                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+                  <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
                 </button>
                 <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Insert emoji">
-                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><line x1="9" y1="9" x2="9.01" y2="9" /><line x1="15" y1="9" x2="15.01" y2="9" /></svg>
-                </button>
-                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Insert files using Drive">
-                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 22 22 22" /></svg>
-                </button>
-                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Insert photo">
-                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" /></svg>
-                </button>
-                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Toggle confidential mode">
-                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-                </button>
-                <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="Insert signature">
-                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
+                  <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><line x1="9" y1="9" x2="9.01" y2="9" /><line x1="15" y1="9" x2="15.01" y2="9" /></svg>
                 </button>
               </div>
             </div>
             
-            <div className="flex items-center gap-1 text-[#444746] dark:text-[#c4c7c5]">
-              <button type="button" className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded cursor-pointer" title="More options">
-                <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg>
-              </button>
+            <div className="flex items-center gap-1.5 text-[#444746] dark:text-[#c4c7c5]">
               <button 
                 type="button"
                 onClick={() => { setSender(""); setSubject(""); setMessage(""); }}
                 className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded text-[#444746] hover:text-strawberry dark:text-[#c4c7c5] dark:hover:text-red-400 cursor-pointer"
                 title="Discard draft"
               >
-                <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
+                <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
               </button>
             </div>
           </div>
