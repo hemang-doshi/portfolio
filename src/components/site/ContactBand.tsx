@@ -93,7 +93,7 @@ function GmailMockup() {
         </div>
       ) : (
         /* Mail Form */
-        <form onSubmit={handleSend} className="flex-1 flex flex-col p-4 pt-0 gap-0 bg-white dark:bg-[#131926] rounded-b-2xl">
+        <form onSubmit={handleSend} className="flex-1 flex flex-col px-5 pb-5 pt-0 gap-0 bg-white dark:bg-[#131926] rounded-b-2xl">
           
           {/* Recipient Field */}
           <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] py-2.5 text-[11px]">
@@ -121,7 +121,7 @@ function GmailMockup() {
               placeholder="your.email@domain.com"
               value={sender}
               onChange={(e) => setSender(e.target.value)}
-              className="flex-1 min-w-0 w-full bg-transparent border-none outline-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9]"
+              className="flex-1 min-w-0 w-full bg-transparent border-none outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9]"
             />
           </div>
 
@@ -133,7 +133,7 @@ function GmailMockup() {
               placeholder="Subject"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="flex-1 min-w-0 w-full bg-transparent border-none outline-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9]"
+              className="flex-1 min-w-0 w-full bg-transparent border-none outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9]"
             />
           </div>
 
@@ -144,7 +144,7 @@ function GmailMockup() {
               placeholder="Say hello..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full bg-transparent border-none outline-none resize-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9] leading-relaxed text-xs pt-1"
+              className="w-full bg-transparent border-none outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 resize-none font-normal placeholder-[#767676]/40 text-[#1f1f1f] dark:text-[#f1f5f9] leading-relaxed text-xs pt-1"
             />
           </div>
 
@@ -180,7 +180,7 @@ function GmailMockup() {
               <button 
                 type="button"
                 onClick={() => { setSender(""); setSubject(""); setMessage(""); }}
-                className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded text-[#444746] hover:text-strawberry dark:text-[#c4c7c5] dark:hover:text-red-400 cursor-pointer"
+                className="hover:bg-black/5 dark:hover:bg-white/10 p-1.5 rounded text-[#444746] hover:text-strawberry dark:text-[#c4c7c5] dark:hover:text-red-400 cursor-pointer -mr-[5px]"
                 title="Discard draft"
               >
                 <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
