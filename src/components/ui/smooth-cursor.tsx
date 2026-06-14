@@ -237,8 +237,10 @@ export function SmoothCursor({
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: `
-        .custom-cursor-active,
-        .custom-cursor-active * {
+        .custom-cursor-active {
+          cursor: none !important;
+        }
+        .custom-cursor-active *:not(a):not(button):not(input):not(textarea):not(select):not([role="button"]):not([tabindex]) {
           cursor: none !important;
         }
       `}} />

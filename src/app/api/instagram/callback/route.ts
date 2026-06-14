@@ -11,7 +11,7 @@ import { type NextRequest } from "next/server";
  *      paste them into .env.local as INSTAGRAM_ACCESS_TOKEN / INSTAGRAM_USER_ID.
  *
  * Required env vars:
- *   META_APP_ID, META_APP_SECRET, META_REDIRECT_URI
+ *   INSTAGRAM_APP_ID, INSTAGRAM_APP_SECRET, INSTAGRAM_REDIRECT_URI
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -25,9 +25,9 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const appId = process.env.META_APP_ID!;
-  const appSecret = process.env.META_APP_SECRET!;
-  const redirectUri = process.env.META_REDIRECT_URI!;
+  const appId = process.env.INSTAGRAM_APP_ID!;
+  const appSecret = process.env.INSTAGRAM_APP_SECRET!;
+  const redirectUri = process.env.INSTAGRAM_REDIRECT_URI!;
 
   // ── Step 1: Exchange code → short-lived token ──────────────────────────────
   const tokenRes = await fetch("https://api.instagram.com/oauth/access_token", {

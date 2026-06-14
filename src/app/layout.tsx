@@ -87,7 +87,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="cursor-none">
+      <body>
         <SmoothCursor />
         {children}
       </body>

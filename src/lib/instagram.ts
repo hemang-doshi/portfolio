@@ -15,6 +15,7 @@ const GRAPH_BASE = "https://graph.instagram.com/v25.0";
 export interface InstagramProfile {
   id: string;
   username: string;
+  name: string;
   biography: string;
   followers_count: number;
   follows_count: number;
@@ -65,6 +66,7 @@ export async function getInstagramProfile(): Promise<InstagramProfile | null> {
     const fields = [
       "id",
       "username",
+      "name",
       "biography",
       "followers_count",
       "follows_count",

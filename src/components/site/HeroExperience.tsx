@@ -221,7 +221,7 @@ export function HeroExperience({ profile = null, posts = [] }: HeroExperiencePro
 
                   {/* Profile Bio */}
                   <div className="text-[10px] leading-relaxed text-aubergine">
-                    <div className="font-bold text-xs">Hemang Doshi</div>
+                    <div className="font-bold text-xs">{profile?.name ?? "Hemang Doshi"}</div>
                     <div className="text-heather font-medium">AI Engineer &amp; Systems Builder</div>
                     <p className="mt-1">{displayBio}</p>
                     <a
