@@ -3,10 +3,12 @@ import {
   Boldonse,
   Inter,
   JetBrains_Mono,
-  Permanent_Marker,
-} from "next/font/google";
+  Permanent_Marker, Geist } from "next/font/google";
 
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,6 +56,8 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -62,9 +66,30 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${boldonse.variable} ${jetBrainsMono.variable} ${permanentMarker.variable}`}
+      className={cn(inter.variable, boldonse.variable, jetBrainsMono.variable, permanentMarker.variable, "font-sans", geist.variable)}
     >
-      <body>{children}</body>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `
+          }}
+        />
+      </head>
+      <body className="cursor-none">
+        <SmoothCursor />
+        {children}
+      </body>
     </html>
   );
 }

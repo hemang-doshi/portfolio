@@ -17,6 +17,7 @@ export type WorkItem = {
   preview: ProjectPreviewVariant;
   emailSubject: string;
   status?: WorkStatus;
+  githubUrl: string;
 };
 
 export const workItems: WorkItem[] = [
@@ -29,6 +30,7 @@ export const workItems: WorkItem[] = [
     preview: "devdeck",
     emailSubject: "Discuss DevDeck",
     status: { label: "Active build", tone: "success" },
+    githubUrl: "https://github.com/hemang-doshi/dev-deck",
   },
   {
     title: "SceneBook",
@@ -39,6 +41,7 @@ export const workItems: WorkItem[] = [
     preview: "scenebook",
     emailSubject: "Discuss SceneBook",
     status: { label: "Active build", tone: "success" },
+    githubUrl: "https://github.com/hemang-doshi/scenebook",
   },
   {
     title: "AI Financial Analyst",
@@ -48,6 +51,7 @@ export const workItems: WorkItem[] = [
     tags: ["Python", "FastAPI", "LLMs"],
     preview: "financial-analyst",
     emailSubject: "Discuss the AI Financial Analyst",
+    githubUrl: "https://github.com/hemang-doshi/ai-financial-analyst",
   },
   {
     title: "SetuAI",
@@ -57,5 +61,6 @@ export const workItems: WorkItem[] = [
     tags: ["OCR", "SAP", "Hackathon"],
     preview: "setuai",
     emailSubject: "Discuss SetuAI",
+    githubUrl: "https://github.com/hemang-doshi/setuai",
   },
 ];

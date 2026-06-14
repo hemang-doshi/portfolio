@@ -1,10 +1,9 @@
-import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
+import { GithubLogoIcon } from "@phosphor-icons/react/ssr";
 
 import { PillTag } from "@/components/ui/PillTag";
 import { ProjectPreview } from "@/components/ui/ProjectPreview";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import type { WorkItem } from "@/data/work";
-import { buildMailtoHref } from "@/lib/site-config";
 
 type WorkCardProps = {
   item: WorkItem;
@@ -41,11 +40,13 @@ export function WorkCard({ item }: WorkCardProps) {
         </div>
 
         <a
-          href={buildMailtoHref(item.emailSubject)}
+          href={item.githubUrl}
+          target="_blank"
+          rel="noreferrer"
           className="inline-flex min-h-11 items-center gap-2 self-start text-[length:var(--text-body-sm)] font-semibold text-aubergine transition-colors hover:text-heather"
         >
-          Discuss this project
-          <ArrowUpRightIcon size={17} weight="bold" aria-hidden="true" />
+          <GithubLogoIcon size={18} weight="bold" aria-hidden="true" />
+          View source code
         </a>
       </div>
     </article>

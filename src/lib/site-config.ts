@@ -17,6 +17,7 @@ export type SiteConfig = {
   location: string;
   timezone: string;
   availability: string;
+  linkedinUrl: string;
   navigation: NavItem[];
   processSteps: ProcessStep[];
 };
@@ -26,14 +27,14 @@ export const siteConfig: SiteConfig = {
   monogram: "HD",
   email: "hemangdoshi26@gmail.com",
   githubUrl: "https://github.com/hemang-doshi",
+  linkedinUrl: "https://linkedin.com/in/hemang-doshi",
   location: "India",
   timezone: "IST",
   availability: "Available selectively",
   navigation: [
     { label: "Work", href: "#work" },
-    { label: "Case studies", href: "#case-studies" },
-    { label: "Notes", href: "#writing" },
-    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "System Console", href: "#system-console" },
   ],
   processSteps: [
     {

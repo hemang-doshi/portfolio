@@ -19,7 +19,7 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        "space-y-4",
+        "flex flex-col gap-5",
         align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl",
         className,
       )}
@@ -31,7 +31,7 @@ export function SectionHeader({
       {description ? (
         <p
           className={cn(
-            "text-[length:var(--text-subheading)] leading-[var(--leading-subheading)] tracking-[var(--tracking-subheading)] text-heather",
+            "text-[length:var(--text-subheading)] leading-relaxed tracking-[var(--tracking-subheading)] text-heather",
             align === "center" && "mx-auto max-w-2xl",
           )}
         >

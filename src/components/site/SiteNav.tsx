@@ -1,25 +1,46 @@
-import { GithubLogoIcon } from "@phosphor-icons/react/ssr";
+"use client";
 
-import { Button } from "@/components/ui/Button";
-import { buildMailtoHref, siteConfig } from "@/lib/site-config";
+import { useEffect, useState } from "react";
+import { GithubLogoIcon, SunIcon, MoonIcon } from "@phosphor-icons/react/ssr";
+import { siteConfig } from "@/lib/site-config";
+import { HemangLogo } from "@/components/ui/HemangLogo";
 
 export function SiteNav() {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const isDark =
+      savedTheme === "dark" ||
+      (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    setTheme(isDark ? "dark" : "light");
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    setTheme(nextTheme);
+    localStorage.setItem("theme", nextTheme);
+    if (nextTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
+
   return (
-    <header className="sticky inset-x-0 top-0 z-50 border-b border-plum-tinted bg-canvas/95 backdrop-blur-md">
+    <header className="sticky inset-x-0 top-0 z-50 border-b border-plum-tinted/30 bg-canvas/70 backdrop-blur-md">
       <div className="section-shell flex min-h-[72px] items-center justify-between gap-4 py-3">
         <a
           href="#top"
           className="flex min-h-11 items-center gap-3"
           aria-label="Hemang Doshi home"
         >
-          <span
-            className="grid size-9 place-items-center rounded-full border border-aubergine"
-            aria-hidden="true"
-          >
-            <span className="grid size-5 place-items-center rounded-full border border-aubergine">
-              <span className="size-1.5 rounded-full bg-aubergine" />
-            </span>
-          </span>
+          <HemangLogo />
           <span className="display-heading hidden text-sm tracking-[-0.02em] text-aubergine sm:inline">
             Hemang Doshi
           </span>
@@ -47,12 +68,18 @@ export function SiteNav() {
           >
             <GithubLogoIcon size={22} weight="regular" aria-hidden="true" />
           </a>
-          <Button
-            href={buildMailtoHref("Start a conversation")}
-            className="px-4 text-[length:var(--text-body-sm)] sm:px-5"
+          
+          <button
+            onClick={toggleTheme}
+            className="grid size-11 place-items-center rounded-[var(--radius-md)] text-aubergine transition-colors hover:bg-aubergine/[0.05] cursor-pointer"
+            aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
           >
-            Email me
-          </Button>
+            {theme === "light" ? (
+              <MoonIcon size={22} weight="regular" aria-hidden="true" />
+            ) : (
+              <SunIcon size={22} weight="regular" aria-hidden="true" />
+            )}
+          </button>
         </div>
       </div>
     </header>

@@ -3,6 +3,7 @@ import { FooterTerminal } from "@/components/site/FooterTerminal";
 import { HeroExperience } from "@/components/site/HeroExperience";
 import { SiteNav } from "@/components/site/SiteNav";
 import { WorkSystem } from "@/components/site/WorkSystem";
+import { SpinningRope } from "@/components/ui/SpinningRope";
 
 export default function Home() {
   return (
@@ -11,7 +12,8 @@ export default function Home() {
         Skip to content
       </a>
       <SiteNav />
-      <main id="main-content">
+      <SpinningRope />
+      <main id="main-content" className="relative">
         <HeroExperience />
         <WorkSystem />
         <ContactBand />

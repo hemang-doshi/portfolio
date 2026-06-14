@@ -1,46 +1,73 @@
-import { ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
+"use client";
 
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { notes } from "@/data/notes";
-import { buildMailtoHref } from "@/lib/site-config";
+import dynamic from "next/dynamic";
+
+const IconCloud = dynamic(
+  () => import("@/components/ui/IconCloud").then((mod) => mod.IconCloud),
+  { ssr: false }
+);
 
 export function WritingNotes() {
-  return (
-    <section id="writing" className="section-anchor py-20 sm:py-24">
-      <div className="section-shell">
-        <SectionHeader
-          eyebrow="WRITING & NOTES"
-          title="Ideas I’m working through."
-          description="Short notes on agents, local AI, product clarity, and the craft of making technical work legible."
-          align="left"
-        />
+  const containerRef = useRef<HTMLDivElement>(null);
 
-        <div className="mt-10 border-t border-plum-tinted">
-          {notes.map((note) => (
-            <article
-              key={note.title}
-              className="grid gap-4 border-b border-plum-tinted py-7 sm:grid-cols-[110px_1fr_auto] sm:items-center"
-            >
-              <p className="font-[family:var(--font-jetbrains-mono)] text-[length:var(--text-caption)] tracking-[0.08em] text-heather uppercase">
-                {note.date}
-              </p>
-              <div className="max-w-2xl">
-                <h3 className="text-[length:var(--text-heading-sm)] leading-[var(--leading-heading-sm)] font-semibold tracking-[var(--tracking-heading-sm)] text-aubergine">
-                  {note.title}
-                </h3>
-                <p className="mt-2 text-[length:var(--text-body-sm)] leading-[var(--leading-body-sm)] text-heather">
-                  {note.description}
-                </p>
-              </div>
-              <a
-                href={buildMailtoHref(note.emailSubject)}
-                className="inline-flex min-h-11 items-center gap-2 self-start text-[length:var(--text-body-sm)] font-semibold text-aubergine transition-colors hover:text-heather sm:self-center"
-              >
-                Request note
-                <ArrowUpRightIcon size={16} weight="bold" aria-hidden="true" />
-              </a>
-            </article>
-          ))}
+  useGSAP(() => {
+    // Header & Content reveal on scroll
+    gsap.fromTo(".wn-header-anim, .wn-content-anim", 
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: containerRef.current || "#skills",
+          start: "top 85%",
+          end: "top 55%",
+          scrub: 1,
+        }
+      }
+    );
+
+  }, { scope: containerRef });
+
+  return (
+    <section
+      id="skills"
+      ref={containerRef}
+      className="section-anchor bg-transparent py-32 sm:py-44"
+    >
+      <div className="section-shell">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center wn-list-trigger">
+          {/* Left Column: Tech Description & Heading */}
+          <div className="flex flex-col gap-6 text-left lg:pr-16 lg:max-w-[480px]">
+            <div className="wn-header-anim">
+              <SectionHeader
+                eyebrow="SKILLS & STACK"
+                title="Tools shaped for execution."
+                description="A modern collection of languages, frameworks, and deployment engines."
+                align="left"
+              />
+            </div>
+            <h3 className="text-[length:var(--text-heading-sm)] leading-[var(--leading-heading-sm)] font-bold text-aubergine mt-8 wn-content-anim">
+              Systems built for scale and clarity.
+            </h3>
+            <p className="text-[length:var(--text-body)] leading-[1.75] text-heather wn-content-anim">
+              I engineer developer infrastructure, autonomous agent loops, and high-performance cloud architectures. My focus is on reducing cognitive overhead, implementing end-to-end type safety, and building clean, observable products.
+            </p>
+            <p className="text-[length:var(--text-body)] leading-[1.75] text-heather wn-content-anim">
+              My stack centers around TypeScript, React, and Next.js for client interfaces, paired with Python and FastAPI for machine learning orchestration and agent runtimes. I rely on PostgreSQL, Supabase, and Docker to deploy secure, reproducible developer environments.
+            </p>
+          </div>
+
+          {/* Right Column: 3D Icon Cloud */}
+          <div className="wn-content-anim flex justify-center items-center h-[460px] w-full bg-transparent">
+            <IconCloud />
+          </div>
         </div>
       </div>
     </section>
