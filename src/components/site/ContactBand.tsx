@@ -93,10 +93,10 @@ function GmailMockup() {
         </div>
       ) : (
         /* Mail Form */
-        <form onSubmit={handleSend} className="flex-1 flex flex-col p-4 gap-3 bg-white dark:bg-[#131926] rounded-b-2xl">
+        <form onSubmit={handleSend} className="flex-1 flex flex-col p-4 pt-0 gap-0 bg-white dark:bg-[#131926] rounded-b-2xl">
           
           {/* Recipient Field */}
-          <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] pb-2 text-[11px]">
+          <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] py-2.5 text-[11px]">
             <span className="text-[#767676] dark:text-[#9e9e9e] shrink-0 w-14 text-left">To</span>
             <div 
               onClick={() => setIsRevealed(true)}
@@ -113,7 +113,7 @@ function GmailMockup() {
           </div>
 
           {/* Sender Email Input */}
-          <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] pb-2 text-[11px]">
+          <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] py-2.5 text-[11px]">
             <span className="text-[#767676] dark:text-[#9e9e9e] shrink-0 w-14 text-left">From</span>
             <input
               type="email"
@@ -126,7 +126,7 @@ function GmailMockup() {
           </div>
 
           {/* Subject Input */}
-          <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] pb-2 text-[11px]">
+          <div className="flex items-center gap-2 border-b border-[#f1f3f4] dark:border-[#303134] py-2.5 text-[11px]">
             <span className="text-[#767676] dark:text-[#9e9e9e] shrink-0 w-14 text-left">Subject</span>
             <input
               type="text"
@@ -138,7 +138,7 @@ function GmailMockup() {
           </div>
 
           {/* Message Area */}
-          <div className="flex-1 min-h-[140px] flex">
+          <div className="flex-1 min-h-[140px] flex pt-3">
             <textarea
               required
               placeholder="Say hello..."
