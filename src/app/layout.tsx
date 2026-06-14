@@ -67,6 +67,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(inter.variable, boldonse.variable, jetBrainsMono.variable, permanentMarker.variable, "font-sans", geist.variable)}
+      suppressHydrationWarning
     >
       <head>
         <script

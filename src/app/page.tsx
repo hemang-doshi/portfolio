@@ -4,8 +4,14 @@ import { HeroExperience } from "@/components/site/HeroExperience";
 import { SiteNav } from "@/components/site/SiteNav";
 import { WorkSystem } from "@/components/site/WorkSystem";
 import { SpinningRope } from "@/components/ui/SpinningRope";
+import { getInstagramProfile, getInstagramMedia } from "@/lib/instagram";
 
-export default function Home() {
+export default async function Home() {
+  const [profile, posts] = await Promise.all([
+    getInstagramProfile(),
+    getInstagramMedia(9),
+  ]);
+
   return (
     <div id="top">
       <a href="#main-content" className="skip-link">
@@ -14,7 +20,7 @@ export default function Home() {
       <SiteNav />
       <SpinningRope />
       <main id="main-content" className="relative">
-        <HeroExperience />
+        <HeroExperience profile={profile} posts={posts} />
         <WorkSystem />
         <ContactBand />
       </main>
@@ -22,3 +28,4 @@ export default function Home() {
     </div>
   );
 }
+
