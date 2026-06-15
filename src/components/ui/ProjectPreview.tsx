@@ -134,9 +134,9 @@ function DevDeckPreview() {
   };
 
   return (
-    <div className="flex flex-col bg-canvas text-aubergine min-h-56">
+    <div className="flex flex-col bg-canvas text-aubergine h-56">
       <WindowChrome label="DevDeck Control Plane" logo={<DevDeckLogo />} />
-      <div className="grid grid-cols-[100px_1fr] flex-1 min-h-48">
+      <div className="grid grid-cols-[100px_1fr] flex-1 min-h-0">
         {/* Left rail service panels */}
         <div className="border-r border-plum-tinted bg-aubergine/[0.02] p-3 flex flex-col gap-3">
           <p className="font-[family:var(--font-jetbrains-mono)] text-[8px] font-bold text-heather uppercase tracking-wider">Services</p>
@@ -232,9 +232,9 @@ function SceneBookPreview() {
   }, [isPlaying]);
 
   return (
-    <div className="flex flex-col bg-canvas text-aubergine min-h-56">
+    <div className="flex flex-col bg-canvas text-aubergine h-56">
       <WindowChrome label="SceneBook Studio / v2.0" logo={<SceneBookLogo />} />
-      <div className="grid grid-cols-[110px_1fr] flex-1 min-h-48 p-3 gap-3 bg-[#07080b]/[0.01]">
+      <div className="grid grid-cols-[110px_1fr] flex-1 min-h-0 p-3 gap-3 bg-[#07080b]/[0.01]">
         {/* Storyboard stages selector */}
         <div className="flex flex-col gap-2">
           <p className="font-[family:var(--font-jetbrains-mono)] text-[8px] font-bold text-heather uppercase tracking-wider">Storyboard</p>
@@ -357,9 +357,9 @@ function FinancialPreview() {
   };
 
   return (
-    <div className="flex flex-col bg-canvas text-aubergine min-h-56">
+    <div className="flex flex-col bg-canvas text-aubergine h-56">
       <WindowChrome label="AI Financial Analyst" logo={<FinancialAnalystLogo />} />
-      <div className="grid grid-cols-[140px_1fr] flex-1 min-h-48 p-3 gap-3">
+      <div className="grid grid-cols-[140px_1fr] flex-1 min-h-0 p-3 gap-3">
         {/* Preset Queries */}
         <div className="flex flex-col gap-2 border-r border-plum-tinted/55 pr-3">
           <p className="font-[family:var(--font-jetbrains-mono)] text-[8px] font-bold text-heather uppercase tracking-wider">Sample Queries</p>
@@ -486,9 +486,9 @@ function SetuPreview() {
   const strokeDashoffset = circumference - (complianceScore / 100) * circumference;
 
   return (
-    <div className="flex flex-col bg-canvas text-aubergine min-h-56">
+    <div className="flex flex-col bg-canvas text-aubergine h-56">
       <WindowChrome label="SetuAI Ethics & Compliance Monitor" logo={<SetuAiLogo />} />
-      <div className="grid grid-cols-[1fr_120px] flex-1 min-h-48 p-3 gap-3">
+      <div className="grid grid-cols-[1fr_120px] flex-1 min-h-0 p-3 gap-3">
         {/* Document lines */}
         <div className="flex flex-col gap-2.5 justify-center">
           <p className="font-[family:var(--font-jetbrains-mono)] text-[8px] font-bold text-heather uppercase tracking-wider">Verification Checklist</p>
