@@ -82,10 +82,12 @@ function DevDeckPreview() {
     "Click a command below to test the agent stack."
   ]);
   const [typing, setTyping] = useState<string | null>(null);
-  const terminalEndRef = useRef<HTMLDivElement>(null);
+  const terminalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
   }, [logs]);
 
   const triggerCommand = (cmd: string) => {
@@ -153,12 +155,11 @@ function DevDeckPreview() {
 
         {/* Right terminal area */}
         <div className="flex flex-col p-3 gap-3">
-          <div className="flex-1 rounded-[var(--radius-md)] bg-aubergine p-3 font-[family:var(--font-jetbrains-mono)] text-[9px] text-canvas overflow-y-auto max-h-32 shadow-inner">
+          <div ref={terminalRef} className="flex-1 rounded-[var(--radius-md)] bg-aubergine p-3 font-[family:var(--font-jetbrains-mono)] text-[9px] text-canvas overflow-y-auto max-h-32 shadow-inner">
             {logs.map((l, i) => (
               <div key={i} className="whitespace-pre-wrap leading-relaxed">{l}</div>
             ))}
             {typing && <div className="text-fuchsia-signal animate-pulse">Running {typing}...</div>}
-            <div ref={terminalEndRef} />
           </div>
 
           {/* Interactive controls */}

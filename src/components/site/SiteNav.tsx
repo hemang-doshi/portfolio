@@ -11,9 +11,7 @@ export function SiteNav() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    const isDark =
-      savedTheme === "dark" ||
-      (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const isDark = savedTheme === "dark";
 
     queueMicrotask(() => {
       setTheme(isDark ? "dark" : "light");
