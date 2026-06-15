@@ -26,21 +26,21 @@ export function HandDrawnAnnotation({
           <>
             {/* Flipped: SVG on the left pointing left, text on the right */}
             <svg
-              viewBox="0 0 100 60"
-              width="100"
-              height="60"
+              viewBox="0 0 96 50"
+              width="96"
+              height="50"
               className="overflow-visible flex-shrink-0"
               style={{ transform: "scaleX(-1)" }}
               fill="none"
             >
               <path
-                d="M 5,20 C 35,5 55,5 50,25 C 45,45 15,35 30,20 C 45,5 80,15 90,35"
+                d="M 6,12 C 45,2 35,42 84,38"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
               <path
-                d="M 80,33 C 84,35 88,36 91,36 C 89,32 87,28 85,24"
+                d="M 74,31 C 78,33 82,36 85,38 C 81,41 77,44 73,47"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
@@ -54,20 +54,20 @@ export function HandDrawnAnnotation({
             {/* Normal: text on the left, SVG on the right pointing right */}
             <span className="whitespace-nowrap select-none mt-2">{children}</span>
             <svg
-              viewBox="0 0 100 60"
-              width="100"
-              height="60"
+              viewBox="0 0 96 50"
+              width="96"
+              height="50"
               className="overflow-visible flex-shrink-0"
               fill="none"
             >
               <path
-                d="M 5,20 C 35,5 55,5 50,25 C 45,45 15,35 30,20 C 45,5 80,15 90,35"
+                d="M 6,12 C 45,2 35,42 84,38"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
               <path
-                d="M 80,33 C 84,35 88,36 91,36 C 89,32 87,28 85,24"
+                d="M 74,31 C 78,33 82,36 85,38 C 81,41 77,44 73,47"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
