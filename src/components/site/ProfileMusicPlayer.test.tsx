@@ -21,10 +21,8 @@ describe("ProfileMusicPlayer", () => {
     );
 
     expect(markup).toContain("Night Drive");
-    expect(markup).not.toContain("Night Drive · The_Mountain");
-    expect(markup).not.toContain("The_Mountain");
+    expect(markup).toContain("The_Mountain");
     expect(markup).toContain('data-player-pill="true"');
-    expect(markup).toContain('aria-label="Profile music waveform"');
     expect(markup).toContain('aria-label="Expand Night Drive player"');
     expect(markup).toContain('src="/audio/night-drive.mp3"');
     expect(markup).toContain('preload="metadata"');

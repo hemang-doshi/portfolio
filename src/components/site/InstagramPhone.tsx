@@ -4,13 +4,17 @@ import Image from "next/image";
 import { useEffect } from "react";
 import {
   BatteryFull,
-  Bell,
+  ChevronDown,
   Clapperboard,
+  Eye,
   Grid3X3,
   Heart,
+  Home,
+  Link as LinkIcon,
   Menu,
   MessageCircle,
-  PlusSquare,
+  Plus,
+  Search,
   SignalHigh,
   UserRound,
   Wifi,
@@ -28,11 +32,11 @@ export interface InstagramPhoneProps {
 }
 
 const MOCK_PROFILE = {
-  username: "hemang.codes",
-  biography: "Building developer tools, creator tools, and responsible local AI loops.",
-  followers_count: 1500,
-  follows_count: 342,
-  media_count: 12,
+  username: "hemang._26",
+  biography: "Just a guy in his 20s figuring it out",
+  followers_count: 843,
+  follows_count: 852,
+  media_count: 17,
   profile_picture_url: null as string | null,
 };
 
@@ -40,38 +44,56 @@ const MOCK_POSTS = [
   {
     accent: "from-[#f9d7e8] via-[#fff2c8] to-[#f3c8ff]",
     shape: "rounded-[28px] bg-[radial-gradient(circle_at_28%_28%,rgba(255,255,255,0.88),transparent_34%),linear-gradient(145deg,rgba(255,255,255,0.18),transparent_60%)]",
+    views: "1,974",
+    type: "video" as const,
   },
   {
     accent: "from-[#d8ecff] via-[#eef5ff] to-[#dbeafe]",
     shape: "rounded-[999px] bg-[linear-gradient(135deg,rgba(255,255,255,0.78),transparent_55%),radial-gradient(circle_at_70%_72%,rgba(15,23,42,0.18),transparent_34%)]",
+    views: "2,881",
+    type: "carousel" as const,
   },
   {
     accent: "from-[#fde68a] via-[#fff7d6] to-[#fbcfe8]",
     shape: "rounded-[18px] bg-[linear-gradient(180deg,rgba(17,24,39,0.12),transparent_58%),radial-gradient(circle_at_42%_38%,rgba(255,255,255,0.88),transparent_30%)]",
+    views: "4,894",
+    type: "carousel" as const,
   },
   {
     accent: "from-[#e2e8f0] via-[#f8fafc] to-[#cbd5e1]",
     shape: "rounded-[26px] bg-[radial-gradient(circle_at_75%_30%,rgba(255,255,255,0.92),transparent_28%),linear-gradient(135deg,rgba(15,23,42,0.12),transparent_62%)]",
+    views: "1,240",
+    type: "video" as const,
   },
   {
     accent: "from-[#fbcfe8] via-[#fdf2f8] to-[#fecdd3]",
     shape: "rounded-[22px] bg-[linear-gradient(135deg,rgba(255,255,255,0.78),transparent_52%),radial-gradient(circle_at_34%_70%,rgba(17,24,39,0.18),transparent_32%)]",
+    views: "982",
+    type: "image" as const,
   },
   {
     accent: "from-[#dbeafe] via-[#eff6ff] to-[#bfdbfe]",
     shape: "rounded-[999px] bg-[radial-gradient(circle_at_30%_32%,rgba(255,255,255,0.95),transparent_26%),linear-gradient(150deg,rgba(15,23,42,0.14),transparent_62%)]",
+    views: "3,310",
+    type: "carousel" as const,
   },
   {
     accent: "from-[#fff1bd] via-[#fef9c3] to-[#fde68a]",
     shape: "rounded-[18px] bg-[linear-gradient(180deg,rgba(15,23,42,0.14),transparent_58%),radial-gradient(circle_at_72%_38%,rgba(255,255,255,0.88),transparent_30%)]",
+    views: "2,204",
+    type: "video" as const,
   },
   {
     accent: "from-[#ede9fe] via-[#f5f3ff] to-[#ddd6fe]",
     shape: "rounded-[24px] bg-[radial-gradient(circle_at_48%_34%,rgba(255,255,255,0.95),transparent_28%),linear-gradient(135deg,rgba(30,41,59,0.16),transparent_58%)]",
+    views: "4,192",
+    type: "carousel" as const,
   },
   {
     accent: "from-[#fee2e2] via-[#fff7ed] to-[#fde68a]",
     shape: "rounded-[30px] bg-[linear-gradient(135deg,rgba(255,255,255,0.78),transparent_56%),radial-gradient(circle_at_68%_72%,rgba(17,24,39,0.14),transparent_30%)]",
+    views: "1,550",
+    type: "image" as const,
   },
 ];
 
@@ -82,6 +104,22 @@ function formatCount(n: number): string {
   if (n >= 1_000) return `${(n / 1_000).toFixed(1)}k`;
   return String(n);
 }
+
+const ThreadsIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" className="opacity-0" />
+    <path d="M16 8.5c-.83-.83-2.08-1.5-3.5-1.5-3.04 0-5.5 2.46-5.5 5.5s2.46 5.5 5.5 5.5c1.88 0 3.52-.94 4.5-2.39" />
+    <path d="M12.5 10c.83 0 1.5.67 1.5 1.5v1.75c0 1.24-1.01 2.25-2.25 2.25-1.52 0-2.75-1.23-2.75-2.75V11.5C9 9.01 11.01 7 13.5 7c2.49 0 4.5 2.01 4.5 4.5v1.25" />
+  </svg>
+);
 
 export function InstagramPhone({
   profile = null,
@@ -166,109 +204,178 @@ export function InstagramPhone({
       <div className="relative h-full w-full rounded-[42px] bg-[#080808] p-[7px] shadow-[0_12px_36px_rgba(15,23,42,0.12)] sm:shadow-[0_24px_70px_rgba(15,23,42,0.28),0_10px_24px_rgba(15,23,42,0.18),inset_0_1px_0_rgba(255,255,255,0.08)]">
         <div className="absolute inset-[2px] rounded-[40px] border border-white/[0.08]" />
 
-        <div className="relative h-full w-full overflow-hidden rounded-[35px] bg-white dark:bg-[#101826]">
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(255,255,255,0.72),transparent)] dark:bg-[linear-gradient(180deg,rgba(16,24,38,0.94),rgba(16,24,38,0.74),transparent)]" />
+        <div className="relative h-full w-full overflow-hidden rounded-[35px] bg-white dark:bg-black">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(255,255,255,0.72),transparent)] dark:bg-[linear-gradient(180deg,rgba(0,0,0,0.94),rgba(0,0,0,0.74),transparent)]" />
           <div className="pointer-events-none absolute left-1/2 top-2.5 z-40 h-7 w-[116px] -translate-x-1/2 rounded-full bg-black shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]" />
 
-          <div className="relative z-20 flex h-full flex-col overflow-hidden rounded-[35px] border border-black/5 bg-white/92 dark:border-white/6 dark:bg-[#101826]/96">
+          <div className="relative z-20 flex h-full flex-col overflow-hidden rounded-[35px] border border-black/5 bg-white/92 dark:border-white/6 dark:bg-black/96">
+            
+            {/* Top Status Bar */}
             <div className="flex items-center justify-between px-5 pt-4 text-[10px] font-semibold text-[#111827] dark:text-[#f8fafc]">
-              <span>9:41</span>
-              <div className="flex items-center gap-1.5">
-                <SignalHigh className="size-4" aria-label="Cellular signal" />
-                <Wifi className="size-4" aria-label="Wi-Fi signal" />
-                <BatteryFull className="size-[18px]" aria-label="Battery level" />
+              <span>11:15</span>
+              <div className="flex items-center gap-1">
+                <SignalHigh className="size-3.5" aria-label="Cellular signal" />
+                <Wifi className="size-3.5" aria-label="Wi-Fi signal" />
+                <div className="flex items-center gap-0.5" aria-label="Battery level">
+                  <span className="text-[9px]">67</span>
+                  <BatteryFull className="size-[18px]" />
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between px-4 pt-4 pb-3 text-[#111827] dark:text-[#f8fafc]">
-              <span className="font-sans text-[13px] font-semibold tracking-[-0.02em]">
-                {displayUsername}
-              </span>
-              <div className="flex items-center gap-3">
-                <Bell className="size-[18px]" aria-label="Notifications" />
-                <PlusSquare className="size-[18px]" aria-label="Create post" />
-                <Menu className="size-[18px]" aria-label="Open menu" />
+            {/* Profile Header Row */}
+            <div className="flex items-center justify-between px-4 pt-3 pb-2 text-[#111827] dark:text-[#f8fafc]">
+              <Plus className="size-5 cursor-pointer" aria-label="Create post" />
+              <div className="flex items-center gap-1 cursor-pointer">
+                <span className="font-sans text-[14px] font-bold tracking-[-0.01em]">
+                  {displayUsername}
+                </span>
+                <ChevronDown className="size-3.5" />
+                <span className="size-1.5 rounded-full bg-[#ff3040]" />
+                <ThreadsIcon className="size-[18px] ml-1.5 text-[#111827] dark:text-white" />
               </div>
+              <Menu className="size-5 cursor-pointer" aria-label="Open menu" />
             </div>
 
-            <div className="flex-1 overflow-y-auto px-4 pb-4 no-scrollbar">
-              <div className="flex items-center gap-4">
-                <div className="relative size-[74px] shrink-0 rounded-full bg-[linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7)] p-[2px] shadow-[0_10px_22px_rgba(238,42,123,0.18)]">
-                  {profilePicUrl ? (
-                    <Image
-                      src={profilePicUrl}
-                      alt={`${displayUsername}'s Instagram profile picture`}
-                      width={74}
-                      height={74}
-                      className="size-full rounded-full object-cover"
-                      unoptimized={false}
-                    />
-                  ) : (
-                    <div className="flex size-full items-center justify-center rounded-full bg-white text-[15px] font-semibold text-[#111827] dark:bg-[#101826] dark:text-[#f8fafc]">
-                      HD
+            {/* Main Content Area */}
+            <div className="flex-1 overflow-y-auto px-4 pb-20 no-scrollbar">
+              
+              {/* Profile Avatar and Stats */}
+              <div className="flex items-center gap-4 mt-6">
+                <div className="relative size-[74px] shrink-0">
+                  {/* Start note speech bubble */}
+                  <div className="absolute -top-11 -left-2 z-15 flex flex-col items-center">
+                    <div className="relative rounded-[10px] bg-[#efefef] dark:bg-[#262626] px-2.5 py-1 border border-black/10 dark:border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
+                      <span className="text-[9px] font-medium text-[#111827] dark:text-white select-none whitespace-nowrap">
+                        Start your first note...
+                      </span>
+                      <div className="absolute -bottom-[4px] left-[32px] size-2 rotate-45 bg-[#efefef] dark:bg-[#262626] border-r border-b border-black/10 dark:border-white/10" />
                     </div>
-                  )}
+                  </div>
+
+                  <div className="relative size-full rounded-full border border-black/10 p-[1px] dark:border-white/10">
+                    {profilePicUrl ? (
+                      <Image
+                        src={profilePicUrl}
+                        alt={`${displayUsername}'s Instagram profile picture`}
+                        width={74}
+                        height={74}
+                        className="size-full rounded-full object-cover"
+                        unoptimized={false}
+                      />
+                    ) : (
+                      <div className="flex size-full items-center justify-center rounded-full bg-[#efefef] dark:bg-[#262626] text-[15px] font-semibold text-[#111827] dark:text-[#f8fafc]">
+                        HD
+                      </div>
+                    )}
+                    
+                    {/* Add to note blue plus badge */}
+                    <div className="absolute bottom-0 right-0 flex size-5 items-center justify-center rounded-full border-2 border-white bg-[#0095f6] dark:border-black">
+                      <Plus className="size-3 text-white stroke-[3.5]" />
+                    </div>
+                  </div>
                 </div>
 
-                <div className="grid flex-1 grid-cols-3 text-center text-[#111827] dark:text-[#f8fafc]">
+                <div className="grid flex-1 grid-cols-3 text-center text-[#111827] dark:text-[#f8fafc] self-center">
                   <div>
-                    <div className="text-[13px] font-semibold">{formatCount(displayPosts)}</div>
-                    <div className="text-[10px] text-[#6b7280] dark:text-[#94a3b8]">posts</div>
+                    <div className="text-[13px] font-bold">{formatCount(displayPosts)}</div>
+                    <div className="text-[10px] text-[#6b7280] dark:text-[#a8a8a8]">posts</div>
                   </div>
                   <div>
-                    <div className="text-[13px] font-semibold">{formatCount(displayFollowers)}</div>
-                    <div className="text-[10px] text-[#6b7280] dark:text-[#94a3b8]">followers</div>
+                    <div className="text-[13px] font-bold">{formatCount(displayFollowers)}</div>
+                    <div className="text-[10px] text-[#6b7280] dark:text-[#a8a8a8]">followers</div>
                   </div>
                   <div>
-                    <div className="text-[13px] font-semibold">{formatCount(displayFollowing)}</div>
-                    <div className="text-[10px] text-[#6b7280] dark:text-[#94a3b8]">following</div>
+                    <div className="text-[13px] font-bold">{formatCount(displayFollowing)}</div>
+                    <div className="text-[10px] text-[#6b7280] dark:text-[#a8a8a8]">following</div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 text-[11px] leading-relaxed text-[#111827] dark:text-[#f8fafc]">
-                <div className="font-semibold">{profile?.name ?? "Hemang Doshi"}</div>
-                <div className="font-medium text-[#6b7280] dark:text-[#94a3b8]">Digital creator</div>
-                <div className="mt-1" data-floating-player-anchor="true">
+              {/* Bio Section */}
+              <div className="mt-4 text-[11px] leading-relaxed text-[#111827] dark:text-white">
+                <div className="font-bold text-[12px]">{profile?.name ?? "Hemang"}</div>
+                <div className="font-medium text-[#6b7280] dark:text-[#a8a8a8]">Digital creator</div>
+                <p className="mt-0.5">{displayBio}</p>
+                
+                {/* Link */}
+                <div className="mt-1 flex items-center gap-1">
+                  <LinkIcon className="size-3 text-[#0095f6] shrink-0" />
+                  <a
+                    href="https://hemang-portfolio-zeta.vercel.app"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold text-[#0095f6] hover:underline"
+                  >
+                    hemang-portfolio-zeta.vercel.app
+                  </a>
+                </div>
+
+                {/* Music Player & Add Music Row */}
+                <div className="mt-2.5 flex items-center gap-1.5" data-floating-player-anchor="true">
                   <ProfileMusicPlayer
                     src="/audio/night-drive.mp3"
-                    title="Night Drive"
-                    artist="The_Mountain"
+                    title="made for this shit"
+                    artist="Gunna"
                   />
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-0.5 rounded-full border border-black/10 bg-black/[0.03] px-3 py-[3px] text-[10px] font-semibold text-[#111827] hover:bg-black/[0.06] dark:border-white/15 dark:bg-white/[0.08] dark:text-white dark:hover:bg-white/[0.12] transition-colors"
+                  >
+                    <Plus className="size-2.5 stroke-[3]" />
+                    <span>Add</span>
+                  </button>
                 </div>
-                <p className="mt-1">{displayBio}</p>
               </div>
 
-              <div className="mt-3 grid grid-cols-2 gap-2.5">
-                <a
-                  href={`https://instagram.com/${encodeURIComponent(displayUsername)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex h-9 items-center justify-center rounded-[11px] bg-[#0095f6] px-3 text-[12px] font-semibold text-white transition-opacity hover:opacity-90"
-                >
-                  Follow
-                </a>
+              {/* Professional Dashboard Card */}
+              <div className="mt-4 rounded-[10px] bg-[#f2f2f7] p-2.5 border border-black/5 dark:border-white/5 dark:bg-[#1c1c1e] text-[11px]">
+                <div className="font-bold text-[#111827] dark:text-white">Professional dashboard</div>
+                <div className="mt-0.5 flex items-center gap-1 text-[#6b7280] dark:text-[#a8a8a8]">
+                  <span className="text-emerald-500 font-bold">↗</span>
+                  <span>3.3K views in the last 30 days.</span>
+                </div>
+              </div>
+
+              {/* Action Buttons: Edit / Share Profile */}
+              <div className="mt-3.5 grid grid-cols-2 gap-2">
                 <button
                   type="button"
-                  className="h-9 rounded-[11px] border border-black/10 bg-black/[0.03] px-3 text-[12px] font-semibold text-[#111827] transition-colors hover:bg-black/[0.05] dark:border-white/10 dark:bg-white/[0.04] dark:text-[#f8fafc] dark:hover:bg-white/[0.08]"
+                  className="flex h-[32px] items-center justify-center rounded-[8px] bg-[#efefef] dark:bg-[#262626] text-[12px] font-bold text-[#111827] dark:text-white hover:bg-[#dbdbdb] dark:hover:bg-[#363636] transition-colors"
                 >
-                  Message
+                  Edit profile
+                </button>
+                <button
+                  type="button"
+                  className="flex h-[32px] items-center justify-center rounded-[8px] bg-[#efefef] dark:bg-[#262626] text-[12px] font-bold text-[#111827] dark:text-white hover:bg-[#dbdbdb] dark:hover:bg-[#363636] transition-colors"
+                >
+                  Share profile
                 </button>
               </div>
 
-              <div className="mt-4 grid grid-cols-3 border-y border-black/8 py-2 text-[#6b7280] dark:border-white/8 dark:text-[#94a3b8]">
-                <div className="flex items-center justify-center">
-                  <Grid3X3 className="size-[18px] text-[#111827] dark:text-[#f8fafc]" aria-label="Posts tab" />
+              {/* Tabs Grid Header */}
+              <div className="mt-5 grid grid-cols-4 border-t border-black/10 pt-2 text-[#6b7280] dark:border-white/10 dark:text-[#a8a8a8]">
+                <div className="flex flex-col items-center justify-center pb-2 border-b-2 border-black dark:border-white -mb-[10px] z-10">
+                  <Grid3X3 className="size-[19px] text-[#111827] dark:text-white" aria-label="Posts tab" />
                 </div>
-                <div className="flex items-center justify-center">
-                  <Clapperboard className="size-[18px]" aria-label="Reels tab" />
+                <div className="flex items-center justify-center pb-2">
+                  <Clapperboard className="size-[19px]" aria-label="Reels tab" />
                 </div>
-                <div className="flex items-center justify-center">
-                  <UserRound className="size-[18px]" aria-label="Tagged tab" />
+                <div className="flex items-center justify-center pb-2">
+                  <svg className="size-[19px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-label="Reposts tab">
+                    <path d="M17 1v5h-5" />
+                    <path d="M3 12c0-3.87 3.13-7 7-7h7" />
+                    <path d="M7 23v-5h5" />
+                    <path d="M21 12c0 3.87-3.13 7-7 7H7" />
+                  </svg>
+                </div>
+                <div className="flex items-center justify-center pb-2">
+                  <UserRound className="size-[19px]" aria-label="Tagged tab" />
                 </div>
               </div>
 
-              <div className="mt-3 grid grid-cols-3 gap-1">
+              {/* Posts Grid Container */}
+              <div className="mt-3 grid grid-cols-3 gap-[2px]">
                 {hasRealPosts
                   ? posts.map((post) => {
                       const thumb = getPostThumbnail(post);
@@ -278,7 +385,7 @@ export function InstagramPhone({
                           href={post.permalink}
                           target="_blank"
                           rel="noreferrer"
-                          className="ig-post-anim group relative aspect-square overflow-hidden rounded-[8px] border border-black/6 bg-[#f8fafc] dark:border-white/8 dark:bg-[#172133]"
+                          className="ig-post-anim group relative aspect-square overflow-hidden bg-[#f8fafc] dark:bg-[#172133]"
                         >
                           {thumb ? (
                             <Image
@@ -293,7 +400,8 @@ export function InstagramPhone({
                               <div className="absolute inset-[14%] rounded-[20px] bg-[radial-gradient(circle_at_35%_32%,rgba(255,255,255,0.88),transparent_28%),linear-gradient(135deg,rgba(15,23,42,0.18),transparent_58%)]" />
                             </div>
                           )}
-                          <div className="absolute inset-0 flex items-center justify-center gap-3 bg-[#0f172a]/74 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                          
+                          <div className="absolute inset-0 flex items-center justify-center gap-3 bg-[#0f172a]/74 opacity-0 transition-opacity duration-200 group-hover:opacity-100 z-20">
                             <span className="flex items-center gap-1 text-[9px] font-semibold text-white">
                               <Heart className="size-3.5" aria-hidden="true" />
                               {post.like_count ?? "—"}
@@ -309,10 +417,29 @@ export function InstagramPhone({
                   : MOCK_POSTS.map((tile, index) => (
                       <div
                         key={index}
-                        className={`ig-post-anim group relative aspect-square overflow-hidden rounded-[8px] border border-black/6 bg-gradient-to-br ${tile.accent} dark:border-white/8 dark:from-[#172133] dark:via-[#1e293b] dark:to-[#334155]`}
+                        className={`ig-post-anim group relative aspect-square overflow-hidden bg-gradient-to-br ${tile.accent} dark:from-[#172133] dark:via-[#1e293b] dark:to-[#334155]`}
                       >
                         <div className={`absolute inset-[13%] ${tile.shape}`} />
-                        <div className="absolute inset-0 flex items-center justify-center gap-3 bg-[#0f172a]/74 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                        
+                        {/* Permanent Badges for Mock Posts (Matching Screenshot) */}
+                        {tile.type === "video" && (
+                          <Clapperboard className="absolute top-1.5 right-1.5 size-3.5 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] z-10 fill-none" />
+                        )}
+                        {tile.type === "carousel" && (
+                          <svg className="absolute top-1.5 right-1.5 size-3 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] z-10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                          </svg>
+                        )}
+                        
+                        {/* Permanent Views Count */}
+                        <div className="absolute bottom-1.5 left-1.5 flex items-center gap-0.5 z-10 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                          <Eye className="size-3 text-white fill-none stroke-white" />
+                          <span className="text-[9px] font-semibold tracking-wide">{tile.views}</span>
+                        </div>
+
+                        {/* Interactive hover overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center gap-3 bg-[#0f172a]/74 opacity-0 transition-opacity duration-200 group-hover:opacity-100 z-20">
                           <span className="flex items-center gap-1 text-[9px] font-semibold text-white">
                             <Heart className="size-3.5" aria-hidden="true" />
                             {42 + index}
@@ -326,6 +453,45 @@ export function InstagramPhone({
                     ))}
               </div>
             </div>
+
+            {/* Floating Navigation Dock */}
+            <div className="absolute bottom-3 inset-x-3 z-30 flex h-[46px] items-center justify-between rounded-full border border-black/10 bg-white/70 px-5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-md dark:border-white/10 dark:bg-[#121212]/80">
+              <button type="button" className="text-[#111827] dark:text-white cursor-pointer" aria-label="Home">
+                <Home className="size-[20px] stroke-[2]" />
+              </button>
+              <button type="button" className="text-[#6b7280] dark:text-[#a8a8a8] cursor-pointer" aria-label="Reels">
+                <Clapperboard className="size-[20px]" />
+              </button>
+              
+              {/* Threads Icon with notification dot */}
+              <button type="button" className="relative text-[#6b7280] dark:text-[#a8a8a8] cursor-pointer" aria-label="Threads">
+                <ThreadsIcon className="size-[20px] text-[#111827] dark:text-white" />
+                <span className="absolute -bottom-0.5 -right-0.5 size-1.5 rounded-full bg-[#ff3040]" />
+              </button>
+              
+              <button type="button" className="text-[#6b7280] dark:text-[#a8a8a8] cursor-pointer" aria-label="Search">
+                <Search className="size-[20px]" />
+              </button>
+              
+              {/* Profile Avatar with red notification dot */}
+              <button type="button" className="relative flex size-[20px] items-center justify-center rounded-full border border-black/10 dark:border-white/10 cursor-pointer" aria-label="Profile">
+                {profilePicUrl ? (
+                  <Image
+                    src={profilePicUrl}
+                    alt="profile"
+                    width={20}
+                    height={20}
+                    className="size-full rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="flex size-full items-center justify-center rounded-full bg-[#efefef] dark:bg-[#262626] text-[8px] font-bold text-[#111827] dark:text-white">
+                    HD
+                  </div>
+                )}
+                <span className="absolute -bottom-[1px] -right-[1px] size-1.5 rounded-full bg-[#ff3040] border border-white dark:border-black" />
+              </button>
+            </div>
+
           </div>
         </div>
       </div>

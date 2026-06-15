@@ -33,6 +33,7 @@ export function formatAudioTime(value: number): string {
 export function ProfileMusicPlayer({
   src,
   title,
+  artist,
 }: ProfileMusicPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [overlayVisible, setOverlayVisible] = useState(false);
@@ -162,19 +163,16 @@ export function ProfileMusicPlayer({
       <button
         type="button"
         onClick={handleExpandAndPlay}
-        className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-black/8 bg-black/[0.035] px-2 py-[3px] text-left align-middle transition-colors hover:bg-black/[0.055] dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.08]"
+        className="inline-flex max-w-full items-center gap-1 rounded-full border border-black/10 bg-black/[0.03] px-3 py-[3px] text-left align-middle transition-colors hover:bg-black/[0.06] dark:border-white/15 dark:bg-white/[0.08] dark:hover:bg-white/[0.12]"
         aria-label={overlayVisible ? "Resume Night Drive player" : "Expand Night Drive player"}
         data-player-pill="true"
       >
-        <span className="truncate text-[10px] font-medium text-[#111827] dark:text-[#f8fafc]">
+        <Play className="size-[9px] fill-current text-[#111827] dark:text-white shrink-0 mr-0.5" />
+        <span className="truncate text-[10px] font-bold text-[#111827] dark:text-white">
           {title}
         </span>
-        <span
-          className="flex items-center gap-0.5 text-[#6b7280] dark:text-[#94a3b8]"
-          aria-label="Profile music waveform"
-        >
-          <AudioWaveform className="size-3" aria-hidden="true" />
-          <HeartPulse className="size-[11px]" aria-hidden="true" />
+        <span className="truncate text-[10px] text-[#6b7280] dark:text-[#a8a8a8] ml-1">
+          {artist}
         </span>
       </button>
 
@@ -193,8 +191,8 @@ export function ProfileMusicPlayer({
                 <p className="truncate text-[10px] font-semibold text-[#111827] dark:text-[#f8fafc]">
                   {title}
                 </p>
-                <p className="text-[8px] uppercase tracking-[0.2em] text-[#6b7280] dark:text-[#94a3b8]">
-                  Music
+                <p className="truncate text-[8px] text-[#6b7280] dark:text-[#a8a8a8] mt-0.5">
+                  {artist}
                 </p>
               </div>
               <button
@@ -227,13 +225,9 @@ export function ProfileMusicPlayer({
                     <p className="truncate text-[10px] font-semibold text-[#111827] dark:text-[#f8fafc]">
                       {title}
                     </p>
-                    <div className="mt-0.5 flex items-center gap-1 text-[8px] uppercase tracking-[0.18em] text-[#6b7280] dark:text-[#94a3b8]">
-                      <span>Music</span>
-                      <span className="flex items-center gap-0.5" aria-label="Profile music waveform">
-                        <AudioWaveform className="size-3" aria-hidden="true" />
-                        <HeartPulse className="size-[10px]" aria-hidden="true" />
-                      </span>
-                    </div>
+                    <p className="truncate text-[8px] font-medium text-[#6b7280] dark:text-[#a8a8a8] mt-0.5">
+                      {artist}
+                    </p>
                   </div>
 
                   <button

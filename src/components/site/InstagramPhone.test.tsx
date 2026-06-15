@@ -12,7 +12,6 @@ describe("InstagramPhone", () => {
     expect(markup).toContain('aria-label="Cellular signal"');
     expect(markup).toContain('aria-label="Wi-Fi signal"');
     expect(markup).toContain('aria-label="Battery level"');
-    expect(markup).toContain('aria-label="Notifications"');
     expect(markup).toContain('aria-label="Create post"');
     expect(markup).toContain('aria-label="Expand Night Drive player"');
     expect(markup).toContain('data-floating-player-anchor="true"');
