@@ -154,8 +154,8 @@ function DevDeckPreview() {
         </div>
 
         {/* Right terminal area */}
-        <div className="flex flex-col p-3 gap-3">
-          <div ref={terminalRef} className="flex-1 rounded-[var(--radius-md)] bg-aubergine p-3 font-[family:var(--font-jetbrains-mono)] text-[9px] text-canvas overflow-y-auto max-h-32 shadow-inner">
+        <div className="flex flex-col p-3 gap-3 h-full">
+          <div ref={terminalRef} className="flex-1 rounded-[var(--radius-md)] bg-aubergine p-3 font-[family:var(--font-jetbrains-mono)] text-[9px] text-canvas overflow-y-auto shadow-inner">
             {logs.map((l, i) => (
               <div key={i} className="whitespace-pre-wrap leading-relaxed">{l}</div>
             ))}
@@ -256,7 +256,7 @@ function SceneBookPreview() {
         </div>
 
         {/* Video Canvas & Controls */}
-        <div className="flex flex-col gap-3 justify-between">
+        <div className="flex flex-col gap-3 justify-between h-full">
           <div className="flex-1 rounded-[var(--radius-md)] border border-plum-tinted bg-[#07080b] p-3 text-canvas relative overflow-hidden flex flex-col justify-between shadow-inner">
             {/* Visual simulation of video scene */}
             <div className="absolute inset-0 bg-gradient-to-tr from-[#240029] via-[#ff6847]/10 to-[#69a7ff]/10 opacity-30 pointer-events-none" />
@@ -381,7 +381,7 @@ function FinancialPreview() {
         </div>
 
         {/* Query execution and visualization */}
-        <div className="flex flex-col gap-3 justify-between">
+        <div className="flex flex-col gap-3 justify-between h-full">
           <div className="flex-1 rounded-[var(--radius-md)] border border-plum-tinted p-3 bg-aubergine/[0.01] flex flex-col gap-3 shadow-inner">
             {/* Prompt bar */}
             <div className="flex items-center gap-2 border-b border-plum-tinted/70 pb-2">
@@ -518,7 +518,7 @@ function SetuPreview() {
         </div>
 
         {/* Compliance Dial & Fact drawer */}
-        <div className="flex flex-col gap-3 justify-between border-l border-plum-tinted/55 pl-3">
+        <div className="flex flex-col gap-3 justify-between border-l border-plum-tinted/55 pl-3 h-full">
           <div className="flex flex-col items-center justify-center pt-2">
             <div className="relative size-16">
               <svg className="size-full transform -rotate-90">
