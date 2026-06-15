@@ -1,0 +1,16 @@
+Night Drive - provenance note
+
+Title: Night Drive
+Artist: The_Mountain
+Source page: https://pixabay.com/music/trap-night-drive-131376/
+Published date: December 30, 2022
+License: Pixabay Content License
+License summary: https://pixabay.com/service/license-summary/
+
+Intended bundled asset path:
+/public/audio/night-drive.mp3
+
+Notes:
+- This redesign uses a locally hosted audio file only; no runtime music service is involved.
+- Metadata above was verified from the Pixabay source page on 2026-06-15.
+- Downloaded into this repo on 2026-06-15 from Pixabay's page-level free download flow.

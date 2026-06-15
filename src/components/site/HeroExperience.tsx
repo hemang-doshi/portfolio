@@ -1,45 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { HandDrawnAnnotation } from "@/components/ui/HandDrawnAnnotation";
 import { buildMailtoHref } from "@/lib/site-config";
 import type { InstagramProfile, InstagramPost } from "@/lib/instagram";
-import { getPostThumbnail } from "@/lib/instagram";
-
-// ─── Mock data (used when real Instagram data is unavailable) ─────────────────
-
-const MOCK_PROFILE = {
-  username: "hemang.codes",
-  biography: "Building developer tools, creator tools, and responsible local AI loops.",
-  followers_count: 1500,
-  follows_count: 342,
-  media_count: 12,
-  profile_picture_url: null as string | null,
-};
-
-const MOCK_POSTS = [
-  { label: "CLI Tool",   color: "from-[#240029] to-[#df37a7]/20" },
-  { label: "NextJS",     color: "from-[#df37a7] to-[#ffcc11]/20" },
-  { label: "OCR AI",     color: "from-[#240029] to-[#ffcc11]/20" },
-  { label: "Database",   color: "from-[#ffcc11] to-[#df37a7]/20" },
-  { label: "Agent UI",   color: "from-[#df37a7] to-[#240029]/20" },
-  { label: "Vector DB",  color: "from-[#240029] to-[#df37a7]/40" },
-  { label: "Analytics",  color: "from-[#ffcc11] to-[#240029]/40" },
-  { label: "Prompt Eng", color: "from-[#df37a7] to-[#ffcc11]/40" },
-  { label: "Workflow",   color: "from-[#240029] to-[#ffcc11]/30" },
-];
-
-/** Format a raw follower count to a compact string, e.g. 1500 → "1.5k" */
-function formatCount(n: number): string {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}m`;
-  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}k`;
-  return String(n);
-}
+import { InstagramPhone } from "@/components/site/InstagramPhone";
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
@@ -89,19 +57,6 @@ export function HeroExperience({ profile = null, posts = [] }: HeroExperiencePro
     }, "-=0.3");
 
   }, { scope: containerRef });
-
-  // ── Derived display values ─────────────────────────────────────────────────
-
-  const displayUsername  = profile?.username       ?? MOCK_PROFILE.username;
-  const displayBio       = profile?.biography      ?? MOCK_PROFILE.biography;
-  const displayFollowers = profile?.followers_count ?? MOCK_PROFILE.followers_count;
-  const displayFollowing = profile?.follows_count   ?? MOCK_PROFILE.follows_count;
-  const displayPosts     = profile?.media_count     ?? MOCK_PROFILE.media_count;
-  const profilePicUrl    = profile?.profile_picture_url ?? null;
-
-  // Whether we have real posts to render
-  const hasRealPosts = posts.length > 0;
-
   return (
     <section
       id="hero"
@@ -143,190 +98,7 @@ export function HeroExperience({ profile = null, posts = [] }: HeroExperiencePro
 
           {/* Right Column: Instagram Phone Mockup */}
           <div className="relative flex justify-center items-center z-10">
-            {/* Phone Wrapper to anchor the annotation relative to the phone */}
-            <div className="relative">
-              {/* Annotation pointing to the interactive posts */}
-              <HandDrawnAnnotation
-                className="left-[calc(100%+12px)] top-[45%] lg:hidden xl:flex hero-annotation-anim"
-                flip
-              >
-                click me
-              </HandDrawnAnnotation>
-
-              {/* Phone Container */}
-              <div className="instagram-phone-anim relative w-[300px] h-[590px] rounded-[42px] border-[8px] border-aubergine bg-canvas shadow-subtle-5 overflow-hidden flex flex-col">
-                {/* Phone Speaker & Camera Notch */}
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-32 h-5 bg-aubergine rounded-full flex items-center justify-between px-4 z-30">
-                  <span className="w-12 h-1 bg-white/20 rounded-full" />
-                  <span className="size-2 rounded-full bg-white/20" />
-                </div>
-
-                {/* Status Bar */}
-                <div className="h-10 pt-5 px-6 flex justify-between items-center text-[10px] font-semibold text-aubergine bg-canvas/80 backdrop-blur border-b border-plum-tinted/20 select-none">
-                  <span>9:41</span>
-                  <div className="flex items-center gap-1">
-                    <span>📶</span>
-                    <span>🔋</span>
-                  </div>
-                </div>
-
-                {/* Instagram App Header */}
-                <div className="h-11 px-4 flex justify-between items-center border-b border-plum-tinted/20 bg-canvas">
-                  <span className="font-mono text-xs font-black tracking-tight">{displayUsername}</span>
-                  <div className="flex gap-3 text-xs">
-                    <span>🔔</span>
-                    <span>➕</span>
-                    <span>≡</span>
-                  </div>
-                </div>
-
-                {/* Profile details */}
-                <div className="p-4 flex flex-col gap-3 bg-canvas overflow-y-auto flex-1 no-scrollbar">
-                  {/* Stats block */}
-                  <div className="flex items-center gap-4">
-                    {/* Profile Picture / Avatar */}
-                    <div className="relative size-14 rounded-full p-[2px] bg-gradient-to-tr from-[#ffcc11] via-[#df37a7] to-[#240029] shadow-md shrink-0">
-                      {profilePicUrl ? (
-                        <Image
-                          src={profilePicUrl}
-                          alt={`${displayUsername}'s Instagram profile picture`}
-                          width={56}
-                          height={56}
-                          className="size-full rounded-full object-cover"
-                          unoptimized={false}
-                        />
-                      ) : (
-                        <div className="size-full rounded-full bg-canvas flex items-center justify-center font-bold text-aubergine text-xs">
-                          HD
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Stats list */}
-                    <div className="flex-1 flex justify-around text-center text-aubergine select-none">
-                      <div>
-                        <div className="font-bold text-xs">{formatCount(displayPosts)}</div>
-                        <div className="text-[8px] text-heather">Posts</div>
-                      </div>
-                      <div>
-                        <div className="font-bold text-xs">{formatCount(displayFollowers)}</div>
-                        <div className="text-[8px] text-heather">Followers</div>
-                      </div>
-                      <div>
-                        <div className="font-bold text-xs">{formatCount(displayFollowing)}</div>
-                        <div className="text-[8px] text-heather">Following</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Profile Bio */}
-                  <div className="text-[10px] leading-relaxed text-aubergine">
-                    <div className="font-bold text-xs">{profile?.name ?? "Hemang Doshi"}</div>
-                    <div className="text-heather font-medium">AI Engineer &amp; Systems Builder</div>
-                    <p className="mt-1">{displayBio}</p>
-                    <a
-                      href="https://github.com/hemang-doshi"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-fuchsia-signal font-semibold mt-0.5 block"
-                    >
-                      github.com/hemang-doshi
-                    </a>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="grid grid-cols-2 gap-2 mt-1 select-none">
-                    <a
-                      href={`https://instagram.com/${displayUsername}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="h-7 bg-fuchsia-signal text-canvas font-bold text-[10px] rounded-lg shadow-sm hover:opacity-90 transition-opacity flex items-center justify-center"
-                    >
-                      Follow
-                    </a>
-                    <button className="h-7 border border-heather text-aubergine font-bold text-[10px] rounded-lg hover:bg-aubergine/[0.03] transition-colors">
-                      Message
-                    </button>
-                  </div>
-
-                  {/* Highlights circle row */}
-                  <div className="flex gap-3 py-1 overflow-x-auto no-scrollbar select-none">
-                    {[
-                      { title: "DevDeck",  icon: "💻" },
-                      { title: "SceneBook", icon: "🎬" },
-                      { title: "AI SQL",   icon: "📊" },
-                      { title: "SetuAI",   icon: "🌐" }
-                    ].map(h => (
-                      <div key={h.title} className="flex flex-col items-center gap-1 shrink-0">
-                        <div className="size-11 rounded-full border border-plum-tinted bg-aubergine/[0.02] flex items-center justify-center text-xs">
-                          {h.icon}
-                        </div>
-                        <span className="text-[7px] text-heather font-semibold">{h.title}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Tabs bar */}
-                  <div className="border-t border-plum-tinted/20 grid grid-cols-3 py-1 text-center text-xs border-b select-none">
-                    <span className="cursor-pointer font-bold text-aubergine border-b-2 border-aubergine pb-1">田</span>
-                    <span className="cursor-pointer text-heather">▶</span>
-                    <span className="cursor-pointer text-heather">👤</span>
-                  </div>
-
-                  {/* Posts 3×3 Grid */}
-                  <div className="grid grid-cols-3 gap-1">
-                    {hasRealPosts
-                      ? posts.map((post) => {
-                          const thumb = getPostThumbnail(post);
-                          return (
-                            <a
-                              key={post.id}
-                              href={post.permalink}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="ig-post-anim relative aspect-square rounded overflow-hidden group border border-plum-tinted/10"
-                            >
-                              {thumb ? (
-                                <Image
-                                  src={thumb}
-                                  alt="Instagram post"
-                                  fill
-                                  className="object-cover"
-                                  sizes="90px"
-                                />
-                              ) : (
-                                /* Fallback gradient tile if no thumbnail (e.g. copyright-blocked) */
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#240029] to-[#df37a7]/20" />
-                              )}
-                              {/* Hover overlay with real counts */}
-                              <div className="absolute inset-0 bg-[#240029]/80 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-3 text-canvas text-[9px] font-bold transition-opacity duration-200">
-                                <span>❤️ {post.like_count ?? "—"}</span>
-                                <span>💬 {post.comments_count}</span>
-                              </div>
-                            </a>
-                          );
-                        })
-                      : MOCK_POSTS.map((p, idx) => (
-                          <div
-                            key={idx}
-                            className={`ig-post-anim relative aspect-square rounded bg-gradient-to-br ${p.color} overflow-hidden group cursor-pointer border border-plum-tinted/10`}
-                          >
-                            <div className="absolute inset-0 flex items-center justify-center text-[7px] font-bold text-canvas uppercase tracking-wider text-center p-1 font-mono">
-                              {p.label}
-                            </div>
-                            {/* Hover overlay */}
-                            <div className="absolute inset-0 bg-[#240029]/80 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-3 text-canvas text-[9px] font-bold transition-opacity duration-200">
-                              <span>❤️ 42</span>
-                              <span>💬 3</span>
-                            </div>
-                          </div>
-                        ))
-                    }
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            <InstagramPhone profile={profile} posts={posts} />
           </div>
 
         </div>

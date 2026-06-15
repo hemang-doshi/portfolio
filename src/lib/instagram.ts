@@ -89,11 +89,19 @@ export async function getInstagramProfile(): Promise<InstagramProfile | null> {
   }
 }
 
+interface InstagramMediaResponse {
+  data?: InstagramPost[];
+  paging?: {
+    next?: string;
+  };
+}
+
 /**
- * Fetch the authenticated user's most recent posts (up to `limit`).
+ * Fetch the authenticated user's posts, paging until exhaustion unless an
+ * optional `limit` is provided.
  * Cached for 1 hour. Returns empty array on any error.
  */
-export async function getInstagramMedia(limit = 9): Promise<InstagramPost[]> {
+export async function getInstagramMedia(limit?: number): Promise<InstagramPost[]> {
   const token = getToken();
   if (!token) return [];
 
@@ -109,16 +117,32 @@ export async function getInstagramMedia(limit = 9): Promise<InstagramPost[]> {
       "timestamp",
     ].join(",");
 
-    const url = `${GRAPH_BASE}/me/media?fields=${fields}&limit=${limit}&access_token=${token}`;
-    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const pageSize = limit ? Math.min(limit, 100) : 100;
+    let nextUrl =
+      `${GRAPH_BASE}/me/media?fields=${fields}&limit=${pageSize}&access_token=${token}`;
+    const posts: InstagramPost[] = [];
 
-    if (!res.ok) {
-      console.error("[instagram] media fetch failed:", res.status, await res.text());
-      return [];
+    while (nextUrl && (limit === undefined || posts.length < limit)) {
+      const res = await fetch(nextUrl, { next: { revalidate: 3600 } });
+
+      if (!res.ok) {
+        console.error("[instagram] media fetch failed:", res.status, await res.text());
+        return [];
+      }
+
+      const json = (await res.json()) as InstagramMediaResponse;
+      const batch = json.data ?? [];
+
+      if (limit !== undefined && posts.length + batch.length > limit) {
+        posts.push(...batch.slice(0, limit - posts.length));
+        break;
+      }
+
+      posts.push(...batch);
+      nextUrl = json.paging?.next ?? "";
     }
 
-    const json = (await res.json()) as { data: InstagramPost[] };
-    return json.data ?? [];
+    return posts;
   } catch (err) {
     console.error("[instagram] media fetch error:", err);
     return [];
