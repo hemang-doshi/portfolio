@@ -241,7 +241,7 @@ export function InstagramPhone({
 
               <div className="mt-3 grid grid-cols-2 gap-2.5">
                 <a
-                  href={`https://instagram.com/${displayUsername}`}
+                  href={`https://instagram.com/${encodeURIComponent(displayUsername)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="flex h-9 items-center justify-center rounded-[11px] bg-[#0095f6] px-3 text-[12px] font-semibold text-white transition-opacity hover:opacity-90"

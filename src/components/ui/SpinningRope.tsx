@@ -14,7 +14,12 @@ export function SpinningRope() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [viewportHeight, setViewportHeight] = useState(800);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+    return false;
+  });
 
   // Cache document height and viewport height to prevent layout thrashing (reflow) on scroll
   const docHeightRef = useRef(2000);
@@ -22,7 +27,6 @@ export function SpinningRope() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mediaQuery.matches);
     
     const handleMediaChange = (e: MediaQueryListEvent) => {
       setReducedMotion(e.matches);

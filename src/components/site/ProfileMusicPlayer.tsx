@@ -33,7 +33,6 @@ export function formatAudioTime(value: number): string {
 export function ProfileMusicPlayer({
   src,
   title,
-  artist,
 }: ProfileMusicPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [overlayVisible, setOverlayVisible] = useState(false);

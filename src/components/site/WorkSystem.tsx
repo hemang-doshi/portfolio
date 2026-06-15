@@ -85,7 +85,7 @@ export function WorkSystem() {
     {
       output: (
         <div className="text-plum-tinted/70">
-          Welcome to Hemang's interactive terminal. Type <span className="text-glowstick font-bold">help</span> to begin.
+          Welcome to Hemang&apos;s interactive terminal. Type <span className="text-glowstick font-bold">help</span> to begin.
         </div>
       )
     }
@@ -242,7 +242,7 @@ export function WorkSystem() {
             </div>
           );
         } else {
-          output = <span className="text-strawberry">Error: Project '{target}' not found. Type 'ls' to list available projects.</span>;
+          output = <span className="text-strawberry">Error: Project &apos;{target}&apos; not found. Type &apos;ls&apos; to list available projects.</span>;
         }
         break;
       }
@@ -290,14 +290,14 @@ export function WorkSystem() {
           "['hip', 'hip'] (hip hip array!)"
         ];
         const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-        output = <span className="italic text-plum-tinted/90">"{randomJoke}"</span>;
+        output = <span className="italic text-plum-tinted/90">&quot;{randomJoke}&quot;</span>;
         break;
       }
       case "clear":
         setHistory([]);
         return;
       default:
-        output = <span className="text-strawberry">Command not found: '{cmd}'. Type 'help' to see list of commands.</span>;
+        output = <span className="text-strawberry">Command not found: &apos;{cmd}&apos;. Type &apos;help&apos; to see list of commands.</span>;
     }
 
     setHistory((prev) => [...prev, { command: cmdText, output }]);

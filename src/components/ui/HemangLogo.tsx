@@ -14,6 +14,7 @@ export function HemangLogo({
       xmlns="http://www.w3.org/2000/svg"
       className={cn("size-9", className)}
     >
+      {/* SECURITY WARNING: Keep this stylesheet static. Do NOT interpolate user inputs or dynamic variables to prevent XSS. */}
       <style dangerouslySetInnerHTML={{__html: `
         :root {
           --logo-stop-1: #df37a7;

@@ -70,6 +70,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        {/* SECURITY WARNING: Keep this theme initialization script static. Do NOT interpolate user inputs or dynamic variables to prevent XSS. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `

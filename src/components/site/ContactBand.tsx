@@ -81,7 +81,7 @@ function GmailMockup() {
           <div>
             <h4 className="font-semibold text-sm text-[#1f1f1f] dark:text-[#f1f5f9]">Message Sent!</h4>
             <p className="mt-2 text-[#767676] dark:text-[#9e9e9e] text-[11px] leading-relaxed">
-              Thanks for reaching out. Hemang's inbox has received your details (simulated) and he will get back to you shortly.
+              Thanks for reaching out. Hemang&apos;s inbox has received your details (simulated) and he will get back to you shortly.
             </p>
           </div>
           <button 

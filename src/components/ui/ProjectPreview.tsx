@@ -428,36 +428,41 @@ function FinancialPreview() {
   );
 }
 
+const DOCUMENTS = [
+  {
+    name: "Registration Certificate",
+    status: "Verified",
+    score: 96,
+    details: "Official verification signature matched. ISO validation stamps confirmed. Registered in India."
+  },
+  {
+    name: "Labour & safety Policy",
+    status: "Extracted",
+    score: 82,
+    details: "Ethical wage metrics match legal local mandates. Missing certification of heavy-machinery standards."
+  },
+  {
+    name: "Supplier Audit Questionnaire",
+    status: "Under Review",
+    score: 64,
+    details: "Secondary supplier statements pending. High trace environmental carbon score flagged."
+  }
+];
+
 function SetuPreview() {
   const [selectedDoc, setSelectedDoc] = useState<number>(0);
   const [complianceScore, setComplianceScore] = useState(0);
 
-  const documents = [
-    {
-      name: "Registration Certificate",
-      status: "Verified",
-      score: 96,
-      details: "Official verification signature matched. ISO validation stamps confirmed. Registered in India."
-    },
-    {
-      name: "Labour & safety Policy",
-      status: "Extracted",
-      score: 82,
-      details: "Ethical wage metrics match legal local mandates. Missing certification of heavy-machinery standards."
-    },
-    {
-      name: "Supplier Audit Questionnaire",
-      status: "Under Review",
-      score: 64,
-      details: "Secondary supplier statements pending. High trace environmental carbon score flagged."
-    }
-  ];
-
   useEffect(() => {
     // Animate score from 0 to selected document score
-    setComplianceScore(0);
-    const target = documents[selectedDoc].score;
+    const target = DOCUMENTS[selectedDoc].score;
     let curr = 0;
+    
+    // Set to 0 in next tick to avoid synchronous setState warning
+    const timeout = setTimeout(() => {
+      setComplianceScore(0);
+    }, 0);
+
     const interval = setInterval(() => {
       curr += 2;
       if (curr >= target) {
@@ -467,7 +472,11 @@ function SetuPreview() {
         setComplianceScore(curr);
       }
     }, 15);
-    return () => clearInterval(interval);
+
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
   }, [selectedDoc]);
 
   // Compute dash array offset for circle animation
@@ -482,7 +491,7 @@ function SetuPreview() {
         {/* Document lines */}
         <div className="flex flex-col gap-2.5 justify-center">
           <p className="font-[family:var(--font-jetbrains-mono)] text-[8px] font-bold text-heather uppercase tracking-wider">Verification Checklist</p>
-          {documents.map((doc, idx) => (
+          {DOCUMENTS.map((doc, idx) => (
             <div
               key={doc.name}
               onClick={() => setSelectedDoc(idx)}
@@ -536,7 +545,7 @@ function SetuPreview() {
           </div>
 
           <div className="flex-1 rounded-[var(--radius-md)] bg-aubergine/[0.02] border border-plum-tinted/40 p-2 text-[8px] leading-relaxed text-heather max-h-20 overflow-y-auto">
-            {documents[selectedDoc].details}
+            {DOCUMENTS[selectedDoc].details}
           </div>
         </div>
       </div>

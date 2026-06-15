@@ -5,7 +5,6 @@ import {
 } from "@phosphor-icons/react/ssr";
 
 import { buildMailtoHref, siteConfig } from "@/lib/site-config";
-import { HemangLogo } from "@/components/ui/HemangLogo";
 
 export function FooterTerminal() {
   return (
