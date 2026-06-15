@@ -43,19 +43,25 @@ export function SiteNav() {
 
   return (
     <header className="sticky inset-x-0 top-0 z-50 border-b border-plum-tinted/30 bg-canvas/70 backdrop-blur-md">
-      <div className="section-shell flex min-h-[72px] items-center justify-between gap-4 py-3">
-        {/* Left spacer to balance buttons and center logo/name on mobile */}
-        <div className="w-[96px] shrink-0 lg:hidden" />
-
+      <div className="section-shell relative flex min-h-[72px] items-center justify-between gap-4 py-3">
         <a
           href="#top"
-          className="flex min-h-11 items-center gap-3 justify-center lg:justify-start"
+          className="flex min-h-11 items-center gap-3 lg:justify-start"
           aria-label="Hemang Doshi home"
         >
           <NavMascot />
-          <span className="display-heading text-sm tracking-[-0.02em] text-aubergine">
+          <span className="display-heading text-sm tracking-[-0.02em] text-aubergine hidden lg:inline">
             Hemang Doshi
           </span>
+        </a>
+
+        {/* Centered Name on mobile */}
+        <a
+          href="#top"
+          className="display-heading text-sm tracking-[-0.02em] text-aubergine absolute left-1/2 -translate-x-1/2 lg:hidden font-semibold"
+          aria-label="Hemang Doshi home"
+        >
+          Hemang Doshi
         </a>
 
         <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary navigation">
@@ -73,7 +79,7 @@ export function SiteNav() {
           ))}
         </nav>
 
-        <div className="flex w-[96px] items-center justify-end gap-2 sm:gap-3 lg:w-auto">
+        <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={siteConfig.githubUrl}
             target="_blank"

@@ -82,14 +82,14 @@ export function HeroExperience({
           {/* Left Column: Heading and Description */}
           <div className="relative z-10 text-center flex flex-col items-center lg:text-left lg:items-start">
             <Eyebrow className="mb-5 hero-anim-item">builder • creator • chasing useful ideas</Eyebrow>
-            <h1 className="display-heading text-[length:clamp(2.4rem,7vw,var(--text-display))] leading-[var(--leading-display)] tracking-[var(--tracking-display)] text-aubergine hero-anim-item">
-              i{" "}
+            <h1 className="display-heading text-[length:clamp(2.4rem,7vw,var(--text-display))] leading-[var(--leading-display)] tracking-[var(--tracking-display)] text-aubergine hero-anim-item flex flex-col items-center lg:block">
+              <span>i</span>
               <TypingAnimation
                 words={["build 🛠️", "ship 🚀", "write 📑"]}
                 loop
-                className="text-fuchsia-signal inline-block min-w-[5.5ch] text-left whitespace-nowrap"
-              />{" "}
-              things.
+                className="text-fuchsia-signal inline-block min-w-[5.5ch] text-center lg:text-left whitespace-nowrap lg:mx-3"
+              />
+              <span>things.</span>
             </h1>
             <p className="mt-6 max-w-xl text-[length:var(--text-body)] sm:text-[length:var(--text-subheading)] leading-[1.6] tracking-[var(--tracking-subheading)] text-aubergine hero-anim-item">
               i&apos;m hemang. i like turning messy ideas, everyday annoyances, and random observations into software, content, and tiny systems that feel useful.
