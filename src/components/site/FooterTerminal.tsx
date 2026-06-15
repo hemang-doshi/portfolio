@@ -58,7 +58,7 @@ export function FooterTerminal() {
             </a>
           </div>
           <p className="text-[10px] text-plum-tinted/40 font-mono">
-            © {new Date().getFullYear()} Hemang Doshi. Built close to the problem.
+            © {new Date().getFullYear()} Hemang Doshi. built with curiosity, too many tabs open, and a mild need to turn everything into a project.
           </p>
         </div>
       </div>

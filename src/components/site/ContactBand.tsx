@@ -242,14 +242,13 @@ export function ContactBand() {
       <div className="section-shell grid items-center gap-12 lg:grid-cols-[1fr_0.9fr]">
         <div className="flex flex-col items-start lg:pr-16">
           <div className="cb-text-anim">
-            <Eyebrow className="text-heather">LET’S BUILD SOMETHING USEFUL</Eyebrow>
+            <Eyebrow className="text-heather">say hi</Eyebrow>
           </div>
           <h2 className="display-heading mt-4 max-w-3xl text-[length:clamp(2.4rem,6vw,var(--text-heading-lg))] leading-[var(--leading-heading-lg)] tracking-[var(--tracking-heading-lg)] text-aubergine cb-text-anim">
-            Have a hard problem worth making clear?
+            got an idea, a problem, or a rabbit hole?
           </h2>
           <p className="mt-6 max-w-[450px] text-[length:var(--text-body)] leading-[1.65] text-heather cb-text-anim">
-            I’m interested in thoughtful teams working on developer tools, AI-native
-            products, cloud platforms, and creator workflows. Based in the Indian peninsula.
+            i&apos;m down to talk about software, content, ai, creator tools, startups, weird product ideas, or anything that feels like it could become something cool with enough curiosity and a little chaos.
           </p>
           
           <div className="mt-8 flex flex-col gap-3 sm:flex-row cb-text-anim">
@@ -257,7 +256,7 @@ export function ContactBand() {
               href={buildMailtoHref("Direct Inquiry")}
               className="inline-flex min-h-11 items-center justify-center rounded-[var(--radius-md)] px-6 py-3 text-[length:var(--text-body)] font-semibold tracking-[var(--tracking-body)] bg-fuchsia-signal text-canvas hover:bg-[color-mix(in_srgb,var(--color-fuchsia-signal)_90%,var(--color-aubergine)_10%)] transition-all hover:-translate-y-0.5 shadow-subtle"
             >
-              Email Direct
+              email me
             </a>
             <Button
               href={siteConfig.githubUrl}
@@ -266,7 +265,7 @@ export function ContactBand() {
               variant="secondary"
               className="border-aubergine/40 text-aubergine hover:bg-aubergine/5"
             >
-              View GitHub
+              find me online
             </Button>
           </div>
         </div>

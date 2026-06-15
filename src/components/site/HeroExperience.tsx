@@ -82,30 +82,29 @@ export function HeroExperience({
 
           {/* Left Column: Heading and Description */}
           <div className="relative z-10 text-left flex flex-col items-start">
-            <Eyebrow className="mb-5 hero-anim-item">AI-NATIVE ENGINEER • SYSTEMS BUILDER</Eyebrow>
+            <Eyebrow className="mb-5 hero-anim-item">builder • creator • chasing useful ideas</Eyebrow>
             <h1 className="display-heading text-[length:clamp(2.4rem,7vw,var(--text-display))] leading-[var(--leading-display)] tracking-[var(--tracking-display)] text-aubergine hero-anim-item">
-              Building systems people can actually use.
+              i build, make, and document things.
             </h1>
             <p className="mt-6 max-w-xl text-[length:var(--text-body)] sm:text-[length:var(--text-subheading)] leading-[1.6] tracking-[var(--tracking-subheading)] text-aubergine hero-anim-item">
-              I&apos;m Hemang Doshi, a developer who likes turning vague ideas, messy
-              workflows, and technical complexity into clean products people can
-              actually use. This site is where I document the work, thinking, and
-              taste behind that.
+              i&apos;m hemang. i like turning messy ideas, everyday annoyances, and random observations into software, content, and tiny systems that feel useful.
+              <br /><br />
+              some of it is code. some of it is creator work. some of it is just me going outside, noticing stuff, and coming back with another idea i probably shouldn&apos;t start... but will.
             </p>
             <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center w-full hero-anim-item">
               <Button
-                href={buildMailtoHref("Start a conversation")}
+                href="#work"
                 withArrow
                 className="w-full sm:w-auto"
               >
-                Start a conversation
+                see what i&apos;m building
               </Button>
               <Button
-                href="#work"
+                href={buildMailtoHref("say hi")}
                 variant="secondary"
                 className="w-full sm:w-auto"
               >
-                Explore selected work
+                say hi
               </Button>
             </div>
           </div>

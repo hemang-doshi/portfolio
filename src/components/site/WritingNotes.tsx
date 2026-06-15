@@ -51,20 +51,20 @@ export function WritingNotes() {
           <div className="flex flex-col gap-6 text-left lg:pr-16 lg:max-w-[480px]">
             <div className="wn-header-anim">
               <SectionHeader
-                eyebrow="SKILLS & STACK"
-                title="Tools shaped for execution."
-                description="A modern collection of languages, frameworks, and deployment engines."
+                eyebrow="toolkit"
+                title="the tools change. the pattern doesn&apos;t."
+                description="i use whatever helps turn a blurry idea into something real — code, design, ai workflows, content systems, notes, scripts, experiments, whatever gets the loop moving."
                 align="left"
               />
             </div>
             <h3 className="text-[length:var(--text-heading-sm)] leading-[var(--leading-heading-sm)] font-bold text-aubergine mt-8 wn-content-anim">
-              Systems built for scale and clarity.
+              mostly building, sometimes filming, always connecting dots.
             </h3>
             <p className="text-[length:var(--text-body)] leading-[1.75] text-heather wn-content-anim">
-              I engineer developer infrastructure, autonomous agent loops, and high-performance cloud architectures. My focus is on reducing cognitive overhead, implementing end-to-end type safety, and building clean, observable products.
+              on the software side, i usually work around full-stack products, ai systems, devtools, cloud workflows, and automation. typescript, react, next.js, python, fastapi, postgres, docker, and agent/rag-style workflows show up a lot.
             </p>
             <p className="text-[length:var(--text-body)] leading-[1.75] text-heather wn-content-anim">
-              My stack centers around TypeScript, React, and Next.js for client interfaces, paired with Python and FastAPI for machine learning orchestration and agent runtimes. I rely on PostgreSQL, Supabase, and Docker to deploy secure, reproducible developer environments.
+              on the creator side, i care about ideas, hooks, storytelling, taste, short-form content, and documenting the process. i don&apos;t really see tech and content as separate worlds — both are just ways to make something in your head visible to other people.
             </p>
           </div>
 

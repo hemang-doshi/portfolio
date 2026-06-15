@@ -85,7 +85,7 @@ export function WorkSystem() {
     {
       output: (
         <div className="text-plum-tinted/70">
-          Welcome to Hemang&apos;s interactive terminal. Type <span className="text-glowstick font-bold">help</span> to begin.
+          welcome to the tiny command center. type <span className="text-glowstick font-bold">help</span> if u wanna poke around.
         </div>
       )
     }
@@ -117,7 +117,7 @@ export function WorkSystem() {
       scrollTrigger: {
         trigger: ".work-grid-trigger",
         start: "top 90%",
-        end: "bottom 30%",
+        end: "bottom 60%",
         scrub: 1.5,
       }
     });
@@ -146,7 +146,7 @@ export function WorkSystem() {
         ease: "power2.out",
         duration: 1,
       },
-      "+=0.2"
+      "-=0.5"
     );
 
     // Thought process/system console pin & reveal on scroll
@@ -272,11 +272,12 @@ export function WorkSystem() {
             <div className="flex flex-col gap-0.5">
               <span><span className="text-glowstick font-bold">guest</span>@<span className="text-glowstick font-bold">hemang-portfolio</span></span>
               <span>-----------------------------</span>
-              <span><span className="text-heather font-bold">OS:</span> PortfolioOS v2.0</span>
-              <span><span className="text-heather font-bold">Shell:</span> portfolio-sh</span>
-              <span><span className="text-heather font-bold">Host:</span> Mac Studio (M2 Ultra)</span>
-              <span><span className="text-heather font-bold">Stack:</span> NextJS, React, TS, Python, GSAP</span>
-              <span><span className="text-heather font-bold">Uptime:</span> 99.98%</span>
+              <span><span className="text-heather font-bold">mode:</span> building + creating + overthinking</span>
+              <span><span className="text-heather font-bold">interests:</span> software, ai, creator tools, food, ideas, places</span>
+              <span><span className="text-heather font-bold">stack:</span> ts/react/next, python, postgres, docker, ai workflows</span>
+              <span><span className="text-heather font-bold">creator_arc:</span> documenting the messy middle</span>
+              <span><span className="text-heather font-bold">current_bug:</span> too many ideas, not enough weekends</span>
+              <span><span className="text-heather font-bold">status:</span> probably outside or shipping something</span>
             </div>
           </div>
         );
@@ -317,9 +318,9 @@ export function WorkSystem() {
         <div className="section-shell">
           <div className="work-header-anim">
             <SectionHeader
-              eyebrow="SELECTED WORK"
-              title="Products shaped around real constraints."
-              description="Four systems exploring agent infrastructure, creator workflows, local analysis, and responsible supply chains."
+              eyebrow="things i&apos;ve made"
+              title="projects, experiments, and rabbit holes."
+              description="a small trail of things i&apos;ve been making across software, ai workflows, creator tools, and problem-solving under real constraints. some are serious builds, some started as “wait, why is this so annoying?”"
             />
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 work-grid-trigger">
@@ -348,9 +349,9 @@ export function WorkSystem() {
       <section id="system-console" className="section-anchor bg-transparent pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-16 lg:pb-20">
         <div className="section-shell relative">
           <div className="tp-header-anim max-w-xl mx-auto text-center mb-8">
-            <p className="font-[family:var(--font-jetbrains-mono)] text-[10px] font-bold text-fuchsia-signal uppercase tracking-wider mb-1.5">System Operations Console</p>
-            <h2 className="text-xl font-bold text-aubergine">Interactive Diagnostic Terminal</h2>
-            <p className="text-xs text-heather mt-1">Execute commands directly to inspect system logs, node status, and tech stack configurations.</p>
+            <p className="font-[family:var(--font-jetbrains-mono)] text-[10px] font-bold text-fuchsia-signal uppercase tracking-wider mb-1.5">little system console</p>
+            <h2 className="text-xl font-bold text-aubergine">a slightly dramatized corner of my brain</h2>
+            <p className="text-xs text-heather mt-1">type around to inspect the projects, stack, and a few bits of developer lore. mostly useful, mildly unnecessary, very on brand.</p>
           </div>
           
           <div className="tp-grid-trigger max-w-3xl mx-auto">

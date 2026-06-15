@@ -25,7 +25,7 @@ export const workItems: WorkItem[] = [
     title: "DevDeck",
     label: "Agent infrastructure",
     description:
-      "An agent-first engineering workspace for orchestrating local development stacks with compact diagnostics and lower token overhead.",
+      "a devtool for making local engineering stacks easier to run, inspect, and hand off to coding agents without wasting time staring at terminals.",
     tags: ["TypeScript", "CLI", "Agent Infra"],
     preview: "devdeck",
     emailSubject: "Discuss DevDeck",
@@ -36,7 +36,7 @@ export const workItems: WorkItem[] = [
     title: "SceneBook",
     label: "Creator systems",
     description:
-      "A creator operating system that brings planning, assets, scripts, and agentic workflows into one focused production loop.",
+      "a creator workspace for turning messy content ideas into scripts, assets, edits, and experiments — basically the tool i wanted for my own creator workflow.",
     tags: ["Next.js", "AI Tools", "Creator OS"],
     preview: "scenebook",
     emailSubject: "Discuss SceneBook",
@@ -47,7 +47,7 @@ export const workItems: WorkItem[] = [
     title: "AI Financial Analyst",
     label: "Local AI",
     description:
-      "A local-first analysis assistant using NL2SQL, forecasting, and LLM workflows to answer leadership questions from structured data.",
+      "an ai/data experiment for turning business questions into sql, forecasts, and readable answers from structured data.",
     tags: ["Python", "FastAPI", "LLMs"],
     preview: "financial-analyst",
     emailSubject: "Discuss the AI Financial Analyst",
@@ -57,7 +57,7 @@ export const workItems: WorkItem[] = [
     title: "SetuAI",
     label: "Responsible supply chains",
     description:
-      "A multilingual supply-chain ethics and compliance prototype for vendor onboarding, document extraction, and explainable risk scoring.",
+      "a hackathon-built workflow for making supplier compliance, document checks, and risk scoring less manual and more explainable.",
     tags: ["OCR", "SAP", "Hackathon"],
     preview: "setuai",
     emailSubject: "Discuss SetuAI",

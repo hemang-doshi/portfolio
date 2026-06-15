@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Cloud } from "react-icon-cloud";
+import iconsData from "@/data/icons-data.json";
 
 const cloudProps = {
   containerProps: {
@@ -31,58 +32,45 @@ const cloudProps = {
   },
 };
 
-const iconSlugs = [
-  "typescript",
-  "javascript",
-  "react",
-  "nextdotjs",
-  "tailwindcss",
-  "nodedotjs",
-  "python",
-  "fastapi",
-  "docker",
-  "git",
-  "supabase",
-  "postgresql",
-  "github",
-  "openai",
-  "html5",
-  "css3",
-  "googlecloud",
-  "anthropic",
-  "nextcloud",
-  "pnpm"
-];
+function getBase64Svg(path: string, color: string, title: string) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" style="fill: ${color};" viewBox="0 0 24 24" height="52" width="52"> <title>${title}</title> <path d="${path}"></path> </svg>`;
+  const base64 = typeof window !== "undefined"
+    ? window.btoa(unescape(encodeURIComponent(svg)))
+    : Buffer.from(svg).toString("base64");
+  return `data:image/svg+xml;base64,${base64}`;
+}
 
 export function IconCloud() {
+  const icons = React.useMemo(() => {
+    return Object.values(iconsData).map((icon) => {
+      const src = getBase64Svg(icon.path, icon.hex, icon.title);
+      return (
+        <a 
+          key={icon.slug} 
+          href={`https://simpleicons.org/icons/${icon.slug}`} 
+          target="_blank" 
+          rel="noreferrer"
+          title={icon.title}
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <img 
+            src={src} 
+            alt={icon.title} 
+            width={52} 
+            height={52}
+            style={{ width: "52px", height: "52px", objectFit: "contain" }}
+          />
+        </a>
+      );
+    });
+  }, []);
+
   return (
     <div className="flex items-center justify-center size-full relative">
       <Cloud options={cloudProps.options} containerProps={cloudProps.containerProps}>
-        {iconSlugs.map((slug) => {
-          const url = `https://cdn.simpleicons.org/${slug}`;
-          return (
-            <a 
-              key={slug} 
-              href={`https://simpleicons.org/icons/${slug}`} 
-              target="_blank" 
-              rel="noreferrer"
-              title={slug.charAt(0).toUpperCase() + slug.slice(1)}
-              onClick={(e) => {
-                // Prevent navigate, just print or do nothing, keeping it smooth
-                e.preventDefault();
-              }}
-            >
-              <img 
-                src={url} 
-                alt={slug} 
-                width={52} 
-                height={52}
-                crossOrigin="anonymous"
-                style={{ width: "52px", height: "52px", objectFit: "contain" }}
-              />
-            </a>
-          );
-        })}
+        {icons}
       </Cloud>
     </div>
   );
