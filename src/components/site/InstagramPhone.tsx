@@ -318,7 +318,7 @@ export function InstagramPhone({
                   href={`https://instagram.com/${encodeURIComponent(displayUsername)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex h-[32px] items-center justify-center rounded-[8px] bg-[#0095f6] text-[12px] font-bold text-white transition-opacity hover:opacity-90"
+                  className="flex h-[32px] items-center justify-center rounded-[8px] bg-[#0095F6] text-[12px] font-bold text-white transition-opacity hover:opacity-90"
                 >
                   Follow
                 </a>

@@ -392,14 +392,14 @@ export function WorkSystem() {
               return (
                 <div
                   key={item.title}
-                  className="relative"
+                  className="relative flex flex-col h-full"
                 >
                   {index === 0 && (
                     <HandDrawnAnnotation className="absolute left-4 -top-32 work-interactive-annotation lg:flex">
                       i'm interactive!
                     </HandDrawnAnnotation>
                   )}
-                  <div className={`work-card-anim ${cardClass}`}>
+                  <div className={`work-card-anim flex-1 flex flex-col ${cardClass}`}>
                     <WorkCard item={item} />
                   </div>
                 </div>
