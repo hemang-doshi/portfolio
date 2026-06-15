@@ -118,7 +118,7 @@ export function HeroExperience({
           {/* Right Column: Instagram Phone Mockup */}
           <div className="relative flex justify-center items-center z-10">
             <HandDrawnAnnotation
-              className="absolute -right-28 top-[290px] hero-annotation-anim lg:flex"
+              className="absolute -right-16 top-[290px] hero-annotation-anim lg:flex"
               flip
             >
               click me

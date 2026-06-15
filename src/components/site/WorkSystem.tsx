@@ -122,19 +122,19 @@ export function WorkSystem() {
         { 
           opacity: 0,
           scale: 0.6,
-          x: -30,
-          y: 20
+          x: -20,
+          y: -20
         },
         {
           opacity: 1,
           scale: 1,
           x: 0,
           y: 0,
-          duration: 0.4,
+          duration: 0.35,
           ease: "back.out(1.7)",
           scrollTrigger: {
             trigger: ".work-grid-trigger",
-            start: "top 95%",
+            start: "top 98%",
             toggleActions: "play none none none"
           }
         }
@@ -395,7 +395,7 @@ export function WorkSystem() {
                   className="relative"
                 >
                   {index === 0 && (
-                    <HandDrawnAnnotation className="absolute -left-36 top-16 work-interactive-annotation lg:flex">
+                    <HandDrawnAnnotation className="absolute left-4 -top-24 work-interactive-annotation lg:flex">
                       i'm interactive!
                     </HandDrawnAnnotation>
                   )}
