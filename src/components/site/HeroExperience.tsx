@@ -85,9 +85,9 @@ export function HeroExperience({
             <h1 className="display-heading text-[length:clamp(2.4rem,7vw,var(--text-display))] leading-[var(--leading-display)] tracking-[var(--tracking-display)] text-aubergine hero-anim-item">
               i{" "}
               <TypingAnimation
-                words={["build 🛠️", "make 👨💻", "document 📑"]}
+                words={["build 🛠️", "ship 🚀", "write 📑"]}
                 loop
-                className="text-fuchsia-signal"
+                className="text-fuchsia-signal inline-block min-w-[5.5ch] text-left whitespace-nowrap"
               />{" "}
               things.
             </h1>
