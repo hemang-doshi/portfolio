@@ -10,7 +10,7 @@ const cspHeader = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' https://*.cdninstagram.com https://*.fbcdn.net https://cdn.simpleicons.org data:",
   "font-src 'self' https://fonts.gstatic.com",
-  `connect-src 'self' https://graph.instagram.com${isDev ? " ws: wss:" : ""}`,
+  `connect-src 'self' https://graph.instagram.com https://cdn.simpleicons.org${isDev ? " ws: wss:" : ""}`,
   "frame-ancestors 'none'",
 ].join("; ");
 
