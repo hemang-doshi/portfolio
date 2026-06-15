@@ -163,15 +163,15 @@ export function ProfileMusicPlayer({
       <button
         type="button"
         onClick={handleExpandAndPlay}
-        className="inline-flex max-w-full items-center gap-1 rounded-full border border-black/10 bg-black/[0.03] px-3 py-[3px] text-left align-middle transition-colors hover:bg-black/[0.06] dark:border-white/15 dark:bg-white/[0.08] dark:hover:bg-white/[0.12]"
+        className="inline-flex max-w-full items-center gap-1 rounded-full border border-black/10 bg-black/[0.03] px-2 py-[2px] text-left align-middle transition-colors hover:bg-black/[0.06] dark:border-white/15 dark:bg-white/[0.08] dark:hover:bg-white/[0.12]"
         aria-label={overlayVisible ? "Resume Night Drive player" : "Expand Night Drive player"}
         data-player-pill="true"
       >
-        <Play className="size-[9px] fill-current text-[#111827] dark:text-white shrink-0 mr-0.5" />
-        <span className="truncate text-[10px] font-bold text-[#111827] dark:text-white">
+        <Play className="size-[8px] fill-current text-[#111827] dark:text-white shrink-0 mr-0.5" />
+        <span className="truncate text-[9px] font-bold text-[#111827] dark:text-white">
           {title}
         </span>
-        <span className="truncate text-[10px] text-[#6b7280] dark:text-[#a8a8a8] ml-1">
+        <span className="truncate text-[9px] text-[#6b7280] dark:text-[#a8a8a8] ml-1">
           {artist}
         </span>
       </button>

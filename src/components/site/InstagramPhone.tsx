@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import {
+  AtSign,
   BatteryFull,
   ChevronDown,
   Clapperboard,
@@ -106,22 +107,6 @@ function formatCount(n: number): string {
   return String(n);
 }
 
-const ThreadsIcon = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" className="opacity-0" />
-    <path d="M16 8.5c-.83-.83-2.08-1.5-3.5-1.5-3.04 0-5.5 2.46-5.5 5.5s2.46 5.5 5.5 5.5c1.88 0 3.52-.94 4.5-2.39" />
-    <path d="M12.5 10c.83 0 1.5.67 1.5 1.5v1.75c0 1.24-1.01 2.25-2.25 2.25-1.52 0-2.75-1.23-2.75-2.75V11.5C9 9.01 11.01 7 13.5 7c2.49 0 4.5 2.01 4.5 4.5v1.25" />
-  </svg>
-);
-
 export function InstagramPhone({
   profile = null,
   posts = [],
@@ -211,10 +196,10 @@ export function InstagramPhone({
 
           <div className="relative z-20 flex h-full flex-col overflow-hidden rounded-[35px] border border-black/5 bg-white/92 dark:border-white/6 dark:bg-black/96">
             
-            {/* Top Status Bar (Perfectly aligned with dynamic island notch) */}
-            <div className="relative z-30 flex h-7 items-center justify-between px-5 mt-2.5 text-[10px] font-semibold text-[#111827] dark:text-[#f8fafc]">
+            {/* Top Status Bar (Perfectly aligned with dynamic island notch, battery closer to right) */}
+            <div className="relative z-30 flex h-7 items-center justify-between pl-5 pr-3.5 mt-2.5 text-[10px] font-semibold text-[#111827] dark:text-[#f8fafc]">
               <span>11:15</span>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5">
                 <SignalHigh className="size-3.5" aria-label="Cellular signal" />
                 <Wifi className="size-3.5" aria-label="Wi-Fi signal" />
                 <div className="flex items-center gap-0.5" aria-label="Battery level">
@@ -224,25 +209,29 @@ export function InstagramPhone({
               </div>
             </div>
 
-            {/* Profile Header Row */}
+            {/* Profile Header Row (threads @ icon moved to the top right next to hamburger) */}
             <div className="flex items-center justify-between px-4 pt-3 pb-2 text-[#111827] dark:text-[#f8fafc]">
               <Plus className="size-5 cursor-pointer" aria-label="Create post" />
+              
               <div className="flex items-center gap-1 cursor-pointer">
                 <span className="font-sans text-[14px] font-bold tracking-[-0.01em]">
                   {displayUsername}
                 </span>
                 <ChevronDown className="size-3.5" />
                 <span className="size-1.5 rounded-full bg-[#ff3040]" />
-                <ThreadsIcon className="size-[18px] ml-1.5 text-[#111827] dark:text-white" />
               </div>
-              <Menu className="size-5 cursor-pointer" aria-label="Open menu" />
+              
+              <div className="flex items-center gap-3">
+                <AtSign className="size-5 cursor-pointer text-[#111827] dark:text-white" aria-label="Threads" />
+                <Menu className="size-5 cursor-pointer" aria-label="Open menu" />
+              </div>
             </div>
 
             {/* Main Content Area */}
             <div className="flex-1 overflow-y-auto px-4 pb-20 no-scrollbar">
               
-              {/* Profile Avatar and Stats */}
-              <div className="flex items-center gap-4 mt-6">
+              {/* Profile Avatar and Stats (Centered spacing & clean alignment, no notes bubble) */}
+              <div className="flex items-center justify-between mt-5 px-1">
                 <div className="relative size-[74px] shrink-0">
                   <div className="relative size-full rounded-full border border-black/10 p-[1px] dark:border-white/10">
                     {profilePicUrl ? (
@@ -267,7 +256,7 @@ export function InstagramPhone({
                   </div>
                 </div>
 
-                <div className="grid flex-1 grid-cols-3 text-center text-[#111827] dark:text-[#f8fafc] self-center">
+                <div className="flex items-center justify-around flex-1 pl-4 text-center text-[#111827] dark:text-[#f8fafc] self-center">
                   <div>
                     <div className="text-[13px] font-bold">{formatCount(displayPosts)}</div>
                     <div className="text-[10px] text-[#6b7280] dark:text-[#a8a8a8]">posts</div>
@@ -302,7 +291,7 @@ export function InstagramPhone({
                   </a>
                 </div>
 
-                {/* Music Player Row (Add button removed) */}
+                {/* Music Player Row (Tiny song pill, add button removed) */}
                 <div className="mt-2.5 flex items-center" data-floating-player-anchor="true">
                   <ProfileMusicPlayer
                     src="/audio/night-drive.mp3"
@@ -322,7 +311,7 @@ export function InstagramPhone({
               </div>
 
               {/* Action Buttons: Follow / Message (Even vertical spacing on top and bottom) */}
-              <div className="my-4 grid grid-cols-2 gap-2">
+              <div className="mt-3 mb-2 grid grid-cols-2 gap-2">
                 <a
                   href={`https://instagram.com/${encodeURIComponent(displayUsername)}`}
                   target="_blank"
@@ -339,8 +328,8 @@ export function InstagramPhone({
                 </button>
               </div>
 
-              {/* Tabs Grid Header */}
-              <div className="mt-5 grid grid-cols-4 border-t border-black/10 pt-2 text-[#6b7280] dark:border-white/10 dark:text-[#a8a8a8]">
+              {/* Tabs Grid Header (Reduced top gap to border line) */}
+              <div className="mt-2 grid grid-cols-4 border-t border-black/10 pt-2 text-[#6b7280] dark:border-white/10 dark:text-[#a8a8a8]">
                 <div className="flex flex-col items-center justify-center pb-2 border-b-2 border-black dark:border-white -mb-[10px] z-10">
                   <Grid3X3 className="size-[19px] text-[#111827] dark:text-white" aria-label="Posts tab" />
                 </div>
