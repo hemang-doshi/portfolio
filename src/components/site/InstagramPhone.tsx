@@ -163,7 +163,7 @@ export function InstagramPhone({
       <div className="pointer-events-none absolute -left-[3px] top-[184px] h-24 w-[3px] rounded-l-full bg-black/80 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]" />
       <div className="pointer-events-none absolute -right-[3px] top-[170px] h-20 w-[3px] rounded-r-full bg-black/80 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]" />
 
-      <div className="relative h-full w-full rounded-[42px] bg-[#080808] p-[7px] shadow-[0_24px_70px_rgba(15,23,42,0.28),0_10px_24px_rgba(15,23,42,0.18),inset_0_1px_0_rgba(255,255,255,0.08)]">
+      <div className="relative h-full w-full rounded-[42px] bg-[#080808] p-[7px] shadow-[0_12px_36px_rgba(15,23,42,0.12)] sm:shadow-[0_24px_70px_rgba(15,23,42,0.28),0_10px_24px_rgba(15,23,42,0.18),inset_0_1px_0_rgba(255,255,255,0.08)]">
         <div className="absolute inset-[2px] rounded-[40px] border border-white/[0.08]" />
 
         <div className="relative h-full w-full overflow-hidden rounded-[35px] bg-white dark:bg-[#101826]">

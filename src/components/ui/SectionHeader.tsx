@@ -20,7 +20,9 @@ export function SectionHeader({
     <div
       className={cn(
         "flex flex-col gap-5",
-        align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl",
+        align === "center"
+          ? "mx-auto max-w-3xl text-center items-center"
+          : "max-w-3xl text-left items-start max-lg:text-center max-lg:items-center max-lg:mx-auto",
         className,
       )}
     >

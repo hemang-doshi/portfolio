@@ -44,13 +44,16 @@ export function SiteNav() {
   return (
     <header className="sticky inset-x-0 top-0 z-50 border-b border-plum-tinted/30 bg-canvas/70 backdrop-blur-md">
       <div className="section-shell flex min-h-[72px] items-center justify-between gap-4 py-3">
+        {/* Left spacer to balance buttons and center logo/name on mobile */}
+        <div className="w-[96px] shrink-0 lg:hidden" />
+
         <a
           href="#top"
-          className="flex min-h-11 items-center gap-3"
+          className="flex min-h-11 items-center gap-3 justify-center lg:justify-start"
           aria-label="Hemang Doshi home"
         >
           <NavMascot />
-          <span className="display-heading hidden text-sm tracking-[-0.02em] text-aubergine sm:inline">
+          <span className="display-heading text-sm tracking-[-0.02em] text-aubergine">
             Hemang Doshi
           </span>
         </a>
@@ -70,7 +73,7 @@ export function SiteNav() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex w-[96px] items-center justify-end gap-2 sm:gap-3 lg:w-auto">
           <a
             href={siteConfig.githubUrl}
             target="_blank"

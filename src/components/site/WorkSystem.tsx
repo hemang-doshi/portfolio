@@ -112,42 +112,76 @@ export function WorkSystem() {
       }
     );
 
-    // Cards coming in sequentially (top 2 first, bottom 2 after)
-    const workTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".work-grid-trigger",
-        start: "top 90%",
-        end: "bottom 60%",
-        scrub: 1.5,
-      }
+    const mm = gsap.matchMedia();
+
+    // Desktop/Tablet: cards coming in sequentially (top 2 first, bottom 2 after)
+    mm.add("(min-width: 768px)", () => {
+      const workTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".work-grid-trigger",
+          start: "top 90%",
+          end: "bottom 60%",
+          scrub: 1.5,
+        }
+      });
+
+      workTl.fromTo([".work-card-top-left", ".work-card-top-right"],
+        { 
+          x: (index) => index === 0 ? -120 : 120, 
+          opacity: 0 
+        },
+        {
+          x: 0,
+          opacity: 1,
+          ease: "power2.out",
+          duration: 1,
+        }
+      );
+
+      workTl.fromTo([".work-card-bottom-left", ".work-card-bottom-right"],
+        { 
+          x: (index) => index === 0 ? -120 : 120, 
+          opacity: 0 
+        },
+        {
+          x: 0,
+          opacity: 1,
+          ease: "power2.out",
+          duration: 1,
+        },
+        "-=0.5"
+      );
     });
 
-    workTl.fromTo([".work-card-top-left", ".work-card-top-right"],
-      { 
-        x: (index) => index === 0 ? -120 : 120, 
-        opacity: 0 
-      },
-      {
-        x: 0,
-        opacity: 1,
-        ease: "power2.out",
-        duration: 1,
-      }
-    );
+    // Mobile: animate each card individually as it enters the viewport (no scrub)
+    mm.add("(max-width: 767px)", () => {
+      const cards = [
+        ".work-card-top-left",
+        ".work-card-top-right",
+        ".work-card-bottom-left",
+        ".work-card-bottom-right"
+      ];
 
-    workTl.fromTo([".work-card-bottom-left", ".work-card-bottom-right"],
-      { 
-        x: (index) => index === 0 ? -120 : 120, 
-        opacity: 0 
-      },
-      {
-        x: 0,
-        opacity: 1,
-        ease: "power2.out",
-        duration: 1,
-      },
-      "-=0.5"
-    );
+      cards.forEach((cardSelector) => {
+        gsap.fromTo(cardSelector,
+          { 
+            y: 40,
+            opacity: 0 
+          },
+          {
+            y: 0,
+            opacity: 1,
+            ease: "power2.out",
+            duration: 0.6,
+            scrollTrigger: {
+              trigger: cardSelector,
+              start: "top 90%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+      });
+    });
 
     // Thought process/system console pin & reveal on scroll
     const tpTl = gsap.timeline({
@@ -355,8 +389,7 @@ export function WorkSystem() {
           </div>
           
           <div className="tp-grid-trigger max-w-3xl mx-auto">
-            {/* Interactive Console Terminal */}
-            <div className="rounded-[var(--radius-xl)] bg-aubergine text-canvas p-5 font-mono text-[10px] flex flex-col gap-3.5 shadow-subtle-5 border border-aubergine h-[280px] overflow-hidden">
+            <div className="rounded-[var(--radius-xl)] bg-[#240029] text-white p-5 font-mono text-[10px] flex flex-col gap-3.5 shadow-subtle-5 border border-[#240029] h-[280px] overflow-hidden">
               {/* Terminal Title Bar */}
               <div className="flex items-center justify-between border-b border-white/10 pb-2 flex-shrink-0">
                 <div className="flex items-center gap-1.5">
@@ -374,7 +407,7 @@ export function WorkSystem() {
                     {entry.command && (
                       <div className="flex items-center gap-1 text-white/50">
                         <span>guest@hemang-portfolio:~$</span>
-                        <span className="text-canvas font-bold">{entry.command}</span>
+                        <span className="text-white font-bold">{entry.command}</span>
                       </div>
                     )}
                     <div>{entry.output}</div>
@@ -390,7 +423,7 @@ export function WorkSystem() {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="flex-1 bg-transparent text-canvas border-none outline-none focus:ring-0 p-0 font-mono text-[10px]"
+                  className="flex-1 bg-transparent text-white border-none outline-none focus:ring-0 p-0 font-mono text-[10px]"
                   placeholder="type command..."
                   autoComplete="off"
                   autoCorrect="off"

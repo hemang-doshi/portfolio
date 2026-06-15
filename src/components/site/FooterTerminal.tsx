@@ -8,10 +8,10 @@ import { buildMailtoHref, siteConfig } from "@/lib/site-config";
 
 export function FooterTerminal() {
   return (
-    <footer className="bg-aubergine py-16 text-plum-tinted relative z-10">
+    <footer className="bg-[#240029] py-16 text-plum-tinted relative z-10">
       <div className="section-shell flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[length:var(--text-body-sm)] text-plum-tinted/70 font-medium">
+        <div className="flex flex-col items-center sm:items-start">
+          <div className="flex flex-wrap justify-center sm:justify-start items-center gap-x-2.5 gap-y-2 text-[length:var(--text-body-sm)] text-plum-tinted/70 font-medium">
             <span className="flex items-center gap-1.5">
               <svg viewBox="0 0 24 24" fill="none" className="size-3.5 stroke-current" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
@@ -29,8 +29,8 @@ export function FooterTerminal() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 sm:items-end">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col items-center gap-4 sm:items-end">
+          <div className="flex items-center justify-center gap-2">
             <a
               href={buildMailtoHref("Start a conversation")}
               className="grid size-10 place-items-center rounded-[var(--radius-md)] text-plum-tinted/80 transition-all duration-200 hover:bg-white/5 hover:text-fuchsia-signal"
@@ -57,7 +57,7 @@ export function FooterTerminal() {
               <LinkedinLogoIcon size={20} weight="regular" aria-hidden="true" />
             </a>
           </div>
-          <p className="text-[10px] text-plum-tinted/40 font-mono">
+          <p className="text-[10px] text-plum-tinted/40 font-mono text-center sm:text-right">
             © {new Date().getFullYear()} Hemang Doshi. built with curiosity, too many tabs open, and a mild need to turn everything into a project.
           </p>
         </div>

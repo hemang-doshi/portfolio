@@ -48,7 +48,7 @@ export function WritingNotes() {
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center wn-list-trigger">
           {/* Left Column: Tech Description & Heading */}
-          <div className="flex flex-col gap-6 text-left lg:pr-16 lg:max-w-[480px]">
+          <div className="flex flex-col gap-6 text-center items-center lg:text-left lg:items-start lg:pr-16 lg:max-w-[480px]">
             <div className="wn-header-anim">
               <SectionHeader
                 eyebrow="toolkit"

@@ -240,7 +240,7 @@ export function ContactBand() {
       className="overflow-hidden bg-transparent py-12 text-aubergine sm:py-16 lg:py-20"
     >
       <div className="section-shell grid items-center gap-12 lg:grid-cols-[1fr_0.9fr]">
-        <div className="flex flex-col items-start lg:pr-16">
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-16">
           <div className="cb-text-anim">
             <Eyebrow className="text-heather">say hi</Eyebrow>
           </div>
@@ -251,7 +251,7 @@ export function ContactBand() {
             i&apos;m down to talk about software, content, ai, creator tools, startups, weird product ideas, or anything that feels like it could become something cool with enough curiosity and a little chaos.
           </p>
           
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row cb-text-anim">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row w-full max-w-sm lg:max-w-none justify-center lg:justify-start cb-text-anim">
             <a 
               href={buildMailtoHref("Direct Inquiry")}
               className="inline-flex min-h-11 items-center justify-center rounded-[var(--radius-md)] px-6 py-3 text-[length:var(--text-body)] font-semibold tracking-[var(--tracking-body)] bg-fuchsia-signal text-canvas hover:bg-[color-mix(in_srgb,var(--color-fuchsia-signal)_90%,var(--color-aubergine)_10%)] transition-all hover:-translate-y-0.5 shadow-subtle"

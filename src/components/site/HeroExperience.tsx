@@ -74,13 +74,13 @@ export function HeroExperience({
       id="hero"
       ref={containerRef}
       data-hero-active={isActive}
-      className="bg-transparent relative overflow-hidden min-h-[calc(100vh-72px)] flex items-center py-12 sm:py-16 lg:py-20"
+      className="bg-transparent relative overflow-hidden min-h-[calc(100vh-72px)] flex items-center pt-12 pb-24 sm:py-16 lg:py-20"
     >
       <div className="section-shell relative">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
 
           {/* Left Column: Heading and Description */}
-          <div className="relative z-10 text-left flex flex-col items-start">
+          <div className="relative z-10 text-center flex flex-col items-center lg:text-left lg:items-start">
             <Eyebrow className="mb-5 hero-anim-item">builder • creator • chasing useful ideas</Eyebrow>
             <h1 className="display-heading text-[length:clamp(2.4rem,7vw,var(--text-display))] leading-[var(--leading-display)] tracking-[var(--tracking-display)] text-aubergine hero-anim-item">
               i{" "}
@@ -96,7 +96,7 @@ export function HeroExperience({
               <br /><br />
               some of it is code. some of it is creator work. some of it is just me going outside, noticing stuff, and coming back with another idea i probably shouldn&apos;t start... but will.
             </p>
-            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center w-full hero-anim-item">
+            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center justify-center lg:justify-start w-full max-w-sm lg:max-w-none hero-anim-item">
               <Button
                 href="#work"
                 withArrow
