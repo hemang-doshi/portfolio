@@ -204,6 +204,7 @@
 }
 
 html {
+  font-size: clamp(0.9375rem, 0.55rem + 0.5vw, 1rem);
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
   -webkit-text-size-adjust: 100%;
