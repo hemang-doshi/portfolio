@@ -40,12 +40,10 @@ const permanentMarker = Permanent_Marker({
 
 export const metadata: Metadata = {
   title: "Hemang Doshi — AI-Native Engineer & Systems Builder",
-  description:
-    "Portfolio of Hemang Doshi: agent infrastructure, cloud-ready systems, local AI workflows, and focused products people can actually use.",
+  description: "AI-Native Engineer & Systems Builder.",
   openGraph: {
     title: "Hemang Doshi — AI-Native Engineer & Systems Builder",
-    description:
-      "Work, thinking, and product craft across agent infrastructure, cloud systems, local AI, and creator workflows.",
+    description: "AI-Native Engineer & Systems Builder.",
     type: "website",
   },
 };
