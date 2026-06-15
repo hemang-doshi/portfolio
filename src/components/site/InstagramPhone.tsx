@@ -209,11 +209,13 @@ export function InstagramPhone({
               </div>
             </div>
 
-            {/* Profile Header Row (threads @ icon moved to the top right next to hamburger) */}
-            <div className="flex items-center justify-between px-4 pt-3 pb-2 text-[#111827] dark:text-[#f8fafc]">
-              <Plus className="size-5 cursor-pointer" aria-label="Create post" />
+            {/* Profile Header Row (centered username absolutely, Threads and Menu grouped on the right) */}
+            <div className="relative flex h-11 items-center justify-between px-4 pt-3 pb-2 text-[#111827] dark:text-[#f8fafc]">
+              <div className="flex w-12 items-center justify-start">
+                <Plus className="size-5 cursor-pointer" aria-label="Create post" />
+              </div>
               
-              <div className="flex items-center gap-1 cursor-pointer">
+              <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 cursor-pointer">
                 <span className="font-sans text-[14px] font-bold tracking-[-0.01em]">
                   {displayUsername}
                 </span>
@@ -221,7 +223,7 @@ export function InstagramPhone({
                 <span className="size-1.5 rounded-full bg-[#ff3040]" />
               </div>
               
-              <div className="flex items-center gap-3">
+              <div className="flex w-12 items-center justify-end gap-3">
                 <AtSign className="size-5 cursor-pointer text-[#111827] dark:text-white" aria-label="Threads" />
                 <Menu className="size-5 cursor-pointer" aria-label="Open menu" />
               </div>
@@ -301,8 +303,8 @@ export function InstagramPhone({
                 </div>
               </div>
 
-              {/* Professional Dashboard Card */}
-              <div className="mt-4 rounded-[10px] bg-[#f2f2f7] p-2.5 border border-black/5 dark:border-white/5 dark:bg-[#1c1c1e] text-[11px]">
+              {/* Professional Dashboard Card (balanced equal gaps top and bottom) */}
+              <div className="my-4 rounded-[10px] bg-[#f2f2f7] p-2.5 border border-black/5 dark:border-white/5 dark:bg-[#1c1c1e] text-[11px]">
                 <div className="font-bold text-[#111827] dark:text-white">Professional dashboard</div>
                 <div className="mt-0.5 flex items-center gap-1 text-[#6b7280] dark:text-[#a8a8a8]">
                   <span className="text-emerald-500 font-bold">↗</span>
@@ -310,8 +312,8 @@ export function InstagramPhone({
                 </div>
               </div>
 
-              {/* Action Buttons: Follow / Message (Even vertical spacing on top and bottom) */}
-              <div className="mt-3 mb-2 grid grid-cols-2 gap-2">
+              {/* Action Buttons: Follow / Message (Balanced margins) */}
+              <div className="mb-4 grid grid-cols-2 gap-2">
                 <a
                   href={`https://instagram.com/${encodeURIComponent(displayUsername)}`}
                   target="_blank"

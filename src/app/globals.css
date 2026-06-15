@@ -1030,3 +1030,11 @@ a {
     @apply font-sans;
   }
 }
+
+button,
+a,
+input[type="button"],
+input[type="submit"],
+[role="button"] {
+  cursor: pointer;
+}
