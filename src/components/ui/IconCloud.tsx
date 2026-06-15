@@ -77,6 +77,7 @@ export function IconCloud() {
                 alt={slug} 
                 width={52} 
                 height={52}
+                crossOrigin="anonymous"
                 style={{ width: "52px", height: "52px", objectFit: "contain" }}
               />
             </a>
