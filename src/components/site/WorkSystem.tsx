@@ -12,6 +12,7 @@ if (typeof window !== "undefined") {
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { WorkCard } from "@/components/ui/WorkCard";
 import { workItems } from "@/data/work";
+import { HandDrawnAnnotation } from "@/components/ui/HandDrawnAnnotation";
 
 const consoleDetails: Record<
   string,
@@ -116,6 +117,29 @@ export function WorkSystem() {
 
     // Desktop/Tablet: cards coming in sequentially (top 2 first, bottom 2 after)
     mm.add("(min-width: 768px)", () => {
+      // Animate the "i'm interactive" annotation with scroll, but faster and earlier than the cards
+      gsap.fromTo(".work-interactive-annotation",
+        { 
+          opacity: 0,
+          scale: 0.6,
+          x: -20,
+          y: -20
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          x: 0,
+          y: 0,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".work-grid-trigger",
+            start: "top 100%",
+            end: "top 85%",
+            scrub: 1,
+          }
+        }
+      );
+
       const workTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".work-grid-trigger",
@@ -368,9 +392,16 @@ export function WorkSystem() {
               return (
                 <div
                   key={item.title}
-                  className={`work-card-anim ${cardClass}`}
+                  className="relative"
                 >
-                  <WorkCard item={item} />
+                  {index === 0 && (
+                    <HandDrawnAnnotation className="absolute left-4 -top-32 work-interactive-annotation lg:flex">
+                      i'm interactive!
+                    </HandDrawnAnnotation>
+                  )}
+                  <div className={`work-card-anim ${cardClass}`}>
+                    <WorkCard item={item} />
+                  </div>
                 </div>
               );
             })}

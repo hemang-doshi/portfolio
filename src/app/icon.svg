@@ -1,8 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="8" fill="#240029" />
-  <text x="16" y="21" font-family="ui-monospace, 'JetBrains Mono', Consolas, monospace" font-size="12" font-weight="900" text-anchor="middle">
-    <tspan fill="#df37a7">{</tspan>
-    <tspan fill="#ffcc11">HD</tspan>
-    <tspan fill="#df37a7">}</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="128" fill="#240029" />
+  <!-- Left Brace -->
+  <path
+    d="M 150,110 Q 100,110 100,160 L 100,220 Q 100,256 60,256 Q 100,256 100,292 L 100,352 Q 100,402 150,402"
+    stroke="#df37a7"
+    stroke-width="40"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <!-- Letter H -->
+  <path
+    d="M 175,160 L 175,352 M 235,160 L 235,352 M 175,256 L 235,256"
+    stroke="#ffcc11"
+    stroke-width="40"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <!-- Letter D -->
+  <path
+    d="M 277,160 L 307,160 Q 337,160 337,256 Q 337,352 307,352 L 277,352"
+    stroke="#ffcc11"
+    stroke-width="40"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <!-- Right Brace -->
+  <path
+    d="M 362,110 Q 412,110 412,160 L 412,220 Q 412,256 452,256 Q 412,256 412,292 L 412,352 Q 412,402 362,402"
+    stroke="#df37a7"
+    stroke-width="40"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
 </svg>

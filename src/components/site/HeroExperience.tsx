@@ -9,6 +9,7 @@ import { buildMailtoHref } from "@/lib/site-config";
 import type { InstagramProfile, InstagramPost } from "@/lib/instagram";
 import { InstagramPhone } from "@/components/site/InstagramPhone";
 import { TypingAnimation } from "@/components/ui/typing-animation";
+import { HandDrawnAnnotation } from "@/components/ui/HandDrawnAnnotation";
 
 interface HeroExperienceProps {
   profile?: InstagramProfile | null;
@@ -116,6 +117,12 @@ export function HeroExperience({
 
           {/* Right Column: Instagram Phone Mockup */}
           <div className="relative flex justify-center items-center z-10">
+            <HandDrawnAnnotation
+              className="absolute -right-20 top-[290px] hero-annotation-anim lg:flex"
+              flip
+            >
+              click me
+            </HandDrawnAnnotation>
             <InstagramPhone
               profile={profile}
               posts={posts}
