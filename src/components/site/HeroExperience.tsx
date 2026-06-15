@@ -75,7 +75,7 @@ export function HeroExperience({
       id="hero"
       ref={containerRef}
       data-hero-active={isActive}
-      className="bg-transparent relative overflow-hidden min-h-[calc(100vh-72px)] flex items-center pt-12 pb-24 sm:py-16 lg:py-20"
+      className="relative overflow-hidden bg-transparent flex items-center py-[var(--hero-block-padding)] lg:min-h-[min(calc(100svh-72px),860px)]"
     >
       <div className="section-shell relative">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -83,7 +83,7 @@ export function HeroExperience({
           {/* Left Column: Heading and Description */}
           <div className="relative z-10 text-center flex flex-col items-center lg:text-left lg:items-start">
             <Eyebrow className="mb-5 hero-anim-item">builder • creator • chasing useful ideas</Eyebrow>
-            <h1 className="display-heading text-[length:clamp(2.4rem,7vw,var(--text-display))] leading-[var(--leading-display)] tracking-[var(--tracking-display)] text-aubergine hero-anim-item flex flex-col items-center lg:block">
+            <h1 className="display-heading text-[length:var(--hero-title-size)] leading-[var(--leading-display)] tracking-[var(--tracking-display)] text-aubergine hero-anim-item flex flex-col items-center lg:block">
               <span>i</span>
               <TypingAnimation
                 words={["build 🛠️", "ship 🚀", "write 📑"]}

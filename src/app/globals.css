@@ -197,6 +197,21 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Compact Desktop tokens */
+  --hero-block-padding: clamp(3rem, 7vh, 5rem);
+  --hero-title-size: clamp(2.75rem, 6vw, 5rem);
+  --section-block-padding: clamp(3rem, 6vw, 5rem);
+  --phone-width: clamp(17rem, 22vw, 19.375rem);
+}
+
+@media (max-width: 1350px), (max-height: 850px) {
+  :root {
+    --hero-block-padding: clamp(2.5rem, 5vh, 4rem);
+    --hero-title-size: clamp(2.5rem, 5.5vw, 4.25rem);
+    --section-block-padding: clamp(2.75rem, 5vw, 4rem);
+    --phone-width: clamp(15.5rem, 20vw, 18rem);
+  }
 }
 
 * {
@@ -204,7 +219,7 @@
 }
 
 html {
-  font-size: clamp(0.9375rem, 0.55rem + 0.5vw, 1rem);
+  font-size: 16px;
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
   -webkit-text-size-adjust: 100%;

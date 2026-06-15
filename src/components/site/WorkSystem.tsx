@@ -208,26 +208,49 @@ export function WorkSystem() {
     });
 
     // Thought process/system console pin & reveal on scroll
-    const tpTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: tpEl || "#system-console",
-        start: "top center",
-        end: "+=400",
-        pin: true,
-        scrub: 1.5,
-        anticipatePin: 1,
-      }
+    mm.add("(min-width: 1024px) and (min-height: 850px)", () => {
+      const tpTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: tpEl || "#system-console",
+          start: "top center",
+          end: "+=400",
+          pin: true,
+          scrub: 1.5,
+          anticipatePin: 1,
+        }
+      });
+
+      tpTl.fromTo(".tp-header-anim, .tp-grid-trigger",
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          ease: "power2.out",
+        }
+      );
     });
 
-    tpTl.fromTo(".tp-header-anim, .tp-grid-trigger",
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.1,
-        ease: "power2.out",
-      }
-    );
+    mm.add("(max-width: 1023px), (max-height: 849px)", () => {
+      const tpTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: tpEl || "#system-console",
+          start: "top 85%",
+          end: "top 30%",
+          scrub: 1,
+        }
+      });
+
+      tpTl.fromTo(".tp-header-anim, .tp-grid-trigger",
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          ease: "power2.out",
+        }
+      );
+    });
   }, { scope: containerRef });
 
   const scrollToBottom = () => {
@@ -372,7 +395,7 @@ export function WorkSystem() {
 
   return (
     <div ref={containerRef}>
-      <section id="work" className="section-anchor bg-transparent py-12 sm:py-16 lg:py-20">
+      <section id="work" className="section-anchor bg-transparent py-[var(--section-block-padding)]">
         <div className="section-shell">
           <div className="work-header-anim">
             <SectionHeader
@@ -411,7 +434,7 @@ export function WorkSystem() {
 
       <WritingNotes />
 
-      <section id="system-console" className="section-anchor bg-transparent pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-16 lg:pb-20">
+      <section id="system-console" className="section-anchor bg-transparent pt-6 sm:pt-8 lg:pt-8 xl:pt-10 pb-[var(--section-block-padding)]">
         <div className="section-shell relative">
           <div className="tp-header-anim max-w-xl mx-auto text-center mb-8">
             <p className="font-[family:var(--font-jetbrains-mono)] text-[10px] font-bold text-fuchsia-signal uppercase tracking-wider mb-1.5">little system console</p>

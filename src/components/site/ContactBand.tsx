@@ -209,27 +209,52 @@ export function ContactBand() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    const mm = gsap.matchMedia();
+
     // Contact section pin & reveal on scroll
-    const contactTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current || "#contact",
-        start: "top center",
-        end: "+=400",
-        pin: true,
-        scrub: 1.5,
-        anticipatePin: 1,
-      }
+    mm.add("(min-width: 1024px) and (min-height: 850px)", () => {
+      const contactTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current || "#contact",
+          start: "top center",
+          end: "+=400",
+          pin: true,
+          scrub: 1.5,
+          anticipatePin: 1,
+        }
+      });
+
+      contactTl.fromTo(".cb-text-anim, .cb-preview-anim",
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          ease: "power2.out",
+        }
+      );
     });
 
-    contactTl.fromTo(".cb-text-anim, .cb-preview-anim",
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        stagger: 0.1,
-        ease: "power2.out",
-      }
-    );
+    mm.add("(max-width: 1023px), (max-height: 849px)", () => {
+      const contactTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current || "#contact",
+          start: "top 85%",
+          end: "top 30%",
+          scrub: 1,
+        }
+      });
+
+      contactTl.fromTo(".cb-text-anim, .cb-preview-anim",
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          ease: "power2.out",
+        }
+      );
+    });
 
   }, { scope: containerRef });
 
@@ -237,7 +262,7 @@ export function ContactBand() {
     <section 
       id="contact" 
       ref={containerRef}
-      className="overflow-hidden bg-transparent py-12 text-aubergine sm:py-16 lg:py-20"
+      className="overflow-hidden bg-transparent py-[var(--section-block-padding)] text-aubergine"
     >
       <div className="section-shell grid items-center gap-12 lg:grid-cols-[1fr_0.9fr]">
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-16">

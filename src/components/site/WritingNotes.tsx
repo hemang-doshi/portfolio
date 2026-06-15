@@ -43,7 +43,7 @@ export function WritingNotes() {
     <section
       id="skills"
       ref={containerRef}
-      className="section-anchor bg-transparent pt-12 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 lg:pb-10"
+      className="section-anchor bg-transparent pt-[var(--section-block-padding)] pb-6 sm:pb-8 lg:pb-8 xl:pb-10"
     >
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center wn-list-trigger">

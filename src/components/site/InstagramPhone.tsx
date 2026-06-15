@@ -182,7 +182,7 @@ export function InstagramPhone({
   }, [onReady, posts, profilePicUrl]);
 
   return (
-    <div className="instagram-phone-anim relative w-[292px] h-[635px] sm:w-[310px] sm:h-[674px]">
+    <div className="instagram-phone-anim relative w-[var(--phone-width)] aspect-[310/674]">
       <div className="pointer-events-none absolute -left-[3px] top-[118px] h-14 w-[3px] rounded-l-full bg-black/80 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]" />
       <div className="pointer-events-none absolute -left-[3px] top-[184px] h-24 w-[3px] rounded-l-full bg-black/80 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]" />
       <div className="pointer-events-none absolute -right-[3px] top-[170px] h-20 w-[3px] rounded-r-full bg-black/80 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]" />
