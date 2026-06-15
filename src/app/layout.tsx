@@ -45,6 +45,20 @@ export const metadata: Metadata = {
     title: "Hemang Doshi — AI-Native Engineer & Systems Builder",
     description: "AI-Native Engineer & Systems Builder.",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 1200,
+        alt: "Hemang Doshi — AI-Native Engineer & Systems Builder",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hemang Doshi — AI-Native Engineer & Systems Builder",
+    description: "AI-Native Engineer & Systems Builder.",
+    images: ["/og-image.png"],
   },
 };
 
