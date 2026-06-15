@@ -12,6 +12,7 @@ if (typeof window !== "undefined") {
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { WorkCard } from "@/components/ui/WorkCard";
 import { workItems } from "@/data/work";
+import { HandDrawnAnnotation } from "@/components/ui/HandDrawnAnnotation";
 
 const consoleDetails: Record<
   string,
@@ -368,8 +369,13 @@ export function WorkSystem() {
               return (
                 <div
                   key={item.title}
-                  className={`work-card-anim ${cardClass}`}
+                  className={`work-card-anim ${cardClass} relative`}
                 >
+                  {index === 0 && (
+                    <HandDrawnAnnotation className="absolute -left-36 top-16 lg:flex">
+                      i'm interactive!
+                    </HandDrawnAnnotation>
+                  )}
                   <WorkCard item={item} />
                 </div>
               );
