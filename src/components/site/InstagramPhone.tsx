@@ -15,6 +15,7 @@ import {
   MessageCircle,
   Plus,
   Search,
+  Send,
   SignalHigh,
   UserRound,
   Wifi,
@@ -210,8 +211,8 @@ export function InstagramPhone({
 
           <div className="relative z-20 flex h-full flex-col overflow-hidden rounded-[35px] border border-black/5 bg-white/92 dark:border-white/6 dark:bg-black/96">
             
-            {/* Top Status Bar */}
-            <div className="flex items-center justify-between px-5 pt-4 text-[10px] font-semibold text-[#111827] dark:text-[#f8fafc]">
+            {/* Top Status Bar (Perfectly aligned with dynamic island notch) */}
+            <div className="relative z-30 flex h-7 items-center justify-between px-5 mt-2.5 text-[10px] font-semibold text-[#111827] dark:text-[#f8fafc]">
               <span>11:15</span>
               <div className="flex items-center gap-1">
                 <SignalHigh className="size-3.5" aria-label="Cellular signal" />
@@ -243,16 +244,6 @@ export function InstagramPhone({
               {/* Profile Avatar and Stats */}
               <div className="flex items-center gap-4 mt-6">
                 <div className="relative size-[74px] shrink-0">
-                  {/* Start note speech bubble */}
-                  <div className="absolute -top-11 -left-2 z-15 flex flex-col items-center">
-                    <div className="relative rounded-[10px] bg-[#efefef] dark:bg-[#262626] px-2.5 py-1 border border-black/10 dark:border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.15)]">
-                      <span className="text-[9px] font-medium text-[#111827] dark:text-white select-none whitespace-nowrap">
-                        Start your first note...
-                      </span>
-                      <div className="absolute -bottom-[4px] left-[32px] size-2 rotate-45 bg-[#efefef] dark:bg-[#262626] border-r border-b border-black/10 dark:border-white/10" />
-                    </div>
-                  </div>
-
                   <div className="relative size-full rounded-full border border-black/10 p-[1px] dark:border-white/10">
                     {profilePicUrl ? (
                       <Image
@@ -311,20 +302,13 @@ export function InstagramPhone({
                   </a>
                 </div>
 
-                {/* Music Player & Add Music Row */}
-                <div className="mt-2.5 flex items-center gap-1.5" data-floating-player-anchor="true">
+                {/* Music Player Row (Add button removed) */}
+                <div className="mt-2.5 flex items-center" data-floating-player-anchor="true">
                   <ProfileMusicPlayer
                     src="/audio/night-drive.mp3"
                     title="made for this shit"
                     artist="Gunna"
                   />
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-0.5 rounded-full border border-black/10 bg-black/[0.03] px-3 py-[3px] text-[10px] font-semibold text-[#111827] hover:bg-black/[0.06] dark:border-white/15 dark:bg-white/[0.08] dark:text-white dark:hover:bg-white/[0.12] transition-colors"
-                  >
-                    <Plus className="size-2.5 stroke-[3]" />
-                    <span>Add</span>
-                  </button>
                 </div>
               </div>
 
@@ -337,19 +321,21 @@ export function InstagramPhone({
                 </div>
               </div>
 
-              {/* Action Buttons: Edit / Share Profile */}
-              <div className="mt-3.5 grid grid-cols-2 gap-2">
+              {/* Action Buttons: Follow / Message (Even vertical spacing on top and bottom) */}
+              <div className="my-4 grid grid-cols-2 gap-2">
+                <a
+                  href={`https://instagram.com/${encodeURIComponent(displayUsername)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex h-[32px] items-center justify-center rounded-[8px] bg-[#0095f6] text-[12px] font-bold text-white transition-opacity hover:opacity-90"
+                >
+                  Follow
+                </a>
                 <button
                   type="button"
-                  className="flex h-[32px] items-center justify-center rounded-[8px] bg-[#efefef] dark:bg-[#262626] text-[12px] font-bold text-[#111827] dark:text-white hover:bg-[#dbdbdb] dark:hover:bg-[#363636] transition-colors"
+                  className="flex h-[32px] items-center justify-center rounded-[8px] bg-[#efefef] dark:bg-[#262626] text-[12px] font-bold text-[#111827] dark:text-white hover:bg-[#dbdbdb] dark:hover:bg-[#363636] border border-black/5 dark:border-white/5 transition-colors"
                 >
-                  Edit profile
-                </button>
-                <button
-                  type="button"
-                  className="flex h-[32px] items-center justify-center rounded-[8px] bg-[#efefef] dark:bg-[#262626] text-[12px] font-bold text-[#111827] dark:text-white hover:bg-[#dbdbdb] dark:hover:bg-[#363636] transition-colors"
-                >
-                  Share profile
+                  Message
                 </button>
               </div>
 
@@ -362,11 +348,12 @@ export function InstagramPhone({
                   <Clapperboard className="size-[19px]" aria-label="Reels tab" />
                 </div>
                 <div className="flex items-center justify-center pb-2">
+                  {/* Standard Repost/Retweet Icon */}
                   <svg className="size-[19px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-label="Reposts tab">
-                    <path d="M17 1v5h-5" />
-                    <path d="M3 12c0-3.87 3.13-7 7-7h7" />
-                    <path d="M7 23v-5h5" />
-                    <path d="M21 12c0 3.87-3.13 7-7 7H7" />
+                    <path d="M17 1l4 4-4 4" />
+                    <path d="M3 10V9a4 4 0 014-4h14" />
+                    <path d="M7 23l-4-4 4-4" />
+                    <path d="M21 14v1a4 4 0 01-4 4H3" />
                   </svg>
                 </div>
                 <div className="flex items-center justify-center pb-2">
@@ -463,10 +450,10 @@ export function InstagramPhone({
                 <Clapperboard className="size-[20px]" />
               </button>
               
-              {/* Threads Icon with notification dot */}
-              <button type="button" className="relative text-[#6b7280] dark:text-[#a8a8a8] cursor-pointer" aria-label="Threads">
-                <ThreadsIcon className="size-[20px] text-[#111827] dark:text-white" />
-                <span className="absolute -bottom-0.5 -right-0.5 size-1.5 rounded-full bg-[#ff3040]" />
+              {/* Paper Plane message icon with red notification dot */}
+              <button type="button" className="relative text-[#6b7280] dark:text-[#a8a8a8] cursor-pointer" aria-label="Messages">
+                <Send className="size-[20px] text-[#111827] dark:text-white -rotate-12 translate-y-[-1px] translate-x-[1px]" />
+                <span className="absolute -top-1 -right-1 flex h-2 w-2 rounded-full bg-[#ff3040] border border-white dark:border-black" />
               </button>
               
               <button type="button" className="text-[#6b7280] dark:text-[#a8a8a8] cursor-pointer" aria-label="Search">
