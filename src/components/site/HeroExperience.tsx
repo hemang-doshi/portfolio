@@ -14,14 +14,24 @@ import { InstagramPhone } from "@/components/site/InstagramPhone";
 interface HeroExperienceProps {
   profile?: InstagramProfile | null;
   posts?: InstagramPost[];
+  isActive?: boolean;
+  onInstagramReady?: () => void;
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export function HeroExperience({ profile = null, posts = [] }: HeroExperienceProps) {
+export function HeroExperience({
+  profile = null,
+  posts = [],
+  isActive = true,
+  onInstagramReady,
+}: HeroExperienceProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    if (!isActive) return;
+
+    const scope = containerRef.current;
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     // Animate left column contents
@@ -49,18 +59,22 @@ export function HeroExperience({ profile = null, posts = [] }: HeroExperiencePro
     }, "-=0.5");
 
     // Animate annotations
-    tl.from(".hero-annotation-anim", {
-      opacity: 0,
-      scale: 0.8,
-      duration: 0.5,
-      stagger: 0.15
-    }, "-=0.3");
+    const annotations = scope?.querySelectorAll(".hero-annotation-anim") ?? [];
+    if (annotations.length > 0) {
+      tl.from(annotations, {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.5,
+        stagger: 0.15
+      }, "-=0.3");
+    }
 
-  }, { scope: containerRef });
+  }, { scope: containerRef, dependencies: [isActive] });
   return (
     <section
       id="hero"
       ref={containerRef}
+      data-hero-active={isActive}
       className="bg-transparent relative overflow-hidden min-h-[calc(100vh-72px)] flex items-center py-12 sm:py-16 lg:py-20"
     >
       <div className="section-shell relative">
@@ -98,7 +112,11 @@ export function HeroExperience({ profile = null, posts = [] }: HeroExperiencePro
 
           {/* Right Column: Instagram Phone Mockup */}
           <div className="relative flex justify-center items-center z-10">
-            <InstagramPhone profile={profile} posts={posts} />
+            <InstagramPhone
+              profile={profile}
+              posts={posts}
+              onReady={onInstagramReady}
+            />
           </div>
 
         </div>

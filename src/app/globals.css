@@ -258,6 +258,598 @@ a {
   width: min(calc(100% - 32px), var(--page-max-width));
 }
 
+.loader-goof {
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.72), transparent 45%),
+    linear-gradient(145deg, rgba(255, 189, 211, 0.88), rgba(255, 241, 189, 0.92) 52%, rgba(255, 203, 15, 0.84));
+}
+
+.loader-goof__orbit {
+  animation: loader-goof-spin 1.15s linear infinite;
+}
+
+.loader-goof__face {
+  animation: loader-goof-bob 1.6s ease-in-out infinite;
+}
+
+@keyframes loader-goof-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-goof-bob {
+  0%,
+  100% {
+    transform: rotate(-8deg) scale(0.98);
+  }
+
+  50% {
+    transform: rotate(10deg) scale(1.04);
+  }
+}
+
+.brand-mascot-shell {
+  position: relative;
+  z-index: 3;
+  width: 3.5rem;
+  height: 3rem;
+  flex: 0 0 auto;
+  transform: translateY(1px);
+}
+
+.brand-mascot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform-origin: 44% 62%;
+}
+
+.brand-mascot-image {
+  object-fit: contain;
+  object-position: center;
+}
+
+.brand-mascot-idle {
+  opacity: 1;
+  animation: brand-mascot-idle 10000ms cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.brand-mascot-breath {
+  opacity: 0;
+  animation: brand-mascot-breath-pose 10000ms cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.brand-name {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  min-width: max-content;
+  padding-left: 0.08rem;
+}
+
+.brand-fire {
+  position: absolute;
+  left: 2.6rem;
+  top: 50%;
+  z-index: 1;
+  width: 10.8rem;
+  height: 1.75rem;
+  transform: translateY(-42%);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.brand-fire-stream,
+.brand-fire-core,
+.brand-name-base,
+.brand-name-flare,
+.brand-mascot {
+  will-change: transform, opacity, filter;
+}
+
+.brand-fire-stream,
+.brand-fire-core {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+}
+
+.brand-fire-stream {
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(201, 255, 242, 0.96) 12%,
+      rgba(70, 236, 188, 0.96) 30%,
+      rgba(145, 255, 230, 0.86) 56%,
+      rgba(255, 255, 255, 0.18) 82%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    url("/brand-fire-stream.png");
+  background-size: 100% 100%, 112% 100%;
+  background-position: 0% 50%, 0% 50%;
+  background-repeat: no-repeat, repeat-x;
+  mix-blend-mode: screen;
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.96) 78%, rgba(0, 0, 0, 0.22) 94%, transparent 100%);
+  filter:
+    drop-shadow(0 0 8px rgba(71, 236, 188, 0.5))
+    drop-shadow(0 0 16px rgba(95, 255, 208, 0.3));
+  opacity: 0;
+  animation:
+    brand-fire-burst 10000ms cubic-bezier(0.45, 0, 0.55, 1) infinite,
+    brand-fire-texture-shift 1100ms linear infinite;
+}
+
+.brand-fire-core {
+  inset: 6px 4px 8px 0;
+  background:
+    radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.98), transparent 15%),
+    radial-gradient(circle at 22% 50%, rgba(226, 255, 248, 0.9), transparent 18%),
+    radial-gradient(circle at 46% 50%, rgba(95, 255, 208, 0.72), transparent 22%),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(204, 255, 243, 0.92) 18%,
+      rgba(95, 255, 208, 0.58) 42%,
+      rgba(157, 255, 236, 0.22) 72%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  filter: blur(4px);
+  opacity: 0;
+  animation: brand-fire-core 10000ms cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.brand-name-base,
+.brand-name-flare {
+  display: block;
+}
+
+.brand-name-base {
+  position: relative;
+  z-index: 1;
+  text-shadow:
+    0 0 0 rgba(95, 255, 208, 0),
+    0 0 0 rgba(255, 255, 255, 0);
+  animation: brand-name-heat 15000ms linear infinite;
+}
+
+.brand-name-flare {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  color: transparent;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(210, 255, 244, 0.96) 12%,
+      rgba(71, 236, 188, 0.98) 28%,
+      rgba(154, 255, 236, 0.84) 56%,
+      rgba(255, 255, 255, 0.18) 82%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    url("/brand-fire-stream.png");
+  background-size: 170% 100%, 150% 140%;
+  background-position: 0% 50%, 0% 50%;
+  background-repeat: no-repeat, repeat-x;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter:
+    drop-shadow(0 0 7px rgba(95, 255, 208, 0.42))
+    drop-shadow(0 0 14px rgba(255, 255, 255, 0.12));
+  opacity: 0;
+  pointer-events: none;
+  animation:
+    brand-name-flare 10000ms cubic-bezier(0.45, 0, 0.55, 1) infinite,
+    brand-fire-texture-shift 1100ms linear infinite;
+}
+
+.brand-link:hover .brand-fire-stream,
+.brand-link:focus-visible .brand-fire-stream,
+.brand-link:hover .brand-fire-core,
+.brand-link:focus-visible .brand-fire-core,
+.brand-link:hover .brand-name-base,
+.brand-link:focus-visible .brand-name-base,
+.brand-link:hover .brand-name-flare,
+.brand-link:focus-visible .brand-name-flare,
+.brand-link:hover .brand-mascot,
+.brand-link:focus-visible .brand-mascot {
+  animation-play-state: running;
+}
+
+.dark .brand-name-base {
+  animation-name: brand-name-heat-dark;
+}
+
+@keyframes brand-mascot-idle {
+  0% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+  }
+  74% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+  }
+  78% {
+    opacity: 1;
+    transform: translateX(-1px) translateY(1px) rotate(-6deg) scale(0.98);
+  }
+  82% {
+    opacity: 0.3;
+    transform: translateX(2px) translateY(-1px) rotate(7deg) scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(2px) translateY(-1px) rotate(7deg) scale(1.02);
+  }
+}
+
+@keyframes brand-mascot-breath-pose {
+  0% {
+    opacity: 0;
+    transform: translateX(-4px) translateY(1px) rotate(-8deg) scale(0.96);
+  }
+  74% {
+    opacity: 0;
+    transform: translateX(-4px) translateY(1px) rotate(-8deg) scale(0.96);
+  }
+  80% {
+    opacity: 0.88;
+    transform: translateX(1px) translateY(-1px) rotate(3deg) scale(1);
+  }
+  86% {
+    opacity: 1;
+    transform: translateX(3px) translateY(-2px) rotate(8deg) scale(1.03);
+  }
+  93% {
+    opacity: 0.8;
+    transform: translateX(1px) translateY(-1px) rotate(4deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-4px) translateY(1px) rotate(-8deg) scale(0.96);
+  }
+}
+
+@keyframes brand-fire-burst {
+  0% {
+    opacity: 0;
+    transform: translateX(0) translateY(3px) rotate(-8deg) scaleX(0.04) scaleY(0.76);
+  }
+  78% {
+    opacity: 0;
+    transform: translateX(0) translateY(3px) rotate(-8deg) scaleX(0.04) scaleY(0.76);
+  }
+  82% {
+    opacity: 0.62;
+    transform: translateX(3px) translateY(0) rotate(-2deg) scaleX(0.36) scaleY(0.82);
+  }
+  86% {
+    opacity: 0.96;
+    transform: translateX(5px) translateY(-1px) rotate(2deg) scaleX(0.96) scaleY(1.04);
+  }
+  90% {
+    opacity: 0.9;
+    transform: translateX(8px) translateY(-2px) rotate(4deg) scaleX(1.12) scaleY(1);
+  }
+  95% {
+    opacity: 0.22;
+    transform: translateX(10px) translateY(-3px) rotate(5deg) scaleX(1.18) scaleY(0.88);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(10px) translateY(-3px) rotate(5deg) scaleX(1.18) scaleY(0.88);
+  }
+}
+
+@keyframes brand-fire-core {
+  0% {
+    opacity: 0;
+    transform: translateX(0) translateY(4px) scaleX(0.05) scaleY(0.68);
+  }
+  80% {
+    opacity: 0;
+    transform: translateX(0) translateY(4px) scaleX(0.05) scaleY(0.68);
+  }
+  84% {
+    opacity: 0.68;
+    transform: translateX(3px) translateY(1px) scaleX(0.34) scaleY(0.9);
+  }
+  88% {
+    opacity: 0.96;
+    transform: translateX(5px) translateY(0) scaleX(0.88) scaleY(1.04);
+  }
+  92% {
+    opacity: 0.48;
+    transform: translateX(8px) translateY(-2px) rotate(8deg) scaleX(1.22) scaleY(0.56);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(8px) translateY(-2px) rotate(8deg) scaleX(1.22) scaleY(0.56);
+  }
+}
+
+@keyframes brand-fire-texture-shift {
+  0% {
+    background-position: 0% 50%, 0% 50%;
+  }
+  100% {
+    background-position: 0% 50%, 110% 50%;
+  }
+}
+
+@keyframes brand-name-flare {
+  0% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+  84% {
+    opacity: 0.34;
+  }
+  88% {
+    opacity: 0.94;
+  }
+  92% {
+    opacity: 0.46;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes brand-name-heat {
+  0% {
+    color: var(--color-aubergine);
+    text-shadow:
+      0 0 0 rgba(95, 255, 208, 0),
+      0 0 0 rgba(255, 255, 255, 0);
+  }
+  80% {
+    color: var(--color-aubergine);
+    text-shadow:
+      0 0 0 rgba(95, 255, 208, 0),
+      0 0 0 rgba(255, 255, 255, 0);
+  }
+  84% {
+    color: color-mix(in srgb, var(--color-aubergine) 78%, rgb(95, 255, 208) 22%);
+    text-shadow:
+      0 0 8px rgba(95, 255, 208, 0.28),
+      0 0 14px rgba(255, 255, 255, 0.1);
+  }
+  88% {
+    color: color-mix(in srgb, var(--color-aubergine) 62%, rgb(95, 255, 208) 38%);
+    text-shadow:
+      0 0 14px rgba(95, 255, 208, 0.44),
+      0 0 20px rgba(255, 255, 255, 0.16);
+  }
+  92% {
+    color: color-mix(in srgb, var(--color-aubergine) 82%, rgb(95, 255, 208) 18%);
+    text-shadow:
+      0 0 5px rgba(95, 255, 208, 0.2),
+      0 0 10px rgba(255, 255, 255, 0.08);
+  }
+  100% {
+    color: var(--color-aubergine);
+    text-shadow:
+      0 0 0 rgba(95, 255, 208, 0),
+      0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes brand-name-heat-dark {
+  0% {
+    color: rgba(255, 255, 255, 0.96);
+    text-shadow:
+      0 0 0 rgba(95, 255, 208, 0),
+      0 0 0 rgba(0, 240, 255, 0);
+  }
+  80% {
+    color: rgba(255, 255, 255, 0.96);
+    text-shadow:
+      0 0 0 rgba(95, 255, 208, 0),
+      0 0 0 rgba(0, 240, 255, 0);
+  }
+  84% {
+    color: color-mix(in srgb, white 76%, rgb(95, 255, 208) 24%);
+    text-shadow:
+      0 0 12px rgba(95, 255, 208, 0.38),
+      0 0 18px rgba(0, 240, 255, 0.18);
+  }
+  88% {
+    color: color-mix(in srgb, white 64%, rgb(95, 255, 208) 36%);
+    text-shadow:
+      0 0 16px rgba(95, 255, 208, 0.48),
+      0 0 24px rgba(0, 240, 255, 0.24);
+  }
+  92% {
+    color: color-mix(in srgb, white 82%, rgb(95, 255, 208) 18%);
+    text-shadow:
+      0 0 7px rgba(95, 255, 208, 0.26),
+      0 0 12px rgba(0, 240, 255, 0.1);
+  }
+  100% {
+    color: rgba(255, 255, 255, 0.96);
+    text-shadow:
+      0 0 0 rgba(95, 255, 208, 0),
+      0 0 0 rgba(0, 240, 255, 0);
+  }
+}
+
+.brand-shadow-fill {
+  fill: color-mix(in srgb, var(--color-aubergine) 18%, transparent);
+}
+
+.brand-creature-body,
+.brand-creature-face {
+  fill: color-mix(in srgb, var(--color-aubergine) 84%, black 16%);
+  stroke: rgba(255, 255, 255, 0.52);
+  stroke-width: 1.2;
+}
+
+.brand-creature-spikes,
+.brand-creature-tail,
+.brand-creature-wing {
+  fill: color-mix(in srgb, rgb(79, 255, 206) 78%, var(--color-heather) 22%);
+  stroke: color-mix(in srgb, var(--color-aubergine) 60%, black 40%);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.brand-creature-brow,
+.brand-creature-mouth,
+.brand-creature-leg {
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.brand-creature-mouth-open {
+  fill: color-mix(in srgb, rgb(79, 255, 206) 24%, black 76%);
+  stroke: rgba(255, 255, 255, 0.72);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.brand-creature-eye {
+  fill: rgba(255, 255, 255, 0.96);
+}
+
+.brand-creature-pupil {
+  fill: color-mix(in srgb, rgb(79, 255, 206) 82%, black 18%);
+}
+
+.brand-creature-fang,
+.brand-creature-claw {
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.brand-orb-core {
+  fill: color-mix(in srgb, rgb(79, 255, 206) 88%, white 12%);
+  filter: drop-shadow(0 0 6px rgba(79, 255, 206, 0.34));
+}
+
+.brand-orb-flame {
+  fill: color-mix(in srgb, rgb(79, 255, 206) 82%, white 18%);
+  opacity: 0.88;
+}
+
+.nav-chip {
+  --nav-chip-fill: color-mix(in srgb, var(--color-canvas) 82%, var(--color-plum-tinted) 18%);
+  --nav-chip-shadow:
+    rgba(41, 0, 41, 0.12) 0px 0px 0px 1px,
+    rgba(32, 0, 36, 0.05) 0px 2px 2px 0px;
+  --nav-chip-after-inset: 2px 1px 1px 2px;
+  --nav-chip-before-transform: rotate(-1.4deg) scale(1.01, 0.97);
+  --nav-chip-after-transform: rotate(1.2deg) scale(0.99, 1.03);
+  --nav-chip-before-width: 1.5px;
+  --nav-chip-after-width: 1px;
+  --nav-chip-before-color: color-mix(in srgb, var(--color-aubergine) 72%, var(--color-heather) 28%);
+  --nav-chip-after-color: color-mix(in srgb, var(--color-heather) 68%, var(--color-plum-tinted) 32%);
+  --nav-chip-radius: 999px;
+  --nav-chip-before-radius: inherit;
+  --nav-chip-after-radius: inherit;
+  position: relative;
+  border-radius: var(--nav-chip-radius);
+  background: var(--nav-chip-fill);
+  box-shadow: var(--nav-chip-shadow);
+  isolation: isolate;
+  text-shadow: 0 0 0.01px rgba(36, 0, 41, 0.2);
+}
+
+.nav-chip::before,
+.nav-chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.nav-chip::before {
+  border: var(--nav-chip-before-width) solid var(--nav-chip-before-color);
+  border-radius: var(--nav-chip-before-radius);
+  transform: var(--nav-chip-before-transform);
+}
+
+.nav-chip::after {
+  inset: var(--nav-chip-after-inset);
+  border: var(--nav-chip-after-width) solid var(--nav-chip-after-color);
+  border-radius: var(--nav-chip-after-radius);
+  transform: var(--nav-chip-after-transform);
+}
+
+.nav-chip:hover,
+.nav-chip:focus-visible {
+  color: var(--color-heather);
+  background: color-mix(in srgb, var(--color-canvas) 72%, var(--surface-warm-wash) 28%);
+  transform: translateY(-1px) rotate(-0.3deg);
+}
+
+.nav-chip:focus-visible {
+  outline-offset: 5px;
+}
+
+.dark .nav-chip {
+  --nav-chip-fill: color-mix(in srgb, var(--surface-dark-plum) 78%, white 22%);
+  --nav-chip-shadow:
+    rgba(255, 255, 255, 0.12) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.12) 0px 2px 6px 0px;
+  --nav-chip-before-color: rgba(255, 255, 255, 0.72);
+  --nav-chip-after-color: rgba(212, 204, 212, 0.36);
+}
+
+.nav-chip--pencil-arc {
+  --nav-chip-fill: color-mix(in srgb, var(--color-canvas) 84%, var(--color-plum-tinted) 16%);
+  --nav-chip-radius: 999px 920px 960px 880px / 88% 104% 92% 110%;
+  --nav-chip-before-transform: rotate(-2.1deg) scale(1.02, 0.96);
+  --nav-chip-after-transform: rotate(0.9deg) scale(0.98, 1.04);
+  --nav-chip-after-inset: 2px 1px 2px 3px;
+  --nav-chip-shadow:
+    rgba(41, 0, 41, 0.12) 0px 0px 0px 1px,
+    rgba(32, 0, 36, 0.04) 0px 3px 6px -3px;
+}
+
+.nav-chip--pencil-tilt {
+  --nav-chip-fill: color-mix(in srgb, var(--color-canvas) 80%, var(--color-plum-tinted) 20%);
+  --nav-chip-radius: 860px 999px 900px 970px / 102% 90% 108% 94%;
+  --nav-chip-before-transform: rotate(1.8deg) scale(1.01, 0.98);
+  --nav-chip-after-transform: rotate(-1.6deg) scale(0.99, 1.02);
+  --nav-chip-after-inset: 1px 3px 2px 1px;
+  --nav-chip-before-width: 1.25px;
+  --nav-chip-after-width: 1.25px;
+}
+
+.nav-chip--pencil-wobble {
+  --nav-chip-fill: color-mix(in srgb, var(--color-canvas) 86%, var(--surface-warm-wash) 14%);
+  --nav-chip-radius: 999px 870px 999px 840px / 95% 110% 90% 104%;
+  --nav-chip-before-transform: rotate(-0.8deg) scale(1.03, 0.95);
+  --nav-chip-after-transform: rotate(2.2deg) scale(0.97, 1.06);
+  --nav-chip-after-inset: 3px 2px 1px 2px;
+  --nav-chip-before-color: color-mix(in srgb, var(--color-aubergine) 64%, var(--color-heather) 36%);
+}
+
+.nav-chip--pencil-loop {
+  --nav-chip-fill: color-mix(in srgb, var(--color-canvas) 81%, var(--color-plum-tinted) 19%);
+  --nav-chip-radius: 940px 999px 870px 999px / 106% 92% 109% 88%;
+  --nav-chip-before-transform: rotate(2.4deg) scale(1, 0.99);
+  --nav-chip-after-transform: rotate(-2.4deg) scale(1.01, 1.02);
+  --nav-chip-after-inset: 2px 2px 3px 1px;
+  --nav-chip-shadow:
+    rgba(41, 0, 41, 0.11) 0px 0px 0px 1px,
+    rgba(32, 0, 36, 0.05) 0px 2px 4px -2px;
+}
+
 .section-anchor {
   scroll-margin-top: 96px;
 }
@@ -286,6 +878,26 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .brand-fire,
+  .brand-fire-stream,
+  .brand-fire-core,
+  .brand-name-base,
+  .brand-name-flare,
+  .brand-mascot {
+    animation: none !important;
+  }
+
+  .brand-fire-stream,
+  .brand-fire-core,
+  .brand-name-flare {
+    opacity: 0 !important;
+  }
+
+  .brand-name-base {
+    color: inherit;
+    text-shadow: none;
+  }
+
   html {
     scroll-behavior: auto;
   }

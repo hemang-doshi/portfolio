@@ -1,6 +1,7 @@
 export type NavItem = {
   label: string;
   href: string;
+  variant: "pencil-arc" | "pencil-tilt" | "pencil-wobble" | "pencil-loop";
 };
 
 export type ProcessStep = {
@@ -32,9 +33,10 @@ export const siteConfig: SiteConfig = {
   timezone: "IST",
   availability: "Available selectively",
   navigation: [
-    { label: "Work", href: "#work" },
-    { label: "Skills", href: "#skills" },
-    { label: "System Console", href: "#system-console" },
+    { label: "About me🧘‍♂️", href: "#hero", variant: "pencil-arc" },
+    { label: "My work💻", href: "#work", variant: "pencil-tilt" },
+    { label: "Skills🧠", href: "#skills", variant: "pencil-wobble" },
+    { label: "Contact☎️", href: "#contact", variant: "pencil-loop" },
   ],
   processSteps: [
     {

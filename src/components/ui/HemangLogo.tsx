@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 
-export function HemangLogo({ 
-  className, 
-  forceLight = false 
-}: { 
-  className?: string; 
+export function HemangLogo({
+  className,
+  forceLight = false,
+}: {
+  className?: string;
   forceLight?: boolean;
 }) {
   return (
@@ -30,34 +30,30 @@ export function HemangLogo({
           <stop offset="100%" stopColor="var(--logo-stop-2)" />
         </linearGradient>
       </defs>
-      {/* Outer Circle */}
       <circle
         cx="16"
         cy="16"
         r="14"
         className={cn(
-          forceLight 
-            ? "stroke-white/20" 
+          forceLight
+            ? "stroke-white/20"
             : "stroke-aubergine/20 dark:stroke-white/20"
         )}
         strokeWidth="1.5"
       />
-      {/* Joined HD Monogram */}
-      <g 
-        strokeWidth="2.5" 
-        strokeLinecap="round" 
+      <g
+        strokeWidth="2.5"
+        strokeLinecap="round"
         strokeLinejoin="round"
       >
-        {/* H Part (Left stem, crossbar, and middle vertical stem) */}
         <path
           d="M8 8V24 M8 16H16 M16 8V24"
           className={cn(
-            forceLight 
-              ? "stroke-white" 
+            forceLight
+              ? "stroke-white"
               : "stroke-aubergine dark:stroke-white"
           )}
         />
-        {/* D Part (Loop extending from middle stem) */}
         <path
           d="M16 8H21C25.4 8 28 11.6 28 16C28 20.4 24.4 24 21 24H16"
           stroke="url(#logoGrad)"

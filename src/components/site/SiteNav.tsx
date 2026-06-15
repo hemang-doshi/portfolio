@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { GithubLogoIcon, SunIcon, MoonIcon } from "@phosphor-icons/react/ssr";
 import { siteConfig } from "@/lib/site-config";
-import { HemangLogo } from "@/components/ui/HemangLogo";
+import { NavMascot } from "@/components/ui/NavMascot";
+import { cn } from "@/lib/utils";
 
 export function SiteNav() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
@@ -13,12 +14,12 @@ export function SiteNav() {
     const isDark =
       savedTheme === "dark" ||
       (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
-    setTheme(isDark ? "dark" : "light");
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+
+    queueMicrotask(() => {
+      setTheme(isDark ? "dark" : "light");
+    });
+
+    document.documentElement.classList.toggle("dark", isDark);
 
     // Force scroll to top on initial page mount
     if (typeof window !== "undefined") {
@@ -48,18 +49,21 @@ export function SiteNav() {
           className="flex min-h-11 items-center gap-3"
           aria-label="Hemang Doshi home"
         >
-          <HemangLogo />
+          <NavMascot />
           <span className="display-heading hidden text-sm tracking-[-0.02em] text-aubergine sm:inline">
             Hemang Doshi
           </span>
         </a>
 
-        <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary navigation">
           {siteConfig.navigation.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="flex min-h-11 items-center text-[length:var(--text-body-sm)] font-medium text-aubergine transition-colors hover:text-heather"
+              className={cn(
+                "nav-chip flex min-h-11 items-center justify-center px-3.5 text-[length:var(--text-body-sm)] font-medium text-aubergine transition-colors hover:text-heather",
+                `nav-chip--${item.variant}`,
+              )}
             >
               {item.label}
             </a>

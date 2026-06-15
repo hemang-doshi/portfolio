@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect } from "react";
 import {
   BatteryFull,
   Bell,
@@ -21,6 +24,7 @@ import { ProfileMusicPlayer } from "./ProfileMusicPlayer";
 export interface InstagramPhoneProps {
   profile?: InstagramProfile | null;
   posts?: InstagramPost[];
+  onReady?: () => void;
 }
 
 const MOCK_PROFILE = {
@@ -71,6 +75,8 @@ const MOCK_POSTS = [
   },
 ];
 
+const INSTAGRAM_ASSET_TIMEOUT_MS = 5000;
+
 function formatCount(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}m`;
   if (n >= 1_000) return `${(n / 1_000).toFixed(1)}k`;
@@ -80,6 +86,7 @@ function formatCount(n: number): string {
 export function InstagramPhone({
   profile = null,
   posts = [],
+  onReady,
 }: InstagramPhoneProps) {
   const displayUsername = profile?.username ?? MOCK_PROFILE.username;
   const displayBio = profile?.biography ?? MOCK_PROFILE.biography;
@@ -88,6 +95,67 @@ export function InstagramPhone({
   const displayPosts = profile?.media_count ?? MOCK_PROFILE.media_count;
   const profilePicUrl = profile?.profile_picture_url ?? null;
   const hasRealPosts = posts.length > 0;
+
+  useEffect(() => {
+    const mediaUrls = [
+      profilePicUrl,
+      ...posts.map((post) => getPostThumbnail(post) ?? null),
+    ].filter((url): url is string => Boolean(url));
+
+    if (mediaUrls.length === 0) {
+      onReady?.();
+      return;
+    }
+
+    let cancelled = false;
+    let completed = 0;
+    let finished = false;
+    const uniqueUrls = [...new Set(mediaUrls)];
+
+    const finish = () => {
+      if (cancelled || finished) return;
+      finished = true;
+      onReady?.();
+    };
+
+    const settle = () => {
+      completed += 1;
+      if (completed >= uniqueUrls.length) {
+        finish();
+      }
+    };
+
+    const pendingImages = uniqueUrls.map((url) => {
+      const img = new window.Image();
+      let isSettled = false;
+      const finish = () => {
+        if (isSettled) return;
+        isSettled = true;
+        settle();
+      };
+
+      img.onload = finish;
+      img.onerror = finish;
+      img.src = url;
+
+      if (img.complete) {
+        queueMicrotask(finish);
+      }
+
+      return img;
+    });
+
+    const timeoutId = window.setTimeout(finish, INSTAGRAM_ASSET_TIMEOUT_MS);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeoutId);
+      pendingImages.forEach((img) => {
+        img.onload = null;
+        img.onerror = null;
+      });
+    };
+  }, [onReady, posts, profilePicUrl]);
 
   return (
     <div className="instagram-phone-anim relative w-[292px] h-[635px] sm:w-[310px] sm:h-[674px]">
