@@ -33,10 +33,10 @@ export const siteConfig: SiteConfig = {
   timezone: "IST",
   availability: "Available selectively",
   navigation: [
-    { label: "About me🧘‍♂️", href: "#hero", variant: "pencil-arc" },
-    { label: "My work💻", href: "#work", variant: "pencil-tilt" },
-    { label: "Skills🧠", href: "#skills", variant: "pencil-wobble" },
-    { label: "Contact☎️", href: "#contact", variant: "pencil-loop" },
+    { label: "About me 🧘‍♂️", href: "#hero", variant: "pencil-arc" },
+    { label: "My work 💻", href: "#work", variant: "pencil-tilt" },
+    { label: "Skills 🧠", href: "#skills", variant: "pencil-wobble" },
+    { label: "Contact ☎️", href: "#contact", variant: "pencil-loop" },
   ],
   processSteps: [
     {

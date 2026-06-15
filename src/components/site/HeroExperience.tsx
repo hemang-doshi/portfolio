@@ -8,8 +8,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { buildMailtoHref } from "@/lib/site-config";
 import type { InstagramProfile, InstagramPost } from "@/lib/instagram";
 import { InstagramPhone } from "@/components/site/InstagramPhone";
-
-// ─── Props ────────────────────────────────────────────────────────────────────
+import { TypingAnimation } from "@/components/ui/typing-animation";
 
 interface HeroExperienceProps {
   profile?: InstagramProfile | null;
@@ -84,7 +83,13 @@ export function HeroExperience({
           <div className="relative z-10 text-left flex flex-col items-start">
             <Eyebrow className="mb-5 hero-anim-item">builder • creator • chasing useful ideas</Eyebrow>
             <h1 className="display-heading text-[length:clamp(2.4rem,7vw,var(--text-display))] leading-[var(--leading-display)] tracking-[var(--tracking-display)] text-aubergine hero-anim-item">
-              i build, make, and document things.
+              i{" "}
+              <TypingAnimation
+                words={["build 🛠️", "make 👨💻", "document 📑"]}
+                loop
+                className="text-fuchsia-signal"
+              />{" "}
+              things.
             </h1>
             <p className="mt-6 max-w-xl text-[length:var(--text-body)] sm:text-[length:var(--text-subheading)] leading-[1.6] tracking-[var(--tracking-subheading)] text-aubergine hero-anim-item">
               i&apos;m hemang. i like turning messy ideas, everyday annoyances, and random observations into software, content, and tiny systems that feel useful.

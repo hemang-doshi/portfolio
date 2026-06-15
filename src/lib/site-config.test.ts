@@ -11,10 +11,10 @@ describe("site configuration", () => {
 
   it("defines the handwritten navbar labels with the expected section anchors", () => {
     expect(siteConfig.navigation).toEqual([
-      { label: "About me🧘‍♂️", href: "#hero", variant: "pencil-arc" },
-      { label: "My work💻", href: "#work", variant: "pencil-tilt" },
-      { label: "Skills🧠", href: "#skills", variant: "pencil-wobble" },
-      { label: "Contact☎️", href: "#contact", variant: "pencil-loop" },
+      { label: "About me 🧘‍♂️", href: "#hero", variant: "pencil-arc" },
+      { label: "My work 💻", href: "#work", variant: "pencil-tilt" },
+      { label: "Skills 🧠", href: "#skills", variant: "pencil-wobble" },
+      { label: "Contact ☎️", href: "#contact", variant: "pencil-loop" },
     ]);
   });
 

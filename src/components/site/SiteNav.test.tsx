@@ -7,10 +7,10 @@ describe("SiteNav", () => {
   it("renders the updated navigation labels as hand-drawn chips", () => {
     const markup = renderToStaticMarkup(<SiteNav />);
 
-    expect(markup).toContain("About me🧘‍♂️");
-    expect(markup).toContain("My work💻");
-    expect(markup).toContain("Skills🧠");
-    expect(markup).toContain("Contact☎️");
+    expect(markup).toContain("About me 🧘‍♂️");
+    expect(markup).toContain("My work 💻");
+    expect(markup).toContain("Skills 🧠");
+    expect(markup).toContain("Contact ☎️");
     expect(markup).toContain('href="#hero"');
     expect(markup).toContain('href="#work"');
     expect(markup).toContain('href="#skills"');
