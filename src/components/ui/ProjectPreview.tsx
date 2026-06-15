@@ -154,8 +154,8 @@ function DevDeckPreview() {
         </div>
 
         {/* Right terminal area */}
-        <div className="flex flex-col p-3 gap-3 h-full">
-          <div ref={terminalRef} className="flex-1 rounded-[var(--radius-md)] bg-aubergine p-3 font-[family:var(--font-jetbrains-mono)] text-[9px] text-canvas overflow-y-auto shadow-inner">
+        <div className="flex flex-col p-3 gap-3 h-full min-h-0">
+          <div ref={terminalRef} className="flex-1 min-h-0 rounded-[var(--radius-md)] bg-aubergine p-3 font-[family:var(--font-jetbrains-mono)] text-[9px] text-canvas overflow-y-auto shadow-inner">
             {logs.map((l, i) => (
               <div key={i} className="whitespace-pre-wrap leading-relaxed">{l}</div>
             ))}
