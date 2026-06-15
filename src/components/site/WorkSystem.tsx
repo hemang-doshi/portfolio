@@ -117,7 +117,7 @@ export function WorkSystem() {
 
     // Desktop/Tablet: cards coming in sequentially (top 2 first, bottom 2 after)
     mm.add("(min-width: 768px)", () => {
-      // Animate the "i'm interactive" annotation independently and quickly
+      // Animate the "i'm interactive" annotation with scroll, but faster and earlier than the cards
       gsap.fromTo(".work-interactive-annotation",
         { 
           opacity: 0,
@@ -130,12 +130,12 @@ export function WorkSystem() {
           scale: 1,
           x: 0,
           y: 0,
-          duration: 0.35,
-          ease: "back.out(1.7)",
+          ease: "power2.out",
           scrollTrigger: {
             trigger: ".work-grid-trigger",
-            start: "top 98%",
-            toggleActions: "play none none none"
+            start: "top 100%",
+            end: "top 85%",
+            scrub: 1,
           }
         }
       );
@@ -395,7 +395,7 @@ export function WorkSystem() {
                   className="relative"
                 >
                   {index === 0 && (
-                    <HandDrawnAnnotation className="absolute left-4 -top-24 work-interactive-annotation lg:flex">
+                    <HandDrawnAnnotation className="absolute left-4 -top-32 work-interactive-annotation lg:flex">
                       i'm interactive!
                     </HandDrawnAnnotation>
                   )}
