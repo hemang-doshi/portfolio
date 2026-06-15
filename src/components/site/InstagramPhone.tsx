@@ -233,7 +233,7 @@ export function InstagramPhone({
             <div className="flex-1 overflow-y-auto px-4 pb-20 no-scrollbar">
               
               {/* Profile Avatar and Stats (Centered spacing & clean alignment, no notes bubble) */}
-              <div className="flex items-center justify-between mt-5 px-1">
+              <div className="flex items-center justify-between mt-2 px-1">
                 <div className="relative size-[74px] shrink-0">
                   <div className="relative size-full rounded-full border border-black/10 p-[1px] dark:border-white/10">
                     {profilePicUrl ? (
