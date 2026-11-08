@@ -52,6 +52,13 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // The old Vercel deployment only redirects to the live site. VERCEL is set on
+  // Vercel builds, never on Cloudflare, so this is a no-op there.
+  async redirects() {
+    return process.env.VERCEL
+      ? [{ source: "/:path*", destination: "https://hemangbuilds.com/:path*", permanent: true }]
+      : [];
+  },
   async headers() {
     return [
       {
