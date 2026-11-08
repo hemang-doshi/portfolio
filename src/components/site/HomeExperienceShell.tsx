@@ -51,7 +51,7 @@ async function waitForPageAssets() {
   ]);
 }
 
-function GoofyLoader() {
+export function GoofyLoader() {
   return (
     <div className="loader-goof flex min-h-screen flex-col items-center justify-center px-6 text-center">
       <div className="loader-goof__icon relative mb-6 flex h-28 w-28 items-center justify-center rounded-full border-4 border-aubergine/15 bg-white/70 shadow-[0_18px_50px_rgba(36,0,41,0.12)] backdrop-blur-sm">

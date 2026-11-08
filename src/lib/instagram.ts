@@ -58,8 +58,10 @@ export function getPostThumbnail(post: InstagramPost): string | undefined {
  * Cached for 1 hour (ISR-style via Next.js fetch cache).
  * Returns null if INSTAGRAM_ACCESS_TOKEN is not set.
  */
-export async function getInstagramProfile(): Promise<InstagramProfile | null> {
-  const token = getToken();
+export async function getInstagramProfile(
+  token: string | null = getToken(),
+  init: RequestInit = { next: { revalidate: 3600 } },
+): Promise<InstagramProfile | null> {
   if (!token) return null;
 
   try {
@@ -75,7 +77,7 @@ export async function getInstagramProfile(): Promise<InstagramProfile | null> {
     ].join(",");
 
     const url = `${GRAPH_BASE}/me?fields=${fields}&access_token=${token}`;
-    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const res = await fetch(url, init);
 
     if (!res.ok) {
       console.error("[instagram] profile fetch failed:", res.status, await res.text());
@@ -101,8 +103,11 @@ interface InstagramMediaResponse {
  * optional `limit` is provided.
  * Cached for 1 hour. Returns empty array on any error.
  */
-export async function getInstagramMedia(limit?: number): Promise<InstagramPost[]> {
-  const token = getToken();
+export async function getInstagramMedia(
+  limit?: number,
+  token: string | null = getToken(),
+  init: RequestInit = { next: { revalidate: 3600 } },
+): Promise<InstagramPost[]> {
   if (!token) return [];
 
   try {
@@ -123,7 +128,7 @@ export async function getInstagramMedia(limit?: number): Promise<InstagramPost[]
     const posts: InstagramPost[] = [];
 
     while (nextUrl && (limit === undefined || posts.length < limit)) {
-      const res = await fetch(nextUrl, { next: { revalidate: 3600 } });
+      const res = await fetch(nextUrl, init);
 
       if (!res.ok) {
         console.error("[instagram] media fetch failed:", res.status, await res.text());

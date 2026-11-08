@@ -35,3 +35,16 @@ pnpm build
 
 The previous Mercury command-center design, cinematic mountain hero, fake
 operational metrics, and placeholder links are intentionally retired.
+
+## Deploying (Cloudflare Workers)
+
+Live at https://hemangbuilds.com, on Cloudflare Workers through the OpenNext adapter.
+
+```bash
+pnpm install
+pnpm run deploy      # opennextjs-cloudflare build && deploy
+```
+
+- The page is static. The Instagram phone loads `/api/instagram/feed`, which reads a snapshot from the `INSTAGRAM` KV namespace.
+- An hourly cron (`worker.ts`) rebuilds that snapshot and rotates the Instagram token once a week, so the 60-day token never expires.
+- `INSTAGRAM_ACCESS_TOKEN` is a Worker secret that only seeds the first token: `pnpm wrangler secret put INSTAGRAM_ACCESS_TOKEN`. Get a new one with `/api/instagram/connect` in local dev only if the stored token was ever revoked.

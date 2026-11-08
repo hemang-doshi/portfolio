@@ -1,5 +1,6 @@
 import path from "node:path";
 
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -28,6 +29,9 @@ const nextConfig: NextConfig = {
     root: path.join(__dirname),
   },
   images: {
+    // Instagram's CDN already serves sized, compressed images, and Cloudflare
+    // Workers has no built-in Next image optimizer on the free plan.
+    unoptimized: true,
     remotePatterns: [
       {
         // Instagram profile pictures and post thumbnails
@@ -66,4 +70,7 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+// Lets `next dev` read the Cloudflare bindings in wrangler.jsonc (local KV).
+initOpenNextCloudflareForDev();
 
