@@ -17,8 +17,10 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 import {
+  getAccountViews,
   getInstagramMedia,
   getInstagramProfile,
+  getMediaViews,
   type InstagramPost,
   type InstagramProfile,
 } from "./instagram";
@@ -26,8 +28,13 @@ import {
 export interface InstagramSnapshot {
   profile: InstagramProfile | null;
   posts: InstagramPost[];
+  /** Account views over the last 30 days; null when insights are unavailable. */
+  views30d: number | null;
   fetchedAt: number;
 }
+
+/** Media insights calls per rebuild. Workers allow 50 subrequests per invocation. */
+const MEDIA_VIEWS_LIMIT = 24;
 
 interface StoredToken {
   token: string;
@@ -66,12 +73,16 @@ async function readToken(env: InstagramEnv): Promise<string | null> {
 export async function rebuildSnapshot(env: InstagramEnv): Promise<InstagramSnapshot | null> {
   const token = await readToken(env);
   if (!token) return null;
-  const [profile, posts] = await Promise.all([
+  const [profile, media, views30d] = await Promise.all([
     getInstagramProfile(token, NO_STORE),
     getInstagramMedia(undefined, token, NO_STORE),
+    getAccountViews(30, token, NO_STORE),
   ]);
   if (!profile) return null;
-  const snapshot: InstagramSnapshot = { profile, posts, fetchedAt: Date.now() };
+  // Views for the newest posts, the ones the phone shows first.
+  const viewsById = await getMediaViews(media.slice(0, MEDIA_VIEWS_LIMIT).map((p) => p.id), token, NO_STORE);
+  const posts = media.map((p) => (viewsById[p.id] !== undefined ? { ...p, views: viewsById[p.id] } : p));
+  const snapshot: InstagramSnapshot = { profile, posts, views30d, fetchedAt: Date.now() };
   await env.INSTAGRAM?.put("snapshot", JSON.stringify(snapshot));
   return snapshot;
 }
@@ -102,11 +113,11 @@ export async function refreshTokenIfDue(env: InstagramEnv, now = Date.now()): Pr
 export async function getInstagramSnapshot(): Promise<Omit<InstagramSnapshot, "fetchedAt">> {
   const env = await cloudflareEnv();
   if (!env?.INSTAGRAM) {
-    const [profile, posts] = await Promise.all([getInstagramProfile(), getInstagramMedia()]);
-    return { profile, posts };
+    const [profile, posts, views30d] = await Promise.all([getInstagramProfile(), getInstagramMedia(), getAccountViews(30)]);
+    return { profile, posts, views30d };
   }
   const cached = await env.INSTAGRAM.get<InstagramSnapshot>("snapshot", "json");
   if (cached && Date.now() - cached.fetchedAt < SNAPSHOT_MAX_AGE) return cached;
   const fresh = await rebuildSnapshot(env).catch(() => null);
-  return fresh ?? cached ?? { profile: null, posts: [] };
+  return fresh ?? cached ?? { profile: null, posts: [], views30d: null };
 }

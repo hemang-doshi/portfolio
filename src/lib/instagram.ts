@@ -27,6 +27,11 @@ export interface InstagramPost {
   id: string;
   /** IMAGE, VIDEO, or CAROUSEL_ALBUM */
   media_type: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
+  /** FEED, REELS or STORY */
+  media_product_type?: "FEED" | "REELS" | "STORY" | "AD";
+  caption?: string;
+  /** Lifetime views, when the token can read insights. */
+  views?: number;
   /** Direct URL to the image/video. May be absent on copyright-flagged content. */
   media_url?: string;
   /** Only present on VIDEO posts */
@@ -114,6 +119,8 @@ export async function getInstagramMedia(
     const fields = [
       "id",
       "media_type",
+      "media_product_type",
+      "caption",
       "media_url",
       "thumbnail_url",
       "permalink",
@@ -152,4 +159,64 @@ export async function getInstagramMedia(
     console.error("[instagram] media fetch error:", err);
     return [];
   }
+}
+
+// ─── Insights (needs instagram_business_manage_insights) ─────────────────────
+
+/** Total views across the account over the last `days` days (max 30), or null if unavailable. */
+export async function getAccountViews(
+  days: number,
+  token: string | null = getToken(),
+  init: RequestInit = { next: { revalidate: 3600 } },
+): Promise<number | null> {
+  if (!token) return null;
+  const until = Math.floor(Date.now() / 1000);
+  const since = until - Math.min(days, 30) * 86400;
+  const params = new URLSearchParams({
+    metric: "views",
+    period: "day",
+    metric_type: "total_value",
+    since: String(since),
+    until: String(until),
+    access_token: token,
+  });
+  try {
+    const res = await fetch(`${GRAPH_BASE}/me/insights?${params}`, init);
+    if (!res.ok) {
+      console.error("[instagram] account insights failed:", res.status, (await res.text()).slice(0, 200));
+      return null;
+    }
+    const json = (await res.json()) as { data?: Array<{ name: string; total_value?: { value?: number } }> };
+    const value = json.data?.find((m) => m.name === "views")?.total_value?.value;
+    return typeof value === "number" ? value : null;
+  } catch (err) {
+    console.error("[instagram] account insights error:", err);
+    return null;
+  }
+}
+
+/** Lifetime views for each media id. Ids Instagram won't answer for are left out. */
+export async function getMediaViews(
+  ids: string[],
+  token: string | null = getToken(),
+  init: RequestInit = { next: { revalidate: 3600 } },
+): Promise<Record<string, number>> {
+  if (!token || ids.length === 0) return {};
+  const entries = await Promise.all(
+    ids.map(async (id): Promise<[string, number] | null> => {
+      try {
+        const res = await fetch(`${GRAPH_BASE}/${id}/insights?metric=views&access_token=${token}`, init);
+        if (!res.ok) return null;
+        const json = (await res.json()) as {
+          data?: Array<{ name: string; values?: Array<{ value?: number }>; total_value?: { value?: number } }>;
+        };
+        const m = json.data?.find((d) => d.name === "views");
+        const value = m?.values?.[0]?.value ?? m?.total_value?.value;
+        return typeof value === "number" ? [id, value] : null;
+      } catch {
+        return null;
+      }
+    }),
+  );
+  return Object.fromEntries(entries.filter((e): e is [string, number] => e !== null));
 }

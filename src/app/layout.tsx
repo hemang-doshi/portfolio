@@ -39,6 +39,8 @@ const permanentMarker = Permanent_Marker({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hemangbuilds.com"),
+  alternates: { canonical: "/" },
   title: "Hemang Doshi — AI-Native Engineer & Systems Builder",
   description: "AI-Native Engineer & Systems Builder.",
   openGraph: {

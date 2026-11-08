@@ -15,6 +15,7 @@ import { SpinningRope } from "../ui/SpinningRope";
 interface HomeExperienceShellProps {
   profile: InstagramProfile | null;
   posts: InstagramPost[];
+  views30d?: number | null;
 }
 
 interface HomeExperienceShellFrameProps extends HomeExperienceShellProps {
@@ -76,6 +77,7 @@ export function HomeExperienceShellFrame({
   isReady,
   profile,
   posts,
+  views30d,
   onInstagramReady,
 }: HomeExperienceShellFrameProps) {
   return (
@@ -103,6 +105,7 @@ export function HomeExperienceShellFrame({
             <HeroExperience
               profile={profile}
               posts={posts}
+              views30d={views30d}
               isActive={isReady}
               onInstagramReady={onInstagramReady}
             />
@@ -119,6 +122,7 @@ export function HomeExperienceShellFrame({
 export function HomeExperienceShell({
   profile,
   posts,
+  views30d = null,
 }: HomeExperienceShellProps) {
   const [pageAssetsReady, setPageAssetsReady] = useState(false);
   const [instagramReady, setInstagramReady] = useState(false);
@@ -167,6 +171,7 @@ export function HomeExperienceShell({
       isReady={isReady}
       profile={profile}
       posts={posts}
+      views30d={views30d}
       onInstagramReady={handleInstagramReady}
     />
   );

@@ -9,9 +9,11 @@ import { getInstagramSnapshot } from "@/lib/instagram-store";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const { profile, posts } = await getInstagramSnapshot();
+  const { profile, posts, views30d } = await getInstagramSnapshot();
+  // Captions are kept for analysis in KV but not sent to the page.
+  const slim = posts.map(({ caption: _caption, ...p }) => p);
   return Response.json(
-    { profile, posts },
+    { profile, posts: slim, views30d: views30d ?? null },
     { headers: { "Cache-Control": "public, max-age=60, s-maxage=300, stale-while-revalidate=3600" } },
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   AtSign,
   BatteryFull,
@@ -14,6 +14,7 @@ import {
   Link as LinkIcon,
   Menu,
   MessageCircle,
+  Play,
   Plus,
   Search,
   Send,
@@ -30,8 +31,12 @@ import { ProfileMusicPlayer } from "./ProfileMusicPlayer";
 export interface InstagramPhoneProps {
   profile?: InstagramProfile | null;
   posts?: InstagramPost[];
+  /** Account views over the last 30 days, from Instagram insights. */
+  views30d?: number | null;
   onReady?: () => void;
 }
+
+const LINK_IN_BIO = "hemangbuilds.com";
 
 const MOCK_PROFILE = {
   username: "hemang._26",
@@ -101,17 +106,64 @@ const MOCK_POSTS = [
 
 const INSTAGRAM_ASSET_TIMEOUT_MS = 5000;
 
+/** Profile stats the way the Instagram app shows them: 2,099 · 10.5K · 1.2M. */
 function formatCount(n: number): string {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}m`;
-  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}k`;
+  if (n >= 1_000_000) return `${trim(n / 1_000_000)}M`;
+  if (n >= 10_000) return `${trim(n / 1_000)}K`;
+  return n.toLocaleString("en-US");
+}
+
+/** Compact counts for grid overlays and the dashboard: 982 · 3.3K · 1.2M. */
+function formatCompact(n: number): string {
+  if (n >= 1_000_000) return `${trim(n / 1_000_000)}M`;
+  if (n >= 1_000) return `${trim(n / 1_000)}K`;
   return String(n);
+}
+
+function trim(n: number): string {
+  return n >= 100 ? String(Math.round(n)) : n.toFixed(1).replace(/\.0$/, "");
+}
+
+/** The visitor's local time, like the phone's own status bar. */
+function useClock(): string {
+  const [now, setNow] = useState<string>("9:41");
+  useEffect(() => {
+    const tick = () =>
+      setNow(
+        new Date()
+          .toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })
+          .replace(/\s?[AP]M$/i, ""),
+      );
+    tick();
+    const id = window.setInterval(tick, 15_000);
+    return () => window.clearInterval(id);
+  }, []);
+  return now;
+}
+
+function PostBadge({ post }: { post: InstagramPost }) {
+  const shadow = "drop-shadow-[0_1px_2px_rgba(0,0,0,0.75)]";
+  if (post.media_product_type === "REELS" || post.media_type === "VIDEO") {
+    return <Clapperboard className={`absolute right-1.5 top-1.5 z-10 size-3.5 text-white ${shadow}`} aria-label="Reel" />;
+  }
+  if (post.media_type === "CAROUSEL_ALBUM") {
+    return (
+      <svg className={`absolute right-1.5 top-1.5 z-10 size-3 text-white ${shadow}`} fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-label="Carousel">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+      </svg>
+    );
+  }
+  return null;
 }
 
 export function InstagramPhone({
   profile = null,
   posts = [],
+  views30d = null,
   onReady,
 }: InstagramPhoneProps) {
+  const clock = useClock();
   const displayUsername = profile?.username ?? MOCK_PROFILE.username;
   const displayBio = profile?.biography ?? MOCK_PROFILE.biography;
   const displayFollowers = profile?.followers_count ?? MOCK_PROFILE.followers_count;
@@ -191,19 +243,17 @@ export function InstagramPhone({
         <div className="absolute inset-[2px] rounded-[40px] border border-white/[0.08]" />
 
         <div className="relative h-full w-full overflow-hidden rounded-[35px] bg-white dark:bg-black">
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(255,255,255,0.72),transparent)] dark:bg-[linear-gradient(180deg,rgba(0,0,0,0.94),rgba(0,0,0,0.74),transparent)]" />
           <div className="pointer-events-none absolute left-1/2 top-2.5 z-40 h-7 w-[116px] -translate-x-1/2 rounded-full bg-black shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]" />
 
           <div className="relative z-20 flex h-full flex-col overflow-hidden rounded-[35px] border border-black/5 bg-white/92 dark:border-white/6 dark:bg-black/96">
             
             {/* Top Status Bar (Perfectly aligned with dynamic island notch, battery closer to right) */}
             <div className="relative z-30 flex h-7 items-center justify-between pl-5 pr-3.5 mt-2.5 text-[10px] font-semibold text-[#111827] dark:text-[#f8fafc]">
-              <span>11:15</span>
+              <span className="tabular-nums" suppressHydrationWarning>{clock}</span>
               <div className="flex items-center gap-1.5">
                 <SignalHigh className="size-3.5" aria-label="Cellular signal" />
                 <Wifi className="size-3.5" aria-label="Wi-Fi signal" />
                 <div className="flex items-center gap-0.5" aria-label="Battery level">
-                  <span className="text-[9px]">67</span>
                   <BatteryFull className="size-[18px]" />
                 </div>
               </div>
@@ -243,7 +293,6 @@ export function InstagramPhone({
                         width={74}
                         height={74}
                         className="size-full rounded-full object-cover"
-                        unoptimized={false}
                       />
                     ) : (
                       <div className="flex size-full items-center justify-center rounded-full bg-[#efefef] dark:bg-[#262626] text-[15px] font-semibold text-[#111827] dark:text-[#f8fafc]">
@@ -284,12 +333,12 @@ export function InstagramPhone({
                 <div className="mt-1 flex items-center gap-1">
                   <LinkIcon className="size-3 text-[#0095f6] shrink-0" />
                   <a
-                    href="https://hemang-portfolio-zeta.vercel.app"
+                    href={`https://${LINK_IN_BIO}`}
                     target="_blank"
                     rel="noreferrer"
                     className="font-semibold text-[#0095f6] hover:underline"
                   >
-                    hemang-portfolio-zeta.vercel.app
+                    {LINK_IN_BIO}
                   </a>
                 </div>
 
@@ -303,14 +352,18 @@ export function InstagramPhone({
                 </div>
               </div>
 
-              {/* Professional Dashboard Card (balanced equal gaps top and bottom) */}
-              <div className="my-4 rounded-[10px] bg-[#f2f2f7] p-2.5 border border-black/5 dark:border-white/5 dark:bg-[#1c1c1e] text-[11px]">
-                <div className="font-bold text-[#111827] dark:text-white">Professional dashboard</div>
-                <div className="mt-0.5 flex items-center gap-1 text-[#6b7280] dark:text-[#a8a8a8]">
-                  <span className="text-emerald-500 font-bold">↗</span>
-                  <span>3.3K views in the last 30 days.</span>
+              {/* Professional dashboard: real 30-day views from Instagram insights */}
+              {views30d !== null ? (
+                <div className="my-3.5 rounded-[10px] border border-black/5 bg-[#f2f2f7] px-3 py-2.5 text-[11px] dark:border-white/5 dark:bg-[#1c1c1e]">
+                  <div className="font-bold text-[#111827] dark:text-white">Professional dashboard</div>
+                  <div className="mt-0.5 flex items-center gap-1 text-[#6b7280] dark:text-[#a8a8a8]">
+                    <span className="font-bold text-emerald-500">↗</span>
+                    <span>{formatCompact(views30d)} views in the last 30 days.</span>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="h-3.5" />
+              )}
 
               {/* Action Buttons: Follow / Message (Balanced margins) */}
               <div className="mb-4 grid grid-cols-2 gap-2">
@@ -322,12 +375,14 @@ export function InstagramPhone({
                 >
                   Follow
                 </a>
-                <button
-                  type="button"
-                  className="flex h-[32px] items-center justify-center rounded-[8px] bg-[#efefef] dark:bg-[#262626] text-[12px] font-bold text-[#111827] dark:text-white hover:bg-[#dbdbdb] dark:hover:bg-[#363636] border border-black/5 dark:border-white/5 transition-colors"
+                <a
+                  href={`https://ig.me/m/${encodeURIComponent(displayUsername)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex h-[32px] items-center justify-center rounded-[8px] bg-[#efefef] dark:bg-[#262626] text-[12px] font-bold text-[#111827] dark:text-white hover:bg-[#dbdbdb] dark:hover:bg-[#363636] transition-colors"
                 >
                   Message
-                </button>
+                </a>
               </div>
 
               {/* Tabs Grid Header (Reduced top gap to border line) */}
@@ -353,7 +408,7 @@ export function InstagramPhone({
               </div>
 
               {/* Posts Grid Container */}
-              <div className="mt-3 grid grid-cols-3 gap-[2px]">
+              <div className="mt-[3px] -mx-4 grid grid-cols-3 gap-[1.5px]">
                 {hasRealPosts
                   ? posts.map((post) => {
                       const thumb = getPostThumbnail(post);
@@ -363,7 +418,7 @@ export function InstagramPhone({
                           href={post.permalink}
                           target="_blank"
                           rel="noreferrer"
-                          className="ig-post-anim group relative aspect-square overflow-hidden bg-[#f8fafc] dark:bg-[#172133]"
+                          className="ig-post-anim group relative aspect-[3/4] overflow-hidden bg-[#f8fafc] dark:bg-[#172133]"
                         >
                           {thumb ? (
                             <Image
@@ -371,7 +426,7 @@ export function InstagramPhone({
                               alt="Instagram post"
                               fill
                               className="object-cover"
-                              sizes="96px"
+                              sizes="110px"
                             />
                           ) : (
                             <div className="absolute inset-0 bg-[linear-gradient(145deg,#f6d4e3,#fff1bd_45%,#e2e8f0)] dark:bg-[linear-gradient(145deg,#1f2937,#334155_45%,#0f172a)]">
@@ -379,10 +434,18 @@ export function InstagramPhone({
                             </div>
                           )}
                           
+                          <PostBadge post={post} />
+                          {post.views !== undefined && (post.media_product_type === "REELS" || post.media_type === "VIDEO") ? (
+                            <div className="absolute bottom-1.5 left-1.5 z-10 flex items-center gap-0.5 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                              <Play className="size-2.5 fill-white" aria-hidden="true" />
+                              <span className="text-[9px] font-semibold tracking-wide">{formatCompact(post.views)}</span>
+                            </div>
+                          ) : null}
+
                           <div className="absolute inset-0 flex items-center justify-center gap-3 bg-[#0f172a]/74 opacity-0 transition-opacity duration-200 group-hover:opacity-100 z-20">
                             <span className="flex items-center gap-1 text-[9px] font-semibold text-white">
                               <Heart className="size-3.5" aria-hidden="true" />
-                              {post.like_count ?? "—"}
+                              {post.like_count !== null ? formatCompact(post.like_count) : "—"}
                             </span>
                             <span className="flex items-center gap-1 text-[9px] font-semibold text-white">
                               <MessageCircle className="size-3.5" aria-hidden="true" />
@@ -395,7 +458,7 @@ export function InstagramPhone({
                   : MOCK_POSTS.map((tile, index) => (
                       <div
                         key={index}
-                        className={`ig-post-anim group relative aspect-square overflow-hidden bg-gradient-to-br ${tile.accent} dark:from-[#172133] dark:via-[#1e293b] dark:to-[#334155]`}
+                        className={`ig-post-anim group relative aspect-[3/4] overflow-hidden bg-gradient-to-br ${tile.accent} dark:from-[#172133] dark:via-[#1e293b] dark:to-[#334155]`}
                       >
                         <div className={`absolute inset-[13%] ${tile.shape}`} />
                         

@@ -9,6 +9,7 @@ import { GoofyLoader, HomeExperienceShell } from "./HomeExperienceShell";
 interface Feed {
   profile: InstagramProfile | null;
   posts: InstagramPost[];
+  views30d?: number | null;
 }
 
 const EMPTY: Feed = { profile: null, posts: [] };
@@ -27,7 +28,7 @@ export function HomeExperienceFeed() {
       .then((res) => (res.ok ? (res.json() as Promise<Feed>) : EMPTY))
       .catch(() => EMPTY)
       .then((data) => {
-        if (!cancelled) setFeed({ profile: data.profile ?? null, posts: data.posts ?? [] });
+        if (!cancelled) setFeed({ profile: data.profile ?? null, posts: data.posts ?? [], views30d: data.views30d ?? null });
       });
     return () => {
       cancelled = true;
@@ -41,5 +42,5 @@ export function HomeExperienceFeed() {
       </div>
     );
   }
-  return <HomeExperienceShell profile={feed.profile} posts={feed.posts} />;
+  return <HomeExperienceShell profile={feed.profile} posts={feed.posts} views30d={feed.views30d ?? null} />;
 }

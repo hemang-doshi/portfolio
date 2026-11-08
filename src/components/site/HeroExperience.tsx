@@ -14,6 +14,7 @@ import { HandDrawnAnnotation } from "@/components/ui/HandDrawnAnnotation";
 interface HeroExperienceProps {
   profile?: InstagramProfile | null;
   posts?: InstagramPost[];
+  views30d?: number | null;
   isActive?: boolean;
   onInstagramReady?: () => void;
 }
@@ -23,6 +24,7 @@ interface HeroExperienceProps {
 export function HeroExperience({
   profile = null,
   posts = [],
+  views30d = null,
   isActive = true,
   onInstagramReady,
 }: HeroExperienceProps) {
@@ -126,6 +128,7 @@ export function HeroExperience({
             <InstagramPhone
               profile={profile}
               posts={posts}
+              views30d={views30d}
               onReady={onInstagramReady}
             />
           </div>
